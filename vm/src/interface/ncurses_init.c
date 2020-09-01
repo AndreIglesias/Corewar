@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 15:07:58 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/01 17:59:07 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/01 18:14:46 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		print_arena(t_vm *vm)
 	vm->height = ft_sqrt(MEM_SIZE);
 	vm->width = vm->height * 3;
 	vm->sideWidth = 50;
-	vm->proc_y = (4 * vm->nplayers) + 10;
+	vm->proc_y = (5 * vm->nplayers) + 10;
 	vm->procHeight = vm->height + 2 - vm->proc_y;
 	init_colors();
 	resize_window(vm);

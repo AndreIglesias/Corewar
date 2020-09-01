@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 20:41:28 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/01 17:56:05 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/01 18:14:14 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,19 +107,19 @@ void	print_panel(WINDOW *sideWin, t_list *process, t_vm *vm)
 	mvwprintw(sideWin, 6, 1, "__________________________________________________");
 	wattroff(sideWin, A_BOLD);
 	champion = vm->player;
-	i = 2;
+	i = 8;
 	while (champion)
 	{
 		wattron(sideWin, A_BOLD);
-		mvwprintw(sideWin, i * 4, 1, "PLAYER %d", champion->nplayer);
+		mvwprintw(sideWin, i, 1, "PLAYER %d", champion->nplayer);
 		wattroff(sideWin, A_BOLD);
-		wattron(sideWin, COLOR_PAIR(i));
-		mvwprintw(sideWin, i * 4 + 1, 1, "\t\t(%s)", champion->name);
-		wattroff(sideWin, COLOR_PAIR(i));
-		mvwprintw(sideWin, i * 4 + 2, 1, "Last live: \t\t\t%d", champion->last_live_cycle);
-		mvwprintw(sideWin, i * 4 + 3, 1, "Lives in current period: \t%d", champion->nblive);
+		wattron(sideWin, COLOR_PAIR((i-8)/5+2));
+		mvwprintw(sideWin, i + 1, 1, "\t\t(%s)", champion->name);
+		wattroff(sideWin, COLOR_PAIR((i-8)/5+2));
+		mvwprintw(sideWin, i + 2, 1, "Last live: \t\t\t%d", champion->last_live_cycle);
+		mvwprintw(sideWin, i + 3, 1, "Lives in current period: \t%d", champion->nblive);
 		champion = champion->next;
-		i++;
+		i += 5;
 	}
 	print_processes(vm->processWin, process, vm, 0);
 }

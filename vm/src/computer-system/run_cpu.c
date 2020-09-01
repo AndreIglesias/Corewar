@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:17:31 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/01 17:26:02 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/01 18:18:34 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int	run_processes(t_vm *vm)
 				pause = ft_mod(pause + 1, 2);
 			if (pause)
 				continue ;
+			if (input != KEY_RESIZE)
 			usleep(7000);
 		}
 		if (vm->cycles == vm->dump_param)
