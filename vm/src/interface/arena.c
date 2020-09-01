@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 20:41:28 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/08/31 20:01:15 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/01 17:56:05 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,37 @@ void	fill_arena(int height, t_vm *vm, t_matrix m, WINDOW *mainWin)
 	}
 }
 
+void	print_processes(WINDOW *window, t_list *process, t_vm *vm, int i)
+{
+	int n;
+	int ir;
+
+	n = 1;
+	wattron(window, A_BOLD);
+	mvwprintw(window, ++i, 0, " __________________PROCESSES_(%d)___________________", vm->process_alive);
+	wattroff(window, A_BOLD);
+	i++;
+	while (process)
+	{
+		wattron(window, COLOR_PAIR(TPROCES->owner + 1));
+		mvwprintw(window, i + 1, 1, "Process %d PC:", n++);
+		wattroff(window, COLOR_PAIR(TPROCES->owner + 1));
+		mvwprintw(window, i + 1, 15, "%d", TPROCES->pc);
+		ir = TPROCES->last_ir;
+		wattron(window, COLOR_PAIR(TPROCES->owner + 1));
+		mvwprintw(window, i + 1, 25, "OP: ");
+		wattron(window, COLOR_PAIR(5) | A_BOLD);
+		mvwprintw(window, i + 1, 30, "%s", (0 < ir && ir <= 15) ?
+				  op_tab[ir - 1].name : "(null)");
+		i++;
+		wattroff(window, COLOR_PAIR(5) | A_BOLD);
+		process = process->next;
+	}
+}
+
 void	print_panel(WINDOW *sideWin, t_list *process, t_vm *vm)
 {
 	int i;
-	int n;
-	int ir;
 	t_player *champion;
 
 	wattron(sideWin, A_BOLD);
@@ -78,13 +104,15 @@ void	print_panel(WINDOW *sideWin, t_list *process, t_vm *vm)
 	mvwprintw(sideWin, 3, 1, "CYCLE_DELTA\t%d", CYCLE_DELTA);
 	mvwprintw(sideWin, 4, 1, "MAX CHECKS\t%d", MAX_CHECKS);
 	mvwprintw(sideWin, 5, 1, "CHECK\t\t%d\n", vm->nchecks);
-	mvwprintw(sideWin, 6, 1, "----------------------------------------");
+	mvwprintw(sideWin, 6, 1, "__________________________________________________");
 	wattroff(sideWin, A_BOLD);
 	champion = vm->player;
 	i = 2;
 	while (champion)
 	{
+		wattron(sideWin, A_BOLD);
 		mvwprintw(sideWin, i * 4, 1, "PLAYER %d", champion->nplayer);
+		wattroff(sideWin, A_BOLD);
 		wattron(sideWin, COLOR_PAIR(i));
 		mvwprintw(sideWin, i * 4 + 1, 1, "\t\t(%s)", champion->name);
 		wattroff(sideWin, COLOR_PAIR(i));
@@ -93,19 +121,5 @@ void	print_panel(WINDOW *sideWin, t_list *process, t_vm *vm)
 		champion = champion->next;
 		i++;
 	}
-	wattron(sideWin, A_BOLD);
-	mvwprintw(sideWin, i*4, 1, "----------------------------------------");
-	wattroff(sideWin, A_BOLD);
-	n = 1;
-	while (process)
-	{
-		wattron(sideWin, COLOR_PAIR(TPROCES->owner + 1));
-		mvwprintw(sideWin, i * 4 + 2, 1, "Process %d PC:\t%d", n++, TPROCES->pc);
-		ir = TPROCES->last_ir;
-		mvwprintw(sideWin, i * 4 + 3, 1, "\t\tOP:%s", (0 < ir && ir <= 15) ?
-				  op_tab[ir - 1].name : "(null)");
-		i++;
-		wattroff(sideWin, COLOR_PAIR(TPROCES->owner + 1));
-		process = process->next;
-	}
+	print_processes(vm->processWin, process, vm, 0);
 }

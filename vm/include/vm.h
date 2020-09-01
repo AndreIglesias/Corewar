@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 21:50:15 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/08/31 18:26:15 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/01 17:38:38 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ typedef struct		s_vm
 	int				width;
 	WINDOW			*sideWin;
 	int				sideWidth;
+	WINDOW			*processWin;
+	int				procHeight;
+	int				proc_y;
 }					t_vm;
 
 typedef struct		s_param

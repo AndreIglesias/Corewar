@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 15:07:58 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/08/30 20:26:35 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/01 17:59:07 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,32 @@ void	resize_window(t_vm *vm)
 	delwin(vm->mainWin);
 	delwin(vm->sideWin);
 	vm->mainWin = newwin(vm->height + 2, vm->width + 2, 0, 0);
-	vm->sideWin = newwin(vm->height + 2, vm->sideWidth + 2, 0, vm->width + 2);
+	vm->sideWin = newwin(vm->height - vm->procHeight + 2, vm->sideWidth + 2, 0,
+						 vm->width + 2);
+	vm->processWin = newwin(vm->procHeight, vm->sideWidth + 2, vm->proc_y,
+							vm->width + 2);
 	fill_arena(vm->height, vm, init_m(), vm->mainWin);
 	print_panel(vm->sideWin, vm->processes, vm);
 	box(vm->mainWin, 0, 0);
 	box(vm->sideWin, 0, 0);
+	box(vm->processWin, 0, 0);
 	wrefresh(vm->mainWin);
 	wrefresh(vm->sideWin);
+	wrefresh(vm->processWin);
 }
 
 int		print_arena(t_vm *vm)
 {
 	initscr();
 	noecho();
-	refresh();
+	nodelay(stdscr, TRUE);
+	keypad(stdscr, TRUE);
 	vm->height = ft_sqrt(MEM_SIZE);
 	vm->width = vm->height * 3;
-	vm->sideWidth = 40;
-	vm->mainWin = newwin(vm->height + 2, vm->width + 2, 0, 0);
-	vm->sideWin = newwin(vm->height + 2, vm->sideWidth + 2, 0, vm->width + 2);
+	vm->sideWidth = 50;
+	vm->proc_y = (4 * vm->nplayers) + 10;
+	vm->procHeight = vm->height + 2 - vm->proc_y;
 	init_colors();
-	fill_arena(vm->height, vm, init_m(), vm->mainWin);
-	box(vm->mainWin, 0, 0);
-	box(vm->sideWin, 0, 0);
-	wrefresh(vm->mainWin);
-	wrefresh(vm->sideWin);
+	resize_window(vm);
 	return (0);
 }
