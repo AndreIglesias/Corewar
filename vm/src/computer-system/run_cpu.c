@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:17:31 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/01 22:11:25 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/01 22:27:28 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,17 +111,20 @@ int	run_processes(t_vm *vm)
 			if (input == 'q')
 				break ;
 			if (input == ' ')
+			{
+				nodelay(stdscr, vm->pause);
 				vm->pause = ft_mod(vm->pause + 1, 2);
+			}
 			if (input == KEY_RESIZE || input == ' ')
 				resize_window(vm);
+			if (vm->pause)
+				continue ;
 			if (input == KEY_UP && vm->speed > MAX_SPEED)
 				vm->speed -= 500;
 			if (input == KEY_DOWN && vm->speed < MIN_SPEED)
 				vm->speed += 500;
-			if (vm->pause)
-				continue ;
 			if (input != KEY_RESIZE)
-			usleep(vm->speed);
+				usleep(vm->speed);
 		}
 		if (vm->cycles == vm->dump_param)
 		{

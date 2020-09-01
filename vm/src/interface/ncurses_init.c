@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 15:07:58 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/01 18:14:46 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/01 22:27:43 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int		print_arena(t_vm *vm)
 {
 	initscr();
 	noecho();
-	nodelay(stdscr, TRUE);
 	keypad(stdscr, TRUE);
 	vm->height = ft_sqrt(MEM_SIZE);
 	vm->width = vm->height * 3;
