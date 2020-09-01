@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 21:50:15 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/01 22:11:21 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/02 01:20:49 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,8 @@ int					is_reg(t_vm *vm, int nb);
 unsigned int		mem_mod(int x);
 int					in_mem(t_vm *vm, int pc);
 void				save_cmp(t_list *process, int id, int comp);
+unsigned int	ft_ptr_to_uint(t_vm *vm, unsigned int pc, int size);
+int				idx_mod(unsigned int val);
 /*
 ** interface
 */

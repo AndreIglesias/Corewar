@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 17:21:12 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/01 21:56:29 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/02 01:20:40 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,44 @@ int		octal_shift(t_uchar acb, t_uchar label_size, t_uchar narg)
 	}
 	return (shift);
 }
+
+unsigned int	ft_ptr_to_uint(t_vm *vm, unsigned int pc, int size)
+{
+	int				i;
+	unsigned int	result;
+
+	i = 0;
+	result = 0;
+	pc = mem_mod(pc);
+	while (i < size)
+	{
+		result = result * 256 + vm->ram.arena[pc];
+		i++;
+		pc = (pc + 1) % MEM_SIZE;
+	}
+	return (result);
+}
+
+int				idx_mod(unsigned int val)
+{
+	int		flag;
+
+	flag = 0;
+	if (val > 2147483647)
+		flag = 1;
+	val = val % 65536;
+	/*
+	if (proc->loaded_op.opcode == 13 || proc->loaded_op.opcode == 14)
+	{
+		if (flag == 0)
+			return (val % MEM_SIZE);
+		return (-(-(val % MEM_SIZE) % IDX_MOD));
+		}*/
+	if (val > (65535 / 2) || flag == 1)
+		return (-(-(val % MEM_SIZE) % IDX_MOD));
+	return ((val % MEM_SIZE) % IDX_MOD);
+}
+
 
 int		reverse_bytes(t_vm *vm, unsigned int pc, int bytes)
 {

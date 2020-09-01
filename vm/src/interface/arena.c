@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 20:41:28 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/01 22:03:12 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/02 00:06:45 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	fill_arena(int height, t_vm *vm, t_matrix m, WINDOW *mainWin)
 
 	while (m.i < MEM_SIZE)
 	{
-		if (/*vm->ram.owner[m.i] == 0 && */is_pc(vm->processes, m.i))
+		if (vm->ram.owner[m.i] == 0 && is_pc(vm->processes, m.i))
 			wattron(mainWin, COLOR_PAIR(6));
 		else
 			wattron(mainWin, COLOR_PAIR(vm->ram.owner[m.i] + 1));
