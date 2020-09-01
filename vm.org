@@ -1,0 +1,590 @@
+#+TITLE: VM
+#+AUTHOR: ciglesia
+
+* TODOS
+** TODO [#A] find out [80%]
+- [X] what is !live!?
+  * *function* that takes as _param_ a player number to qualify it as /alive/
+- [X] what is !REG_NUMBER!?
+  * The number of /General Purpose Registers/
+- [X] what is an argumen't coding byte?
+  * The [[ACB]] allows the VM to know how to *load* the arguments of an instruction
+- [X] what are the acronyms !ACB! (EN) or !OCP! (FR) for?
+  * Argument's Coding Byte / Octet de Codage des Parametres
+- [ ] The meaning of "Each address is relative to the case with the !opcode! of the /current instruction/".
+** TODO [#B] program [0%]
+- [ ] structures [0/3]
+  - [ ] Registry
+  - [ ] Champion
+  - [ ] Virtual Arena
+- [ ] initialize
+- [ ] validate && fill structures
+- [ ] zero leaks
+- [ ] implement
+  - [ ] circular memory
+  - [ ] computer system
+
+* REFERENCE
+** COMPUTER SYSTEM
+
+  +------+-----+------------+-----+-----------------+
+  |           ~CPU~           |     |      ~RAM~        |
+  +------+------------+-----|     |-----------------+
+  | !REGS! |    .ALU.     |     |     |   `Instructions`  |
+  +------+------------+-----|     |------+----------+
+  |  /R0/  | 'Arithmetic' | !IR!  |     | 'Addr' | 'Mem Cell' |
+  |  /R1/  | 'Logic Unit' | !PC!  |     +------+----------+
+  |  /R2/  |            | !PSR! |     |  ~0~   |    ,0,     |
+  |  /R3/  |            |     |     |  ~1~   |    ,22,    |
+  |  /R4/  |            |     |     |  ~2~   |    ,4,     |
+  |  ... |            |     |     |  ~...~ |    ,...,   |
+  +------+------------+-----+-----+------+----------+
+
+*** CPU COMPONENTS
+1. !R*! (Registers)
+   - GPR: *General Purpose Registers* (/memory cell/)
+   - *Register* is _synonym_ for *memory* in /computer science/
+   - Used to store (and recall) /intermediate result/ of complex computations
+
+2. !ALU!
+   - *Arithmetic and Logic Unit*
+   - Is a /complex electrical circuit/ that performs operations
+	 + Mathematical (+, -, x, /)
+	 + Logical (<, <=, >, >=, &&, ||)
+   - The output of the computation is often stored in a GPR
+
+3. !IR!
+   - *Instruction Register*
+   - Contains the _value_ of the /current instruction/ being executed by the *CPU*
+	 + *CPU performs* the operation indicated by the /Instruction code/ contained in the IR
+
+4. !PC!
+   - *Program Counter* (/Register, memory cell/)
+   - _Address_ of the /next/ *instruction* after the current in *IR* (/that's been executing/)
+   - The value in the *PC* wiwll be _increased_ after *CPU finishes executing*
+
+5. !PSR!
+   - Procesor Status Register (/Register, memory cell/)
+   - Contains various info about *CPU*
+	 + Output of /comparison operation/ between 2 numbers (a, b)
+	   * == equal
+	   * != not equal
+	   * <  less than
+	   * <= less than or equal
+	   * >  greater than
+	   * >= greater than or equal
+
+*** CPU OPERATIONS
+1. /Fetches/ the *next instruction* at the _address location_ given by !PC!
+2. The /fetched instruction/ is stored in the !IR! (/overwriting old instruction/)
+   - and !PC! is /increased/ to point to the *next instruction* in the memory
+3. Executes /current instruction/ at !IR!
+   - (/the *CPU* will do the operation indicated by the _instruction code_ in the/ !IR!)
+
+** IMPLEMENTATION
+*** MANDATORY STRUCTURE
+**** GENERAL PURPOSE REGISTER
+1. *REG_SIZE* (bytes)
+2. *REG_NUMBER*
+   - Number of /General Purpose Registers/
+
+|----------+----------|
+| ~REGISTER~ | ~SIZE~     |
+|----------+----------|
+| r0       | REG_SIZE |
+| r1       | REG_SIZE |
+| ...      | ...      |
+|----------+----------|
+
+**** PROCESS
+A process is the general execution of the champion
+Available: (The processor register)
+1. *REG_NUMBER* Number of /General Purpose Registers/
+   - All init at 0 except r1
+2. *PC*
+   - Address of next instruction (In HEX)
+3. *carry* (Boolean)
+   - Last operatiton /success/
+
+**** CHAMPION && COMPILER
+***** ASSEMBLY FORMAT
+An instruction is composed of three elements
+1. !Label!
+   - Chain of characters amongst /LABEL_CHARS/ followed by /LABEL_CHAR/
+   - Can't have no instruction following or placed on a line before the instruction concerned
+2. !Opcode!
+3. !parameters! separated by /SEPARATOR_CHAR/
+   - Types of *parameters*
+	 + [[Registry]] (r1 <-> rx | x = REG_NUMBER)
+	 + *[[Direct]]*
+	   * Character /DIRECT_CHAR/ followed by numeric value or a label (preceded by /LABEL_CHAR/)
+	 + *INDIRECT*
+	   * Value or label (preceded by LABEL CHAR)
+	   * Represents a value at the address of the param, relative to the PC of the current process
+	   * /IDX_MOD/ to obtain the value of an indirect (PC + 4 instead of PC + 516)
+4. !COMMENT_CHAR! ('#')
+
+All the addressing is /relatif/ to PC and IDX_MOD (except for lld, lldi and lfork)
+***** CHAMPION
+1. !Name!
+   - Present after the /marker/ /NAME_CMD_STRING/
+2. !Description!
+   - Present after the /marker/ /COMMENT_CMD_STRING/
+***** Encoding
+VM is BIG ENDIAN
+****** OP_TAB ARRAY
+1. Number of cycles for each instruction (cycles are always consumed)
+2. Mnemonic representatinos
+3. Associated amount
+4. Possible types of arguments
+Other codes have no action, just pass to the next one and loose a cycle
+
+****** INSTRUCTIONS ARE ENCODED BY
+- The instruction code *find it in (/op_tab/)*
+- The argument's coding byte ([[ACB]]) if appropiate.
+  + /For example/
+	* !r2, 23, %34! gives the coding byte ,0b 01 11 10 00,, hence 0x78
+	* !23, 45, %34! gives the coding byte ,0b 11 11 10 00,, hence 0xF8
+	* !r1, r3, 34!  gives the coding byte ,0b 01 01 11 00,, hence 0x5C
+- The arguments / parameters
+  + /For example/
+	* !r2, 23, %34! gives the ACB .0x78. then `0x02 0x00 0x17 0x00 0x00 0x00 0x22`
+	* !23, 45, %34! gives the ACB .0xF8. then `0x00 0x17 0x00 0x2d 0x00 0x00 0x00 0x22`
+
+****** EXECUTABLE
+- The executable will always start with a header, defined in op.h (the header_t type)
+
+***** SYNTAX
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| INSTRUCTION | OPCODE   | DESCRIPTION                                                            | ACB | RESTRICTED ADDRSS | MODIF CARRY | DURATION |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[live]]        | <<0x01>> | Allows process to stay alive. Argument is player's number *(4 bytes)*    | .NO.  | .NO.                | .NO.          |       10 |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[ld]]          | <<0x02>> | Random argument + registry. Load *value of first arg* in the registry    | `YES` | `YES`               | `YES`         |        5 |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[st]]          | <<0x03>> | Take a registry and a [registry/indirect], *store* value of registry     | `YES` | `YES`               | `YES`         |        5 |
+|             |          | toward the second argument. (st r1, 42) store value at PC+(42%IDX_MOD) |     |                   |             |          |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[add]]         | <<0x04>> | Take 3 registries, add first 2, *result in the 3rd*. Modify the carry    | `YES` | .NO.                | `YES`         |       10 |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[sub]]         | <<0x05>> | Same as add but uses *substraction*                                      | `YES` | .NO.                | `YES`         |       10 |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[and]]         | <<0x06>> | Apply & (bit-to-bit AND) over first 2 args and store in 3rd (registry) | `YES` | `YES`               | `YES`         |        6 |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[or]]          | <<0x07>> | bit-to-bit *OR*                                                          | `YES` | `YES`               | `YES`         |        6 |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[xor]]         | <<0x08>> | exclusive *OR*                                                           | `YES` | `YES`               | `YES`         |        6 |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[zjmp]]        | <<0x09>> | Take index and *jump to this address* if the carry is 1                  | .NO.  | .NO.                | .NO.          |       20 |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[ldi]]         | <<0x0A>> | Take a registry and *2 indexes*, *add indexes* and treat the result as     | `YES` | `YES`               | `YES`         |       25 |
+|             |          | an address, *read a value of a REG_SIZE* and put it on the registry      |     |                   |             |          |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[sti]]         | <<0x0B>> | Take a registry and *2 indexes* (potentially registries), *add indexes*    | `YES` | `YES`               | `YES`         |       25 |
+|             |          | result = *address* where the value of the *first param will be copied*     |     |                   |             |          |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[fork]]        | <<0x0C>> | Take an index, create *new process* that *inherits* different states of    | .NO.  | `YES`               | .NO.          |      800 |
+|             |          | its father, except it's PC which will be  *PC + (1st param % IDX_MOD)*   |     |                   |             |          |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[lld]]         | <<0x0D>> | Long-load, ld *without modulo*. Modify the carry                         | `YES` | .NO.                | `YES`         |       10 |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[lldi]]        | <<0x0E>> | Same as *ldi* without any modulo. Modify the carry                       | `YES` | .NO.                | `YES`         |       50 |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[lfork]]       | <<0x0F>> | Long-fork, fork *without modulo* in the address                          | .NO.  | .NO.                | .NO.          |     1000 |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+| [[aff]]         | <<0x10>> | Take a registry, *displays value* on std output (ASCII). Modulo 256      | `YES` | .NO.                | `YES`         |        2 |
+|-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|
+
+**** PREDEFINED PREPROCESSORS
+***** VM
+|--------------+-----------------------------------------------------------------------------------------------------------------------|
+| ~PREPROCESSOR~ | ~DESCRIPTION~                                                                                                           |
+|--------------+-----------------------------------------------------------------------------------------------------------------------|
+| *CYCLE_TO_DIE* | Each *CYCLE_TO_DIE* modulo, verify if necessary to kill processes (bcs they didn't execute live instruction for example) |
+| *NBR_LIVE*     | Min *live* executed in each /CYCLE_TO_DIE/ in order to decrease it of CYCLE_DELTA units                         |
+| *CYCLE_DELTA*  | Units to decrement /CYCLE_TO_DIE/ if /NBR_LIVE/ was not fulfilled                                                         |
+| *MEM_SIZE*     | Circular memory                                                                                                       |
+| *MAX_CHECKS*   | Max checkups before decreasing /CYCLE_TO_DIE/                                                                           |
+| *IDX_MOD*      | Modulo for the action address to obtain the value of an indirect                                                      |
+| *REG_SIZE*     | Size in bytes of a register                                                                                           |
+| *REG_NUMBER*   | Number of /General Purpose Registers/                                                                                   |
+|--------------+-----------------------------------------------------------------------------------------------------------------------|
+
+***** COMPILER
+|----------------+-----------------------------------------|
+| ~PREPROCESSOR~   | ~DESCRIPTION~                             |
+|----------------+-----------------------------------------|
+| *LABEL_CHARS*    |                                         |
+| *LABEL_CHAR*     |                                         |
+| *SEPARATOR_CHAR* | Separator of params in ASM instructions |
+| *DIRECT_CHAR*    |                                         |
+| *COMMENT_CHAR*   | #                                       |
+| *IDX_MOD*        | Modulo applied to the action addresses  |
+|----------------+-----------------------------------------|
+
+***** CHAMPION
+|--------------------+-------------|
+| ~PREPROCESSOR~       | ~DESCRIPTION~ |
+|--------------------+-------------|
+| NAME_CMD_STRING    |             |
+| COMMENT_CMD_STRING |             |
+|                    |             |
+|--------------------+-------------|
+
+*** INIT
+1. Initialize every registry is at 0 except
+   - !r1!
+	 * Player's /Number/, is given to the champions via r1 registry their ~first process~ at startup
+	 * Generated by the machine or specified at lunch
+   - !PC!
+2. !Load the champions! within the memory
+   - so that they can space out evenly their entry points
+   - The last born champion plays first
+3. Create a !virtual arena! (/reserve memory space dedicated to the combat/)
+   - A virtual `RAM`
+4. !Load each champion && their processes! to the _arena_
+5. Execute the /processes/ in the arena /until all processes are dead/.
+
+**** LOADING
+***** ARGUMENT'S CODING BYTE
+The <<ACB>> allows the VM to know !how to load! the arguments of an instruction.
+
+Divided by `4` !pairs of bits!:
+- 3 that determines the type of argument
+- 1 unused
+  +-------+--------+-------+--------+-------+--------+-------+--------+
+  |   128 |     64 |    32 |     16 |     8 |      4 |     2 |      1 |
+  +-------+--------+-------+--------+-------+--------+-------+--------+
+  |  `Argument #1`   |  !Argument #2!   |   .Argument #3.  |                |
+  +-------+--------+-------+--------+-------+--------+-------+--------+
+
+For each argument:
+|-----------+-----------+----------|
+| UPPER BIT | LOWER BIT | TYPE     |
+|-----------+-----------+----------|
+|         !0! |         !0! | /ABSCENT/  |
+|         !0! |         `1` | REGISTRY |
+|         `1` |         !0! | DIRECT   |
+|         `1` |         `1` | INDEX    |
+|-----------+-----------+----------|
+
+***** RAM && ADDRESSES
+- *RAM* (/memory/)
+  - Is _circular_
+  - Of size /MEM_SIZE/
+  - There's no /initial point/ or another /landmark/
+	+ Therefore, absolute addressing is *not possible*
+	+ The addressing is !relative to the current instruction!
+	  + Where the possition is /relative to the starting of the program/
+
+Example of a [[64 byte's RAM]]
+
+- The !starting point! of a program is the reference point of addressing.
+- Each process has a *PC* (/process counter, 2 octets/)
+  + Which is the number of *memory cells* between the !current instruction! and the !starting point!
+  + *PC* is strictly /positive/ or /null/.
+  + The maximum value of *PC* is !0xFFFF!, it allows to access the RAM until .65 535 OCTETS.
+- Effective value of an address is !its! sum with the !PC!
+
+[[Zork in ASM]]
+
+*** VALIDATION
+Display relevant error message on the *standard error* (/fd = 2/)
+
+**** INPUT
+1. Verify the format of the argv
+   - ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ...
+	 + /-dump nbr_cycles/
+	   * after nbr_cycles, *dump the memory* and *quit the game*
+		 * must be dumped in *hexadecimal* format with *32 octets* per line
+	 + /-n number/
+	   * *number of the next player*
+		 * if non-existent, the player will have the /next/ number in *parameter* order
+	 + The last player will have the first *process* in the order of /execution/
+2. The champions cannot go over /CHAMP_MAX_SIZE/, otherwise it is an *ERROR*
+3. Invalid *header* values! (/header_t/ type)
+4. Verify if there's *no code* in champion.cor
+
+**** IN RUN-TIME
+1. Every (/CYCLE_TO_DIE/) number of cycles
+   - Verify if *each process* has executed at least one *live*
+	 + if a *process didn't*, it will be killed
+   - Verify if *live* was executed at least /NBR_LIVE/
+	 + if it *wasn't*, /CYCLE_TO_DIE/ -= /CYCLE_DELTA/ units
+   - Verify if /CYCLE_TO_DIE/ wasn't decreased since /MAX_CHECKS/
+	 + if it *wasn't decreased*, decrease it
+3. If every process is dead, the *game is over*
+4. *Memory* is _circular_ and of /MEM_SIZE/
+
+*** GAME
+**** MEANWHILE
+1. For each valid execusion of the *live* instruction
+   - Display "A process shows that player X (champion_name) is alive"
+
+**** END
+1. The last /player/ alive *wins*
+   - Display "Player X (champion_name) won" | X = *player's number* && champion_name = *its name*
+
+*** COMPUTER SYSTEM
+- Each instruction will *completely* execute itself /at the end of its last cycle/
+  + and wait for its entire duration
+
+* USE && EXAMPLES
+** COMPILATION
+.name "zork"
+.comment "just a basic living prog"
+
+l2:		sti r1, %:live, %1
+		and r1, %0,r1
+
+live:   live  %1
+		zjmp  %:live
+
+# Executable compilation:
+0x0b,0x68,0x01,0x00,0x0f,0x00,0x01
+0x06,0x64,0x01,0x00,0x00,0x00,0x00,0x01
+0x01,0x00,0x00,0x00,0x01
+0x09,0xff,0xfb
+
+|--------------------------+-------------------------|
+| <<ZORK IN ASM>>          | *ZORK IN HEXADECIMAL*     |
+|--------------------------+-------------------------|
+| !l2!:   `sti` !r1!, *%:live*, !%1! | `0b` !68! 01 00 0f 00 01    |
+| `     `and` !r1!, !%0!, !r1!     | `06` !64! 01 00 00 00 00 01 |
+| live: `live` !%1!            | `01` 00 00 00 01          |
+| `     `zjmp` %:live        | `09` ff fb                |
+|--------------------------+-------------------------|
+
+[[Zork in RAM]]
+
+** ASM SYNTAX
+*** ARGUMENTS
+- <<Registry>> *(RG)*
+  + Registry Identifier *(1 octet)*
+	+ !Source! `S()`: Loads the value of the Registry
+	+ !Destination! `D()`: Stock the value in the Registry
+  + If *non-existant* registry is called
+	+ Instruction is *invalid* and process *crash*
+- <<Index>> *(ID)*
+  + Address of an INT in /RAM/ *(2 octet)*
+	+ !Source! `S()`: Loads the value of 4 octets following the index
+	+ !Destination! `D()`: Stock the value in the 4 octets following the index
+- <<Direct>> *(D4/D2)*
+  + Int number		*(4 octet)*
+  + /RAM/ address		*(2 octet)*
+|-------------+---------------------------+-------------------------------------|
+| *INSTRUCTION* | *NAME*                      | *SYNTAX*                              |
+|-------------+---------------------------+-------------------------------------|
+| <<live>>    | Live                      | *live* S(D4)                          |
+|-------------+---------------------------+-------------------------------------|
+| <<ld>>      | Direct Load               | *ld* S(ID/D4), D(RG)                  |
+|-------------+---------------------------+-------------------------------------|
+| <<st>>      | Direct Store              | *st* S(RG), D(RG/ID)                  |
+|-------------+---------------------------+-------------------------------------|
+| <<add>>     | Arithmetical Addition     | *add* S(RG), S(RG), D(RG)             |
+|-------------+---------------------------+-------------------------------------|
+| <<sub>>     | Arithmetical Substraction | *sub* S(RG), S(RG), D(RG)             |
+|-------------+---------------------------+-------------------------------------|
+| <<and>>     | Logical AND               | *and* S(RG/ID/D4), S(RG/ID/D4), D(RG) |
+|-------------+---------------------------+-------------------------------------|
+| <<or>>      | Logical OR                | *or* S(RG/ID/D4), S(RG/ID/D4), D(RG)  |
+|-------------+---------------------------+-------------------------------------|
+| <<xor>>     | Logical XOR               | *xor* S(RG/ID/D4), S(RG/ID/D4), D(RG) |
+|-------------+---------------------------+-------------------------------------|
+| <<zjmp>>    | Jump if Zero              | *zjmp* S(D2)                          |
+|-------------+---------------------------+-------------------------------------|
+| <<ldi>>     | Indirect Load             | *ldi* S(RG/ID/D2), S(ID/D2), D(RG)    |
+|-------------+---------------------------+-------------------------------------|
+| <<sti>>     | Indirect Store            | *sti* S(RG), S(RG/ID/D2), S(ID/D2)    |
+|-------------+---------------------------+-------------------------------------|
+| <<fork>>    | Fork                      | *frok* S(D2)                          |
+|-------------+---------------------------+-------------------------------------|
+| <<lld>>     | Long Direct Load          | *lld* S(ID/D4), D(RG)                 |
+|-------------+---------------------------+-------------------------------------|
+| <<lldi>>    | Long Indirect Load        | *lldi* S(RG/ID/D2), S(ID/D2), D(RG)   |
+|-------------+---------------------------+-------------------------------------|
+| <<lfork>>   | Long Fork                 | *lfork* S(D2)                         |
+|-------------+---------------------------+-------------------------------------|
+| <<aff>>     | Aff                       | aff S(RG)                           |
+|-------------+---------------------------+-------------------------------------|
+
+** RAM && ADDRESSING
+*** Example of a <<64 byte's RAM>>
+At first it's empty (Asume it's 64).
+  +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+  |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |
+  +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+  |00 |                                                                                               |00 |
+  +---+                                                                                               +---+
+  |00 |                                                                                               |00 |
+  +---+                                                                                               +---+
+  |00 |                                                                                               |00 |
+  +---+                                                                                               +---+
+  |00 |                                                                                               |00 |
+  +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+  |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |
+  +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+
+  +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+  |00 |00 |00 |00 |XX |00 |00 |00 |00 |00 |YY |00 |00 |00 |ZZ |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |
+  +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+  |00 |                                                                                               |00 |
+  +---+                                                                                               +---+
+  |00 |                                                                                               |00 |
+  +---+                                                                                               +---+
+  |00 |                                                                                               |FF |
+  +---+                                                                                               +---+
+  |00 |                                                                                               |00 |
+  +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+  |00 |00 |00 |00 |00 |00 |00 |AA |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |00 |
+  +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+
+If we read the RAM in a clockwise sense:
+- !YY! is now the address *0* (it can be 0, 64, 128, 192, 448, -4608, 17344, ...)
+- .ZZ. is *3*
+- `XX` is *-6*
+- /AA/ is -16 -6 = *-22*
+- *FF* is = *17*
+*** ZORK IN RAM
+Loading <<Zork in RAM>>
+|----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
+| 00 | 00 | `0b` | `68` | `01` | `00` | `0f` | `00` | `01` | `06` | `64` | `01` | `00` | `00` | `00` | `00` | `01` | `01` | `00` | `00` | `00` | `01` | `09` | `ff` | `fb` | 00 | 00 | 00 |
+|----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
+ !...!                                                                                                                                    !...!
+
+- VM generates a process with !starting point! the /memory cell/ with the *opcode* of the first instruction.
+- From here, this /memory cell/ becomes the _reference point_ of addressing.
+
+Colors for identification:
+- !Opcode of current instruction!
+- 'ACB'
+- `First argument`
+- ,Second argument,
+- .Third argument.
+- ~Opcode of other instructions~
+
+**** ZORK 1
+#+NAME: Zork RAM 1
+|----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
+| 00 | 00 | !0b! | '68' | `01` | ,00, | ,0f, | .00. | .01. | ~06~ | '64' | `01` | ,00, | ,00, | ,00, | ,00, | .01. | ~01~ | `00` | `00` | `00` | `01` | ~09~ | `ff` | `fb` | 00 | 00 | 00 |
+|----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
+ !...!                                                                                                                                    !...!
+Current instruction: !0b!
+[[Zork Decoding 1]]
+
+**** ZORK 2
+#+NAME: Zork RAM 2
+|----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
+| 00 | 00 | ~0b~ | '68' | `01` | ,00, | ,0f, | .00. | .01. | !06! | '64' | `01` | ,00, | ,00, | ,00, | ,00, | .01. | ~01~ | `00` | `00` | `00` | `00` | ~09~ | `ff` | `fb` | 00 | 00 | 00 |
+|----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
+ !...!                                                                                                                                    !...!
+Current instruction: !06!
+[[Zork Decoding 2]]
+
+**** ZORK 3
+#+NAME: Zork RAM 3
+|----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
+| 00 | 00 | ~0b~ | '68' | `01` | ,00, | ,0f, | .00. | .01. | ~06~ | '64' | `01` | ,00, | ,00, | ,00, | ,00, | .01. | !01! | `00` | `00` | `00` | `00` | ~09~ | `ff` | `fb` | 00 | 00 | 00 |
+|----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
+ !...!                                                                                                                                    !...!
+Current instruction: !01!
+[[Zork Decoding 3]]
+
+**** ZORK 4
+#+NAME: Zork RAM 4
+|----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
+| 00 | 00 | ~0b~ | '68' | `01` | ,00, | ,0f, | .00. | .01. | ~06~ | '64' | `01` | ,00, | ,00, | ,00, | ,00, | .01. | ~01~ | `00` | `00` | `00` | `00` | !09! | `ff` | `fb` | 00 | 00 | 00 |
+|----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----|
+ !...!                                                                                                                                    !...!
+Current instruction: !09!
+[[Zork Decoding 4]]
+
+
+Execution: [[Zork execution]]
+
+** EXECUTING INSTRUCTIONS
+*** ZORK
+<<Zork execution>> is the continuation of [[Zork in RAM]]
+
+**** ITERATION 1
+Executing [[Zork RAM 1]]
+
+#+NAME: Zork Decoding 1
+
+*ACB* 01101000:
+  +-------+--------+-------+--------+-------+--------+-------+--------+
+  |   .128. |     `64` |    `32` |     .16. |     `8` |      .4. |     .2. |      .1. |
+  +-------+--------+-------+--------+-------+--------+-------+--------+
+  | `Argument #1`    |  !Argument #2!   |   .Argument #3.  |                |
+  +-------+--------+-------+--------+-------+--------+-------+--------+
+
+|----+-------+--------+---------+------------+------------+------------|
+| !PC! | !CARRY! | !OPCODE! | [[ACB]]     | !ARGUMENT 1! | !ARGUMENT 2! | !ARGUMENT 3! |
+|----+-------+--------+---------+------------+------------+------------|
+|  0 |     0 | [[0x0b]]   | '0x68'    | [[Registry]]   | [[Direct]]     | [[Direct]]     |
+|    |       | sti    | 0110100 | `01`         | ,00 0f,      | .00 01.      |
+|----+-------+--------+---------+------------+------------+------------|
+
+Executing:
+- /0x000f + 0x0001 = 0x0010/
+- Store value of Registry in 0x0010
+  + Will see the change in the /3rd argument/ in this case
+
+**** ITERATION 2
+Executing [[Zork RAM 2]]
+
+#+NAME: Zork Decoding 2
+
+*ACB* 01100100:
+  +-------+--------+-------+--------+-------+--------+-------+--------+
+  |   .128. |     `64` |    `32` |     .16. |     .8. |      `4` |     .2. |      .1. |
+  +-------+--------+-------+--------+-------+--------+-------+--------+
+  |  `Argument #1`   |  !Argument #2!   |   .Argument #3.  |                |
+  +-------+--------+-------+--------+-------+--------+-------+--------+
+
+|----+-------+--------+----------+------------+-------------+------------|
+| !PC! | !CARRY! | !OPCODE! | [[ACB]]      | !ARGUMENT 1! | !ARGUMENT 2!  | !ARGUMENT 3! |
+|----+-------+--------+----------+------------+-------------+------------|
+|  7 |     0 | [[0x06]]   | '0x64'     | [[Registry]]   | [[Direct]]      | [[Registry]]   |
+|    |       | and    | 01100100 | `01`         | ,00 00 00 00, | .01.         |
+|----+-------+--------+----------+------------+-------------+------------|
+
+Executing:
+- /0x01 and 0x00 = 0x00/
+- Carry = 1
+- Store value in Registry
+
+**** ITERATION 3
+Executing [[Zork RAM 3]]
+
+#+NAME: Zork Decoding 3
+|----+-------+--------+------+-------------------|
+| !PC! | !CARRY! | !OPCODE! | [[ACB]]  | !ARGUMENT 1!        |
+|----+-------+--------+------+-------------------|
+| 14 |     1 | [[0x01]]   | .NONE. | [[Direct]] (4 octets) |
+|    |       | live   |      | `00 00 00 00`       |
+|----+-------+--------+------+-------------------|
+
+Executing:
+- VM reports that player 0 is still alive /in the terminal/
+
+**** ITERATION 4
+Executing [[Zork RAM 4]]
+
+#+NAME: Zork Decoding 4
+|----+-------+--------+------+-------------------|
+| !PC! | !CARRY! | !OPCODE! | [[ACB]]  | !ARGUMENT 1!        |
+|----+-------+--------+------+-------------------|
+| 19 |     1 | [[0x09]]   | .NONE. | [[Direct]] (2 octets) |
+|    |       | zjmp   |      | `ff fb`             |
+|----+-------+--------+------+-------------------|
+
+Executing:
+- VM pass the /value in argument/ (`0xFFFB`) to *PC* (*19 = 0x0013*)
+- /0x0013 + 0xFFFB = 0x1000E/
+- Maximum value of *PC* is inside 2 octets, so !0x000E! (14)
+- PC = 14
+
+*After that, the program is in an infinite loop, repeating instructions 3 and 4.*
+
+[[https://www.mathcs.emory.edu/~cheung/Courses/170/Syllabus/01/intro-computer2.html][REFERENCE]]

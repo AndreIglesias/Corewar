@@ -1,0 +1,2 @@
+./corewar -n puppy.cor  puppy.cor -n 4 zork.cor -n 3 puppy.cor
+./corewar -n machine.cor superkitty.cor skynet.cor machine.cor

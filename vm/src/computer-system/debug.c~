@@ -1,0 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   debug.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/27 14:44:58 by ciglesia          #+#    #+#             */
+/*   Updated: 2020/08/27 14:45:50 by ciglesia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+# include "vm.h"
+
+void	print_ram(t_vm *vm)
+{
+	int i;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		if (vm->ram.owner[i] == 0)
+			ft_printf(RED"%.2d"E0M, vm->ram.arena[i]);
+		else if (vm->ram.owner[i] == 1)
+			ft_printf((vm->ram.arena[i] == 0) ? E0M"%.2d"E0M : GREEN"%.2x"E0M, vm->ram.arena[i]);
+		else if (vm->ram.owner[i] == 2)
+			ft_printf((vm->ram.arena[i] == 0) ? E0M"%.2d"E0M : CYAN"%.2x"E0M, vm->ram.arena[i]);
+		else if (vm->ram.owner[i] == 3)
+			ft_printf((vm->ram.arena[i] == 0) ? E0M"%.2d"E0M : BLUE"%.2x"E0M, vm->ram.arena[i]);
+		else
+			ft_printf((vm->ram.arena[i] == 0) ? E0M"%.2d"E0M : YELLOW"%.2x"E0M, vm->ram.arena[i]);
+		i++;
+	}
+}

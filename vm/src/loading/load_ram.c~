@@ -1,0 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_ram.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/26 18:30:54 by ciglesia          #+#    #+#             */
+/*   Updated: 2020/08/26 18:48:09 by ciglesia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "vm.h"
+
+int		load_champions(t_vm *vm)
+{
+	t_player *champion;
+	int space;
+	int ad;
+
+	space = MEM_SIZE / vm->nplayers;
+	champion = vm->player;
+	ad = 0;
+	//modulo?
+	while (champion)
+	{
+		ft_memcpy(&(vm->ram.arena[ad]), champion->code, champion->prog_size);
+		ft_memset(&(vm->ram.owner[ad]), champion->nplayer, champion->prog_size);
+		champion->pc_address = ad;
+		ad += space;
+		champion = champion->next;
+	}
+	//vm->last_live_id = vm->nplayers - 1;
+	return (EXIT_SUCCESS);
+}

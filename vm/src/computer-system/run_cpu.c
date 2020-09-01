@@ -1,0 +1,123 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   run_cpu.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/27 22:17:31 by ciglesia          #+#    #+#             */
+/*   Updated: 2020/08/31 20:58:02 by ciglesia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "vm.h"
+
+void	kill_zombies(t_vm *vm, t_list *process)
+{
+	t_list *prev;
+
+	prev = NULL;
+	while (process)
+	{
+		if (!TPROCES->live_count || vm->cycle_to_die < 0)
+		{
+			if (process == vm->processes)
+				vm->processes = process->next;
+			else
+				prev->next = process->next;
+			free(process->obj);
+			free(process);
+			process = (prev == NULL) ? vm->processes: prev->next;
+			vm->process_alive--;
+			continue ;
+		}
+		TPROCES->live_count = 0;
+		prev = process;
+		process = process->next;
+	}
+}
+
+void	find_ir(t_vm *vm, t_list *process)
+{
+	int ir;
+
+	ir = vm->ram.arena[TPROCES->pc % MEM_SIZE];
+	if (0 < ir && ir <= 15)
+	{
+		TPROCES->ir = ir - 1;
+		TPROCES->last_ir = ir;
+		TPROCES->duration = op_tab[TPROCES->ir].cycle - 1;
+		return ;
+	}
+	TPROCES->ir = - 1;
+	TPROCES->pc++;
+	TPROCES->pc %= MEM_SIZE;
+}
+
+void	process_operations(t_vm *vm, t_list *process)
+{
+	int ir;
+
+	if (vm->cycles % 200 == 0)
+		ft_memset(vm->ram.scrb, 0, sizeof(unsigned char) * MEM_SIZE);
+	while (process)
+	{
+		ir = TPROCES->ir;
+		if (ir < 0 || 15 < ir)
+			find_ir(vm, process);
+		if (vm->ncurses)
+			resize_window(vm);
+		if (!TPROCES->duration && (0 <= ir && ir <= 15))
+		{
+			//ft_printf(GREEN"HELLO: %s"E0M, op_tab[TPROCES->ir].name);
+			op_tab[TPROCES->ir].f(vm, process);
+			TPROCES->ir = -1;
+		}
+		else
+			TPROCES->duration--;
+		TPROCES->live_since++;
+		process = process->next;
+	}
+}
+
+void	update_cycles(t_vm *vm)
+{
+	int reduce_cycles;
+
+	reduce_cycles = 0;
+	if (vm->cycles && vm->cycles % vm->cycle_to_die == 0)
+	{
+		//verify if each process executed at least one "live" and kill them
+		if (vm->nlives >= NBR_LIVE)
+			reduce_cycles = 1;
+		vm->nchecks = (reduce_cycles) ? 0 : vm->nchecks + 1;
+		if (vm->nchecks >= MAX_CHECKS)
+			reduce_cycles = 1;
+		vm->nlives = 0;
+	}
+	vm->cycle_to_die -= (reduce_cycles) ? CYCLE_DELTA : 0;
+	vm->cycles++;
+}
+
+int	run_processes(t_vm *vm)
+{
+	while (vm->processes != NULL && vm->cycle_to_die > 0)
+	{
+		if (vm->ncurses)
+			usleep(10000);
+		if (vm->cycles == vm->dump_param)
+		{
+			print_ram(vm);
+			return (EXIT_SUCCESS);
+		}
+		update_cycles(vm);
+		if (vm->processes)
+			process_operations(vm, vm->processes);
+		if((vm->processes && vm->cycles ) && vm->cycles %vm->cycle_to_die == 0)
+			kill_zombies(vm, vm->processes);
+	}
+	if (!vm->ncurses)
+		print_ram(vm);
+	ft_printf("\nlast alive %d\n", vm->last_alive);
+	return (EXIT_SUCCESS);
+}
