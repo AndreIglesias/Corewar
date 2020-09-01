@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 19:39:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/08/27 22:43:39 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/01 20:51:32 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		load_player(t_vm *vm, char *file, int nplayer)
 	read(fd, &new->comment, COMMENT_LENGTH);
 	lseek(fd, 4, SEEK_CUR);
 	size = read(fd, &new->code, CHAMP_MAX_SIZE);
-	new->nplayer = (nplayer > 0) ? nplayer : -vm->nplayers - 1;
+	new->nplayer = (nplayer > 0) ? nplayer : -vm->nplayers - 1;///////////////////// -nplayer
 	new->prog_size = size;
 	new->nblive = 0;
 	new->last_live_cycle = 0;

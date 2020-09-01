@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 21:50:15 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/01 17:38:38 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/01 22:11:21 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <ncurses.h>
 # include "libft.h"
 # include "op.h"
+
+# define MAX_SPEED 0
+# define MIN_SPEED 30000
 
 # define PROCESS ((t_process*)vm->processes->obj)
 # define TPROCES ((t_process*)process->obj)
@@ -84,6 +87,7 @@ typedef struct		s_vm
 	int				nchecks;
 	int				nlives;
 	int				ncurses;
+	int				speed;
 	WINDOW			*mainWin;
 	int				height;
 	int				width;
@@ -92,6 +96,7 @@ typedef struct		s_vm
 	WINDOW			*processWin;
 	int				procHeight;
 	int				proc_y;
+	int				pause;
 }					t_vm;
 
 typedef struct		s_param

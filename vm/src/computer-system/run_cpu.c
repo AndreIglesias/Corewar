@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:17:31 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/01 18:18:34 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/01 22:11:25 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,7 @@ void	update_cycles(t_vm *vm)
 int	run_processes(t_vm *vm)
 {
 	int	input;
-	int pause;
 
-	pause = 1;
 	while (vm->processes != NULL && vm->cycle_to_die > 0)
 	{
 		if (vm->ncurses)
@@ -112,14 +110,18 @@ int	run_processes(t_vm *vm)
 			input = getch();
 			if (input == 'q')
 				break ;
-			if (input == KEY_RESIZE)
-				resize_window(vm);
 			if (input == ' ')
-				pause = ft_mod(pause + 1, 2);
-			if (pause)
+				vm->pause = ft_mod(vm->pause + 1, 2);
+			if (input == KEY_RESIZE || input == ' ')
+				resize_window(vm);
+			if (input == KEY_UP && vm->speed > MAX_SPEED)
+				vm->speed -= 500;
+			if (input == KEY_DOWN && vm->speed < MIN_SPEED)
+				vm->speed += 500;
+			if (vm->pause)
 				continue ;
 			if (input != KEY_RESIZE)
-			usleep(7000);
+			usleep(vm->speed);
 		}
 		if (vm->cycles == vm->dump_param)
 		{

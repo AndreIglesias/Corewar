@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 20:41:28 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/01 18:14:14 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/01 22:03:12 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	fill_arena(int height, t_vm *vm, t_matrix m, WINDOW *mainWin)
 
 	while (m.i < MEM_SIZE)
 	{
-		if (vm->ram.owner[m.i] == 0 && is_pc(vm->processes, m.i))
+		if (/*vm->ram.owner[m.i] == 0 && */is_pc(vm->processes, m.i))
 			wattron(mainWin, COLOR_PAIR(6));
 		else
 			wattron(mainWin, COLOR_PAIR(vm->ram.owner[m.i] + 1));
@@ -100,7 +100,9 @@ void	print_panel(WINDOW *sideWin, t_list *process, t_vm *vm)
 
 	wattron(sideWin, A_BOLD);
 	mvwprintw(sideWin, 1, 1, "CYCLES\t\t%d", vm->cycles);
+	mvwprintw(sideWin, 1, 35, (vm->pause) ? "** PAUSED **" : "** RUNNING **");
 	mvwprintw(sideWin, 2, 1, "CYCLE_TO_DIE\t%d", vm->cycle_to_die);
+	mvwprintw(sideWin, 2, 35, "Speed: %d", 50000 - vm->speed);
 	mvwprintw(sideWin, 3, 1, "CYCLE_DELTA\t%d", CYCLE_DELTA);
 	mvwprintw(sideWin, 4, 1, "MAX CHECKS\t%d", MAX_CHECKS);
 	mvwprintw(sideWin, 5, 1, "CHECK\t\t%d\n", vm->nchecks);
@@ -113,9 +115,9 @@ void	print_panel(WINDOW *sideWin, t_list *process, t_vm *vm)
 		wattron(sideWin, A_BOLD);
 		mvwprintw(sideWin, i, 1, "PLAYER %d", champion->nplayer);
 		wattroff(sideWin, A_BOLD);
-		wattron(sideWin, COLOR_PAIR((i-8)/5+2));
+		wattron(sideWin, COLOR_PAIR((i - 8) / 5 + 2));
 		mvwprintw(sideWin, i + 1, 1, "\t\t(%s)", champion->name);
-		wattroff(sideWin, COLOR_PAIR((i-8)/5+2));
+		wattroff(sideWin, COLOR_PAIR((i - 8) / 5 + 2));
 		mvwprintw(sideWin, i + 2, 1, "Last live: \t\t\t%d", champion->last_live_cycle);
 		mvwprintw(sideWin, i + 3, 1, "Lives in current period: \t%d", champion->nblive);
 		champion = champion->next;

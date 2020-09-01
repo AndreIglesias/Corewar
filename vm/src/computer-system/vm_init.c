@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 22:44:00 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/08/30 12:53:31 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/01 21:58:33 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int		vm_init(t_vm *vm)
 	vm->cycles = 0;
 	vm->nlives = 0;
 	vm->height = 0;
+	vm->speed = 10000;
 	vm->width = 0;
+	vm->pause = 1;
 	vm->nchecks = 0;
 	vm->last_alive = 0;
 	vm->process_alive = 0;
