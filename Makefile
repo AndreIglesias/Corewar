@@ -6,30 +6,34 @@
 #    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/20 22:37:03 by ciglesia          #+#    #+#              #
-#    Updated: 2020/09/05 15:14:18 by ciglesia         ###   ########.fr        #
+#    Updated: 2020/09/05 22:25:31 by ciglesia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-SUB_MAKEL	=	./libft/
-SUB_MAKEVM	=	./vm/
-SUB_MAKEC	=	./compiler/
+DEPENDENCIES = Makefile libft/Makefile vm/Makefile assembler/Makefile
 
 ECHO		=	/bin/echo -e
 
-clean	:
-				@($(MAKE) clean -C $(SUB_MAKEL))
-				@($(MAKE) clean -C $(SUB_MAKEVM))
-				@$(ECHO) '> Directory cleaned'
+.SUFFIXES:
 
-all		:
-				@($(MAKE) -C $(SUB_MAKEL))
-				@($(MAKE) -C $(SUB_MAKEVM))
+all:	$(DEPENDENCIES)
+		@$(MAKE) -C libft/
+		@$(MAKE) -C vm/
+		@$(MAKE) -C assembler/
 
-fclean	:		clean
-				@($(MAKE) fclean -C $(SUB_MAKEL))
-				@($(MAKE) fclean -C $(SUB_MAKEVM))
-				@$(ECHO) '> Remove executable'
+clean:
+		@$(MAKE) -C libft/ clean
+		@$(MAKE) -C vm/ clean
+		@$(MAKE) -C assembler/ clean
 
-re		:		fclean all
+fclean:	clean
+		@$(MAKE) -C libft/ fclean
+		@$(MAKE) -C vm/ fclean
+		@$(MAKE) -C assembler/ fclean
 
-.PHONY	:		all clean re
+re:
+		@echo "Recompiling"
+		@$(MAKE) fclean
+		@$(MAKE) all
+
+.PHONY: clean fclean all re
