@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 17:01:05 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/02 00:45:45 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/05 14:29:20 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,9 +127,9 @@ void							op_xor(t_vm *vm, t_list *process)
 
 void							op_zjmp(t_vm *vm, t_list *process)
 {
-	int pos;
+	int move;
 
-	pos = reverse_bytes(vm, TPROCES->pc + 1, 2) % IDX_MOD;
+	move = reverse_bytes(vm, TPROCES->pc + 1, 2) % IDX_MOD;
 	TPROCES->pc = mem_mod(TPROCES->pc + ((TPROCES->carry) ? pos : 3));
 }
 

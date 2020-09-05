@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 17:21:12 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/02 01:20:40 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/05 14:08:00 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ unsigned int	ft_ptr_to_uint(t_vm *vm, unsigned int pc, int size)
 	pc = mem_mod(pc);
 	while (i < size)
 	{
-		result = result * 256 + vm->ram.arena[pc];
+		result = result * 0x100 + vm->ram.arena[pc];
 		i++;
-		pc = (pc + 1) % MEM_SIZE;
+		pc = mem_mod(pc + 1);
 	}
 	return (result);
 }

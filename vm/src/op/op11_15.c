@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 17:02:18 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/02 01:30:04 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/05 14:13:38 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void							op_sti(t_vm *vm, t_list *process)
 
 void							op_fork(t_vm *vm, t_list *process)
 {
-	t_uchar move;
+	int move;
 
 	move = reverse_bytes(vm, TPROCES->pc + 1, 2);
 	add_process(vm, process, mem_mod(TPROCES->pc + (move % IDX_MOD)));
@@ -63,7 +63,7 @@ void							op_fork(t_vm *vm, t_list *process)
 
 void							op_lld(t_vm *vm, t_list *process)
 {
-	t_uchar move;
+	int move;
 	t_uchar acb;
 	int reg;
 
@@ -127,7 +127,7 @@ void							op_lldi(t_vm *vm, t_list *process)
 
 void							op_lfork(t_vm *vm, t_list *process)
 {
-	t_uchar move;
+	int move;
 
 	move = reverse_bytes(vm, TPROCES->pc + 1, 2);
 	add_process(vm, process, mem_mod(TPROCES->pc + move));
