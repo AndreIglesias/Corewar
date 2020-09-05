@@ -6,11 +6,11 @@
 #    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/20 19:19:55 by ciglesia          #+#    #+#              #
-#    Updated: 2020/09/01 13:28:51 by ciglesia         ###   ########.fr        #
+#    Updated: 2020/09/05 14:45:18 by ciglesia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME		=	corewar
+NAME		=	../corewar
 
 INC			=	./include/
 INC2		=	../libft/include/
