@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:17:31 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/01 22:27:28 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/05 15:34:42 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ void	process_operations(t_vm *vm, t_list *process)
 		ir = TPROCES->ir;
 		if (ir < 0 || 15 < ir)
 			find_ir(vm, process);
-		if (vm->ncurses)
-			resize_window(vm);
 		if (!TPROCES->duration && (0 <= ir && ir <= 15))
 		{
 			//ft_printf(GREEN"HELLO: %s"E0M, op_tab[TPROCES->ir].name);
@@ -119,6 +117,8 @@ int	run_processes(t_vm *vm)
 				resize_window(vm);
 			if (vm->pause)
 				continue ;
+			else
+				resize_window(vm);
 			if (input == KEY_UP && vm->speed > MAX_SPEED)
 				vm->speed -= 500;
 			if (input == KEY_DOWN && vm->speed < MIN_SPEED)
