@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 21:50:15 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/02 01:20:49 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/05 18:02:04 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,12 @@ int					load_processes(t_vm *vm);
 void				add_player(t_vm *vm, t_player *new);
 t_player			*new_player();
 int					add_process(t_vm *vm, t_list *process, unsigned int pc);
+void				kill_players(t_vm *vm);
 
 /*
 ** validation
 */
+
 int					valid_input(int ac, char **av);
 int					is_dump(int i, int ac, char **av);
 int					is_champion(int i, int ac, char **av, int *np);
@@ -129,7 +131,7 @@ int					valid_header(int fd, char *file);
 */
 int					vm_init(t_vm *vm);
 int					run_processes(t_vm *vm);
-void				print_ram(t_vm *vm);
+int					print_ram(t_vm *vm);
 /*
 ** parsing
 */
@@ -151,6 +153,7 @@ int				idx_mod(unsigned int val);
 ** interface
 */
 int					print_arena(t_vm *vm);
+int					ncupdate(t_vm *vm, int input);
 void				print_panel(WINDOW *sideWin, t_list *process, t_vm *vm);
 void				resize_window(t_vm *vm);
 void				fill_arena(int height, t_vm *vm, t_matrix m,

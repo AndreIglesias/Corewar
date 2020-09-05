@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 17:09:58 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/08/26 18:13:24 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/05 18:01:06 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,20 @@ void	add_player(t_vm *vm, t_player *new)
 	new->next = vm->player;
 	vm->player = new;
 	vm->nplayers++;
+}
+
+void	kill_players(t_vm *vm)
+{
+	t_player *champion;
+	t_player *aux;
+
+	champion = vm->player;
+	while (champion)
+	{
+		ft_printf("killing: %s\n", champion->name);
+		aux = champion;
+		champion = champion->next;
+		free(aux);
+	}
+	vm->player = NULL;
 }

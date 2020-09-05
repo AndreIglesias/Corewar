@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 15:07:58 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/01 22:27:43 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/05 17:47:54 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,30 @@ static t_matrix init_m()
 	m.col = 1;
 	m.i = 0;
 	return (m);
+}
+
+int		ncupdate(t_vm *vm, int input)
+{
+	if (input == 'q')
+		return (1);
+	if (input == ' ')
+	{
+		nodelay(stdscr, vm->pause);
+		vm->pause = ft_mod(vm->pause + 1, 2);
+	}
+	if (input == KEY_RESIZE || input == ' ')
+		resize_window(vm);
+	if (vm->pause)
+		return (2);
+	else
+		resize_window(vm);
+	if (input == KEY_UP && vm->speed > MAX_SPEED)
+		vm->speed -= 500;
+	if (input == KEY_DOWN && vm->speed < MIN_SPEED)
+		vm->speed += 500;
+	if (input != KEY_RESIZE)
+		usleep(vm->speed);
+	return (0);
 }
 
 void	resize_window(t_vm *vm)

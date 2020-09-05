@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 22:01:52 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/08/29 20:37:38 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/05 18:06:27 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		main(int ac, char **av)
 	if (vm.ncurses)
 		print_arena(&vm);
 	run_processes(&vm);
+	kill_players(&vm);
 	endwin();
 	return (EXIT_SUCCESS);
 }

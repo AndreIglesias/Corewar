@@ -6,13 +6,13 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 14:44:58 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/08/28 14:28:29 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/05 17:25:44 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "vm.h"
 
-void	print_ram(t_vm *vm)
+int		print_ram(t_vm *vm)
 {
 	int i;
 
@@ -33,4 +33,5 @@ void	print_ram(t_vm *vm)
 			ft_printf("\n");
 		i++;
 	}
+	return (0);
 }
