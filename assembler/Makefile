@@ -6,7 +6,7 @@
 #    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/20 19:19:55 by ciglesia          #+#    #+#              #
-#    Updated: 2020/09/06 22:19:25 by ciglesia         ###   ########.fr        #
+#    Updated: 2020/09/07 18:55:51 by ciglesia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -19,20 +19,20 @@ INCLUDE		=	-I $(INC) -I $(INC2) -I $(INC3)
 INC_LIB		=	-L../libft/ -lft -lncurses
 
 DIRSRC		=	./src/
-DIRLOAD		=	./src/loading/
-DIRPARSE	=	./src/parsing/
+DIRAN		=	./src/analysis/
+DIRSYN		=	./src/synthesis/
 DIROP		=	./src/op/
 DIRVALID	=	./src/validation/
 
 SRC			=	asm_main.c
-LOADING		=
-PARSING		=
+ANALYSIS	=
+SYNTHESIS	=
 OP			=
-VALIDATION	=	input_param.c
+VALIDATION	=	valid_file.c valid_syntax.c
 
 DIROBJ		=	./depo/
 
-OAUX		=	$(SRC:%=$(DIROBJ)%) $(LOADING:%=$(DIROBJ)%) $(PARSING:%=$(DIROBJ)%) $(OP:%=$(DIROBJ)%) $(VALIDATION:%=$(DIROBJ)%)
+OAUX		=	$(SRC:%=$(DIROBJ)%) $(ANALYSIS:%=$(DIROBJ)%) $(SYNTHESIS:%=$(DIROBJ)%) $(OP:%=$(DIROBJ)%) $(VALIDATION:%=$(DIROBJ)%)
 DEPS		=	$(OAUX:.c=.d)
 OBJS		=	$(OAUX:.c=.o)
 
@@ -54,10 +54,10 @@ ECHO		=	/bin/echo -e
 %.o		:		../$(DIRSRC)/%.c
 				$(CC) $(CFLAGS) $(INCLUDE) -MMD -o $@ -c $<
 
-%.o		:		../$(DIRLOAD)/%.c
+%.o		:		../$(DIRAN)/%.c
 				$(CC) $(CFLAGS) $(INCLUDE) -MMD -o $@ -c $<
 
-%.o		:		../$(DIRPARSE)/%.c
+%.o		:		../$(DIRSYN)/%.c
 				$(CC) $(CFLAGS) $(INCLUDE) -MMD -o $@ -c $<
 
 %.o		:		../$(DIROP)/%.c

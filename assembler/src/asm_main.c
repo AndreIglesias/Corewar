@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:21:40 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/06 22:21:32 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/07 15:10:23 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		main(int ac, char **av)
 {
 	if (ac != 2)
-		return (ft_puterr(ERROR RED": assembler needs exactly one file!"E0M,
+		return (ft_puterr(ERROR""RED": assembler needs exactly one file!"E0M,
 						EXIT_FAILURE));
 	else
 	{
