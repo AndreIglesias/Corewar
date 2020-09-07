@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 18:31:41 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/08/27 01:19:50 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/06 22:14:28 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,6 @@ int		is_dump(int i, int ac, char **av)
 	else
 		return (0);
 	return (2);
-}
-
-int		cor_file(char *file)
-{
-	int i;
-
-	i = 0;
-	if (ft_strlen(file) < 4)
-	{
-		ft_printf_fd(2, ERROR": %s: Not a .cor file\n", file);
-		return (0);
-	}
-	while (file[i+4])
-		i++;
-	if (ft_strcmp(&file[i], ".cor") != 0)
-	{
-		ft_printf_fd(2, ERROR": %s: Not a .cor file\n", file);
-		return (0);
-	}
-	return (1);
 }
 
 int		is_champion(int i, int ac, char **av, int *np)
@@ -60,7 +40,7 @@ int		is_champion(int i, int ac, char **av, int *np)
 		np[npi] = ft_atoi(av[i + 1]);
 		i += 2;
 	}
-	if (i < ac && !cor_file(av[i]))
+	if (i < ac && !file_name(av[i], ".cor"))
 		return (-1);
 	if ((i >= ac || (fd = open(av[i], O_RDONLY)) < 0) || read(fd, NULL, 0))
 	{

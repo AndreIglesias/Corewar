@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_main.c                                         :+:      :+:    :+:   */
+/*   input_param.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/05 22:21:40 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/06 22:21:32 by ciglesia         ###   ########.fr       */
+/*   Created: 2020/09/06 21:55:33 by ciglesia          #+#    #+#             */
+/*   Updated: 2020/09/06 22:20:00 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		main(int ac, char **av)
+int		valid_input(char *file)
 {
-	if (ac != 2)
-		return (ft_puterr(ERROR RED": assembler needs exactly one file!"E0M,
-						EXIT_FAILURE));
-	else
+	if (!file_name(file, ".s"))
+		return (EXIT_FAILURE);
+	if (open(av[i], O_RDONLY) < 0 || read(fd, NULL, 0))
 	{
-		if (valid_input(av[1]) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+		ft_printf_fd(2, ERROR": %s: Cannot open file .s\n",	file);
+		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }

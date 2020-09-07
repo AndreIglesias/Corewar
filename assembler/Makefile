@@ -6,7 +6,7 @@
 #    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/20 19:19:55 by ciglesia          #+#    #+#              #
-#    Updated: 2020/09/05 22:36:24 by ciglesia         ###   ########.fr        #
+#    Updated: 2020/09/06 22:19:25 by ciglesia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -28,7 +28,7 @@ SRC			=	asm_main.c
 LOADING		=
 PARSING		=
 OP			=
-VALIDATION	=
+VALIDATION	=	input_param.c
 
 DIROBJ		=	./depo/
 

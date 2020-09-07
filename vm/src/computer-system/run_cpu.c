@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:17:31 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/05 17:54:26 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/06 21:49:39 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	update_cycles(t_vm *vm)
 int		run_processes(t_vm *vm)
 {
 	int	control;
+	t_player *champion;
 
 	while (vm->processes != NULL && vm->cycle_to_die > 0)
 	{
@@ -130,6 +131,12 @@ int		run_processes(t_vm *vm)
 		kill_zombies(vm, vm->processes);
 	}
 	(!vm->ncurses) ? print_ram(vm) : 0;
-	ft_printf("\nlast alive %d\n", vm->last_alive);
+	champion = vm->player;
+	while (champion)
+	{
+		if (vm->last_alive == champion->nplayer)
+			ft_printf("Player %d (%s) won\n", vm->last_alive, champion->name);
+		champion = champion->next;
+	}
 	return (EXIT_SUCCESS);
 }

@@ -2,7 +2,7 @@
 #+AUTHOR: ciglesia
 
 * TODOS
-** TODO [#A] find out [80%]
+** TODO [#A] find out [100%]
 - [X] what is !live!?
   * *function* that takes as _param_ a player number to qualify it as /alive/
 - [X] what is !REG_NUMBER!?
@@ -11,18 +11,20 @@
   * The [[ACB]] allows the VM to know how to *load* the arguments of an instruction
 - [X] what are the acronyms !ACB! (EN) or !OCP! (FR) for?
   * Argument's Coding Byte / Octet de Codage des Parametres
-- [ ] The meaning of "Each address is relative to the case with the !opcode! of the /current instruction/".
-** TODO [#B] program [0%]
-- [ ] structures [0/3]
-  - [ ] Registry
-  - [ ] Champion
-  - [ ] Virtual Arena
-- [ ] initialize
-- [ ] validate && fill structures
-- [ ] zero leaks
-- [ ] implement
-  - [ ] circular memory
-  - [ ] computer system
+- [X] The meaning of "Each address is relative to the case with the !opcode! of the /current instruction/".
+** TODO [#B] program [80%]
+- [X] structures [3/3]
+  - [X] Registry
+  - [X] Champion
+  - [X] Virtual Arena
+- [X] initialize
+- [X] validate && fill structures
+- [-] zero leaks
+  - [X] without interface
+  - [ ] with ncurses
+- [X] implement
+  - [X] circular memory
+  - [X] computer system
 
 * REFERENCE
 ** COMPUTER SYSTEM
@@ -81,6 +83,53 @@
 3. Executes /current instruction/ at !IR!
    - (/the *CPU* will do the operation indicated by the _instruction code_ in the/ !IR!)
 
+*** RAM
+**** Encoding
+VM is !BIG ENDIAN!
+|------------+-------------|
+| *32-Bit Int* | `0A 0B 0C 0D` |
+|------------+-------------|
+| *Memory*     | `0D 0C 0B 0A` |
+|------------+-------------|
+
+.NOT. /LTTLE ENDIAN/
+|------------+-------------|
+| *32-Bit Int* | !0A 0B 0C 0D! |
+|------------+-------------|
+| *Memory*     | !0A 0B 0C 0D! |
+|------------+-------------|
+
+** CODE TRANSLATION
+|---------------------+-----------------------|
+|                     | ~TRANSLATION~           |
+|---------------------+-----------------------|
+| ~HIGH-LEVEL LANGUAGE~ | Compiler              |
+| ~ASSEMBLY LANGUAGE~   | Assembler             |
+| ~MACHINE CODE~        | Instruction Execution |
+| ~PROCESSOR~           |                       |
+|---------------------+-----------------------|
+
+|-----------+-----------------------------+----------------------------|
+| !COMPILER!  | ~SECTION~                     | ~OUTPUT~                     |
+|-----------+-----------------------------+----------------------------|
+|           | Lexical Analyzer (lexer)    | Token Stream               |
+| ~ANALYSIS~  | Syntax Analyzer (parser)    | Abstract Syntax Tree *(ABT)* |
+|           | Semantic Analyzer           | Semantic Graph             |
+|-----------+-----------------------------+----------------------------|
+|           | Intermediate Code Generator | Flow Graph                 |
+| ~SYNTHESIS~ | Code Generator              |                            |
+|           | Code Optimizer              |                            |
+|-----------+-----------------------------+----------------------------|
+
+|-----------+--------------------------+-------------------------------------------|
+| !ASSAMBLER! | ~SECTION~                  | ~OUTPUT~                                    |
+|-----------+--------------------------+-------------------------------------------|
+| ~ANALYSIS~  | Lexical Analyzer (lexer) | Def & Create `Symbol table` & `literal table` |
+|-----------+--------------------------+-------------------------------------------|
+| ~SYNTHESIS~ |                          |                                           |
+|-----------+--------------------------+-------------------------------------------|
+
+
 ** IMPLEMENTATION
 *** MANDATORY STRUCTURE
 **** GENERAL PURPOSE REGISTER
@@ -106,7 +155,45 @@ Available: (The processor register)
 3. *carry* (Boolean)
    - Last operatiton /success/
 
-**** CHAMPION && COMPILER
+**** RAM
+***** Encoding
+VM is !BIG ENDIAN!
+|------------+-------------|
+| *32-Bit Int* | `0A 0B 0C 0D` |
+|------------+-------------|
+| *Memory*     | `0D 0C 0B 0A` |
+|------------+-------------|
+
+.NOT. /LTTLE ENDIAN/
+|------------+-------------|
+| *32-Bit Int* | !0A 0B 0C 0D! |
+|------------+-------------|
+| *Memory*     | !0A 0B 0C 0D! |
+|------------+-------------|
+
+****** OP_TAB ARRAY
+1. Number of cycles for each instruction (cycles are always consumed)
+2. Mnemonic representatinos
+3. Associated amount
+4. Possible types of arguments
+Other codes have no action, just pass to the next one and loose a cycle
+
+****** INSTRUCTIONS ARE ENCODED BY
+- The instruction code *find it in (/op_tab/)*
+- The argument's coding byte ([[ACB]]) if appropiate.
+  + /For example/
+	* !r2, 23, %34! gives the coding byte ,0b 01 11 10 00,, hence 0x78
+	* !23, 45, %34! gives the coding byte ,0b 11 11 10 00,, hence 0xF8
+	* !r1, r3, 34!  gives the coding byte ,0b 01 01 11 00,, hence 0x5C
+- The arguments / parameters
+  + /For example/
+	* !r2, 23, %34! gives the ACB .0x78. then `0x02 0x00 0x17 0x00 0x00 0x00 0x22`
+	* !23, 45, %34! gives the ACB .0xF8. then `0x00 0x17 0x00 0x2d 0x00 0x00 0x00 0x22`
+
+****** EXECUTABLE
+- The executable will always start with a header, defined in op.h (the header_t type)
+
+**** CHAMPION && ASSEMBLER
 ***** ASSEMBLY FORMAT
 An instruction is composed of three elements
 1. !Label!
@@ -130,29 +217,6 @@ All the addressing is /relatif/ to PC and IDX_MOD (except for lld, lldi and lfor
    - Present after the /marker/ /NAME_CMD_STRING/
 2. !Description!
    - Present after the /marker/ /COMMENT_CMD_STRING/
-***** Encoding
-VM is BIG ENDIAN
-****** OP_TAB ARRAY
-1. Number of cycles for each instruction (cycles are always consumed)
-2. Mnemonic representatinos
-3. Associated amount
-4. Possible types of arguments
-Other codes have no action, just pass to the next one and loose a cycle
-
-****** INSTRUCTIONS ARE ENCODED BY
-- The instruction code *find it in (/op_tab/)*
-- The argument's coding byte ([[ACB]]) if appropiate.
-  + /For example/
-	* !r2, 23, %34! gives the coding byte ,0b 01 11 10 00,, hence 0x78
-	* !23, 45, %34! gives the coding byte ,0b 11 11 10 00,, hence 0xF8
-	* !r1, r3, 34!  gives the coding byte ,0b 01 01 11 00,, hence 0x5C
-- The arguments / parameters
-  + /For example/
-	* !r2, 23, %34! gives the ACB .0x78. then `0x02 0x00 0x17 0x00 0x00 0x00 0x22`
-	* !23, 45, %34! gives the ACB .0xF8. then `0x00 0x17 0x00 0x2d 0x00 0x00 0x00 0x22`
-
-****** EXECUTABLE
-- The executable will always start with a header, defined in op.h (the header_t type)
 
 ***** SYNTAX
 |-------------+----------+------------------------------------------------------------------------+-----+-------------------+-------------+----------|

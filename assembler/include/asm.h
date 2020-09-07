@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/05 22:30:30 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/06 22:00:30 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 # define ASM_H
 
 # include "libft.h"
+
+int		valid_input(char *file);
 
 #endif
