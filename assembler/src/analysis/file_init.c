@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_file.c                                       :+:      :+:    :+:   */
+/*   file_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/07 18:21:29 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/07 19:32:09 by ciglesia         ###   ########.fr       */
+/*   Created: 2020/09/07 20:49:08 by ciglesia          #+#    #+#             */
+/*   Updated: 2020/09/07 20:57:48 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		valid_input(char *file)
+void	file_init(t_file *file)
 {
-	int fd;
-
-	if (!file_name(file, ".s"))
-		return (EXIT_FAILURE);
-	if ((fd = open(file, O_RDONLY) < 0) || read(fd, NULL, 0))
-	{
-		ft_printf_fd(2, ERROR""RED": %s: Cannot open file .s\n"E0M, file);
-		return (EXIT_FAILURE);
-	}
-	if (!correct_syntax(fd, NULL, 0, 0))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	file->fd = -1;
+	file->name = NULL;
+	file->comment = NULL;
+	file->playername = NULL;
+	ft_memset(file->code, 0, CHAMP_MAX_SIZE);
 }

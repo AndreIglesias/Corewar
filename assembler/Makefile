@@ -6,7 +6,7 @@
 #    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/20 19:19:55 by ciglesia          #+#    #+#              #
-#    Updated: 2020/09/07 18:55:51 by ciglesia         ###   ########.fr        #
+#    Updated: 2020/09/08 15:48:40 by ciglesia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,7 +15,8 @@ NAME		=	asm
 INC			=	./include/
 INC2		=	../libft/include/
 INC3		=	../include/
-INCLUDE		=	-I $(INC) -I $(INC2) -I $(INC3)
+INC4		=	../vm/include/
+INCLUDE		=	-I $(INC) -I $(INC2) -I $(INC3) -I $(INC4)
 INC_LIB		=	-L../libft/ -lft -lncurses
 
 DIRSRC		=	./src/
@@ -25,10 +26,10 @@ DIROP		=	./src/op/
 DIRVALID	=	./src/validation/
 
 SRC			=	asm_main.c
-ANALYSIS	=
+ANALYSIS	=	file_init.c
 SYNTHESIS	=
-OP			=
-VALIDATION	=	valid_file.c valid_syntax.c
+OP			=	op.c
+VALIDATION	=	valid_file.c valid_syntax.c instruction_lexicon.c
 
 DIROBJ		=	./depo/
 
