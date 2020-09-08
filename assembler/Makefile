@@ -6,7 +6,7 @@
 #    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/20 19:19:55 by ciglesia          #+#    #+#              #
-#    Updated: 2020/09/08 15:48:40 by ciglesia         ###   ########.fr        #
+#    Updated: 2020/09/09 01:38:29 by ciglesia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -29,7 +29,7 @@ SRC			=	asm_main.c
 ANALYSIS	=	file_init.c
 SYNTHESIS	=
 OP			=	op.c
-VALIDATION	=	valid_file.c valid_syntax.c instruction_lexicon.c
+VALIDATION	=	valid_file.c valid_syntax.c instruction_lexicon.c valid_params.c
 
 DIROBJ		=	./depo/
 

@@ -12,9 +12,9 @@ arstasr:###nirsra
 
 
 
-25sarsc:ld    %400 ,              r3           		# 7,106,175
+25sarsc:ld%400 ,              r3           		# 7,106,175
 
 
 	live     %0                 		# 5,113,168
 	ld    %400,              r3           		# 7,106,175
-	st	r4, :arstasr
+	st r4,:arstasr
