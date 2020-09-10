@@ -1,0 +1,321 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/home/user42/Inner42/push_swap/" . "src/")
+ ("/home/user42/Desktop/" . "Corewar/")
+ ("/home/user42/Desktop/Corewar/libft/" . "include/")
+ ("/home/user42/Desktop/Corewar/assembler/" . "include/")
+ ("/home/user42/Desktop/Corewar/assembler/src/" . "op/")
+ ("/home/user42/Desktop/Corewar/" . "include/")
+ ("/home/user42/Desktop/Corewar/vm/" . "src/")
+ ("/home/user42/Corewar/Corewar/srcs/" . "corewar/")
+ ("/home/user42/Corewar/Corewar/" . "srcs/")
+ ("/home/user42/Corewar/" . "Corewar/")
+ ("/home/user42/Desktop/Corewar/vm/src/" . "computer-system/")
+ ("/home/user42/Lem-in/" . "include/")
+ ("/home/user42/Inner42/V_Fillit/" . "src/")
+ ("/home/user42/get_next_line/" . "libft/")
+ ("/" . "tmp/")
+ ("/tmp/Corewar/Corewar/srcs/" . "corewar/")
+ ("/tmp/Corewar/Corewar/" . "srcs/")
+ ("/tmp/Corewar/" . "Corewar/")
+ ("/tmp/" . "Corewar/")
+ ("/home/user42/Inner42/corewar/libft/ft_printf/src/" . "aux/")
+ ("/home/user42/Inner42/corewar/libft/ft_printf/" . "src/")
+ ("/home/user42/Inner42/corewar/libft/" . "ft_printf/")
+ ("/home/user42/Inner42/corewar/vm/" . "include/")
+ ("/home/user42/Inner42/corewar/vm/src/" . "computer-system/")
+ ("/home/user42/" . "Desktop/")
+ ("/home/user42/Inner42/corewar/include/libft/ft_printf/src/" . "aux/")
+ ("/home/user42/Inner42/corewar/include/libft/" . "ft_printf/")
+ ("/home/user42/Inner42/corewar/include/libft/ft_printf/" . "include/")
+ ("/home/user42/Inner42/corewar/" . "vm/")
+ ("/home/user42/Inner42/" . "GNL/")
+ ("/home/usuario/42/web_copy/web_cv/" . "js/")
+ ("/home/usuario/42/web_copy/" . "web_cv/")
+ ("/home/usuario/42/web_cv/" . "js/")
+ ("/home/usuario/42/push_swap/" . "libft/")
+ ("/home/usuario/42/Fillit/" . "libft/")
+ ("/home/usuario/42/sandbox/piscine-j/C11/" . "ex05/")
+ ("/home/usuario/42/sandbox/piscine-j/07/" . "convert_base/")
+ ("/home/usuario/42/sandbox/piscine-j/" . "C11/")
+ ("/home/usuario/42/sandbox/" . "piscine-j/")
+ ("/home/usuario/42/ft_printf/src/" . "aux/")
+ ("/home/usuario/42/" . "web_copy/")
+ ("/home/usuario/42/ft_printf/" . "includes/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/home/user42/Desktop/Corewar/include/"
+ "/home/user42/Desktop/Corewar/assembler/include/"
+ "/home/user42/Desktop/Corewar/assembler/src/op/"
+ "/home/user42/Desktop/Corewar/libft/"
+ "/home/user42/Desktop/Corewar/assembler/src/validation/"
+ "/home/user42/Desktop/Corewar/tmp/"
+ "/home/user42/Desktop/Corewar/libft/include/"
+ "/home/user42/Desktop/Corewar/"
+ "/home/user42/Desktop/Corewar/assembler/"
+ "/home/user42/Desktop/Corewar/vm/src/computer-system/"
+ "/home/user42/Desktop/Corewar/assembler/src/analysis/"
+ "/home/user42/Desktop/Corewar/vm/src/loading/"
+ "/home/user42/Desktop/Corewar/vm/include/"
+ "/home/user42/Inner42/GNL/"
+ "/home/user42/Inner42/push_swap/src/"
+ "/home/user42/Desktop/Corewar/assembler/src/"
+ "/home/user42/Desktop/Corewar/vm/src/validation/"
+ "/home/user42/Desktop/Corewar/vm/src/interface/"
+ "/home/user42/Desktop/Corewar/vm/src/parsing/"
+ "/home/user42/Corewar/Corewar/srcs/corewar/"
+ "/home/user42/Corewar/"
+ "/home/user42/Desktop/Corewar/vm/src/op/"
+ "/home/user42/Lem-in/include/"
+ "/home/user42/Lem-in/src/"
+ "/home/user42/Lem-in/libft/"
+ "/home/user42/ft_printf/"
+ "/home/user42/ft_printf/include/"
+ "/home/user42/Inner42/V_Fillit/src/"
+ "/home/user42/Inner42/Fillit/"
+ "/home/user42/get_next_line/libft/"
+ "/home/user42/get_next_line/"
+ "/home/user42/Inner42/corewar/vm/src/computer-system/"
+ "/home/user42/Inner42/corewar/vm/include/"
+ "/home/user42/Inner42/corewar/vm/src/op/"
+ "/home/user42/Inner42/corewar/include/"
+ "/home/user42/Inner42/corewar/vm/src/parsing/"
+ "/tmp/Corewar/Corewar/srcs/corewar/"
+ "/home/user42/Inner42/corewar/"
+ "/home/user42/Inner42/corewar/vm/src/loading/"
+ "/home/user42/Inner42/corewar/libft/"
+ "/home/user42/Inner42/corewar/vm/"
+ "/home/user42/Inner42/corewar/vm/src/validation/"
+ "/home/user42/"
+ "/home/user42/Inner42/corewar/vm/src/"
+ "/home/user42/Inner42/corewar/libft/ft_printf/src/"
+ "/home/user42/Inner42/corewar/libft/ft_printf/src/aux/"
+ "/home/user42/Inner42/corewar/libft/ft_printf/include/"
+ "/home/user42/Inner42/corewar/libft/ft_printf/"
+ "/home/user42/Inner42/corewar/include/libft/ft_printf/"
+ "/home/user42/Inner42/corewar/include/libft/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "op.h"
+ "asm.h"
+ "op.c"
+ "ft_isdigit.c"
+ "valid_params.c"
+ "car.s"
+ "car.cor"
+ "valid_syntax.c"
+ "Makefile"
+ "libft.h"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/home/user42/Desktop/Corewar/assembler/src/validation/" (24408 2685 545151 450000) "instruction_lexicon.c~" "valid_params.c~" "../" "valid_syntax.c" "valid_file.c" ".-" ".#instruction_lexicon.c" "./" "valid_params.c" "#instruction_lexicon.c#" "instruction_lexicon.c")
+
+ ("/home/user42/" (24407 64960 289041 310000) "Pictures/" "Videos/" "get_next_line/" ".zcompdump" ".mozilla/" "rendu/" ".emacs2" "NCURSES-Programming-HOWTO-examples/" "mininterface/" "piscine-C.zip" "Templates/" ".vboxclient-draganddrop.pid" ".config/" "vm.org~" ".emacs" "id_rsa" ".xsession-errors" ".xscreensaver" ".gitconfig" ".cache/" ".bundle/" ".emacs.d/" ".Xauthority" "Documents/" ".node_repl_history" ".norminette/" ".sudo_as_admin_successful" ".pki/" "hello.c" ".xsession-errors.old" ".bashrc" ".dmrc" ".shell.pre-oh-my-zsh" ".bash_logout" ".profile" "a.out" ".vboxclient-display.pid" ".Xdefaults" ".vboxclient-seamless.pid" ".bash_history" "Téléchargements/" ".thumbnails/" "triangle.c~" "id_rsa.pub" "norminette/" "hello.c~" "../" "Corewar/" ".viminfo" ".gnupg/" ".zcompdump-salty-VirtualBox-5.4.2" "42/" "background.txt" "Desktop/" ".local/" ".bashrc~" "Modèles/" ".xinputrc" ".emacs~" ".ICEauthority" ".pam_environment" ".zshrc~" "./" ".zshrc" ".ssh/" "Music/" "Public/" "Downloads/" ".zsh_history" "minilibx-linux/" ".oh-my-zsh/" "Inner42/" "Bureau/")
+
+ ("/home/user42/Desktop/Corewar/libft/include/" (24407 64932 49040 356000) "../" "libft.h" "./")
+
+ ("/home/user42/Desktop/Corewar/libft/" (24407 64943 933040 758000) "file_name.c" "ft_split.c" "ft_strnequ.c" "ft_memmove.c" "ft_strlcat.c" "ft_vstrdup.c" "ft_itersplit.c" "ft_lstdelone.c" "ft_strsub.c" "ft_strmap.c" "ft_putchar_fd.c" "ft_strlen.c" "ft_strndup.c" "ft_putstr.c" "ft_strcpy.c" "ft_atoi_protected.c" "ft_memcmp.c" "ft_fillstr.c" "ft_memalloc.c" "exceeds_int.c" "ft_strrev.c" "get_next_line2.c" "ft_memset.c" "LICENSE" "ft_isdigit.c" "ft_isprint.c" "ft_sort_list.c" "ft_repet_fd.c" "ft_repet.c" "ft_itoa.c" "ft_pgcd.c" "ft_putnbr_fd.c" "ft_countchr.c" "ft_isalnum.c" "ft_do_op.c" "free_split.c" "ft_isint.c" "auteur" "ft_strrchr.c" "ft_strmapi.c" "ft_strchr.c" "depo/" "ft_printf/" "ft_putstr_fd.c" "ft_lstnew2.c" "ft_sqrt.c" "ft_putnbr.c" "ft_bzero.c" "ft_striteri.c" "ft_lstmap.c" "ft_strequ.c" "ft_freesv.c" "ft_strjoin.c" "include/" "ft_fstrjoin.c" "libft.a" "ft_isalpha.c" "ft_abs.c" "../" "ft_putnbr_max.c" "ft_lstadd.c" "ft_strdup.c" "ft_putendl_fd.c" "ft_strnew.c" "ft_toupper.c" "ft_chgchr.c" "ft_strstr.c" "ft_strncat.c" "ft_striter.c" "ft_putendl.c" "ft_putchar.c" "ft_memccpy.c" "ft_strsplit.c" "ft_coordsplit.c" "ft_strclr.c" "ft_tolower.c" "ft_strnstr.c" "ft_lstdel.c" "ft_scmp.c" "ft_strcmp.c" ".git" "ft_fprime.c" "ft_strncpy.c" "build-libft.mri" "ft_isascii.c" "ft_decompose.c" "ft_lstnew.c" "Makefile" "ft_puterr.c" "ft_atoi.c" "ft_memchr.c" "ft_memdel.c" "ft_memcpy.c" "ft_mod.c" "./" "ft_strcat.c" "ft_lstiter.c" "ft_itoa_base.c" "ft_cpyxchr.c" "ft_ulstr.c" "get_next_line.c" "ft_strncmp.c" "ft_strtrim.c" "ft_strdel.c" "ft_swap_bits.c")
+
+ ("/home/user42/Desktop/Corewar/assembler/" (24407 64142 625013 696000) "a.s" "src/" "depo/" "include/" "../" "a.cor" "Makefile" "./" "asm")
+
+ ("/home/user42/Desktop/Corewar/include/" (24407 63853 893003 945000) "op.h" "../" "corewar.h" "./")
+
+ ("/home/user42/Desktop/Corewar/" (24407 63861 753004 210000) "a.s" "vm.org~" "corewar2.gif" "README.md" "vm/" "LICENSE" "include/" "vm.org" "../" "asmexample" "tmp/" "corewarexample" "corewar" "assembler/" "a.s~" "libft/" "a.cor" ".git/" "Makefile" "./" ".gitmodules")
+
+ ("/home/user42/Desktop/Corewar/assembler/src/op/" (24407 35876 114290 99000) "../" "op.c~" "op.c" "./")
+
+ ("/home/user42/Desktop/Corewar/assembler/src/" (24407 35789 58287 159000) "synthesis/" "asm_main.c" "op/" "../" "validation/" "analysis/" "./")
+
+ ("/home/user42/Desktop/Corewar/assembler/include/" (24407 32189 918165 608000) "asm.h~" "asm.h" "../" "./")
+
+ ("/home/user42/Desktop/Corewar/assembler/src/analysis/" (24406 33452 808781 500000) "file_init.c" "../" "./" "file_init.c~")
+
+ ("/home/user42/Desktop/Corewar/vm/include/" (24406 32784 624758 934000) "vm.h" "../" "vm.h~" "./")
+
+ ("/home/user42/Desktop/Corewar/tmp/" (24405 24608 471349 360000) "skynet.cor" "jumper.s" "skynet.s" "machine.cor" "zork.s" "42.cor" "superkitty.cor" "car.cor" "superkitty.s" "car.s" "machine.s" "../" "todo.txt" "puppy.cor" "zorkorig.cor" "zork.cor" "a.cor" "jumper.cor" "kitty.cor" "kitty.s" "./" "misaka.cor" "nigini.cor" "misaka.s")
+
+ ("/home/user42/Inner42/push_swap/src/" (24406 26428 472544 273000) "solve2.c" "solve.c" "push_swap.c" "treatment2.c" "treatment.c" "checker.c" "../" "verif2.c" "push_swap.h" "./" "valid_input.c" "verif.c")
+
+ ("/home/user42/Inner42/push_swap/" (24384 6931 371221 643000) "correction/" "push-swap.gif" "src/" "auteur" "interface/" "../" "push_swap.fr.pdf" "libft/" "Makefile" "./")
+
+ ("/home/user42/Desktop/Corewar/vm/src/validation/" (24405 17252 695100 939000) "valid_exec.c" "valid_param.c" "../" "input_param.c" "./")
+
+ ("/home/user42/Desktop/Corewar/vm/src/" (24403 46979 515130 516000) "parsing/" "computer-system/" "vm_main.c" "loading/" "op/" "interface/" "../" "validation/" "./")
+
+ ("/home/user42/Desktop/Corewar/vm/src/computer-system/" (24405 15699 115048 472000) "run_cpu.c" "vm_init.c" "debug.c" "../" ".-" "./")
+
+ ("/home/user42/Desktop/Corewar/vm/src/loading/" (24403 47024 139132 23000) "load.c" "load_input.c" "../" "load_ram.c" ".-" "players.c" "./")
+
+ ("/home/user42/Desktop/Corewar/compiler/" (24403 62232 136017 677000) "src/" "include/" "../" "Makefile" "./")
+
+ ("/home/user42/Desktop/Corewar/compiler/src/" (24403 62301 896020 33000) ".#asm_main.c" "asm_main.c" "../" "./")
+
+ ("/home/user42/Desktop/Corewar/vm/src/interface/" (24403 46140 995102 197000) "ncurses_init.c" "../" "arena.c" ".-" "./")
+
+ ("/home/user42/Desktop/Corewar/vm/src/parsing/" (24403 36780 17238 149000) "logical_management.c" "byte_management.c" "../" ".-" "./")
+
+ ("/home/user42/Desktop/Corewar/vm/src/op/" (24403 36773 317237 922000) "op6_10.c" "aff.c" "op11_15.c" "op1_5.c" "../" "op.c" "./")
+
+ ("/home/user42/Desktop/Corewar/vm/" (24403 36723 765236 249000) ".cor" "cool" "src/" "depo/" "include/" "../" "Makefile" "./")
+
+ ("/home/user42/Corewar/Corewar/srcs/corewar/" (24398 38345 127138 101000) "operation_2b.c" "operation_3.c" "op_shift.c" "operation_4.c" "get_players.c" "vw_draw_tools.c" "get_players_errors.c" "vw_draw_img.c" "a.out" "vw_maj_process.c" "vw_maj_win.c" "corewar.c" "load_arena.c" "vw_init_win.c" "vw_th_input.c" "../" "operation_2.c" "vw_init.c" "vw_draw_life.c" "vw_th_core.c" "vm_game.c" "vm_debbug.c" "vm_parsing.c" "op.c" "vm_init_free.c" "./" "vw_th_timer.c" "operate.c" "operation_4b.c" "vw_th_anim.c" "operation_1.c" "vw_th_render.c")
+
+ ("/home/user42/Corewar/Corewar/srcs/" (24393 25370 948059 123000) "../" "corewar/" "champion/" "./" "asm/")
+
+ ("/home/user42/Corewar/Corewar/" (24398 42448 183276 670000) "auteur" "../" "srcs/" "libft/" "Makefile" "./" "includes/")
+
+ ("/home/user42/Corewar/" (24393 25370 968059 123000) "resources/" "README.md" "corewar.pdf" "resources_corewar.pdf" "script_v.sh" "images/" "check_asm.sh" "../" "Corewar/" "corewar_en.pdf" "note_corewar.txt" ".git/" "./")
+
+ ("/home/user42/Desktop/" (24398 23932 674484 356000) "../" "Corewar/" "./")
+
+ ("/home/user42/Lem-in/include/" (24398 10618 478034 706000) "farm.h" "graph.h" "lem_in.h" "../" "solve.h" "./")
+
+ ("/home/user42/Lem-in/" (24398 10669 914036 443000) "LICENSE" "src/" "auteur" "depo/" "generator" "include/" "interface/" "../" "libft/" ".git/" "Makefile" "./" "lemin.gif" ".gitmodules")
+
+ ("/home/user42/Lem-in/src/" (24398 9900 966010 474000) "solve/" "lem_in.c" "farm/" "graph/" "../" "./")
+
+ ("/home/user42/Lem-in/src/farm/" (24398 10338 706025 257000) "treatment.c" "../" "./" "valid_input.c")
+
+ ("/home/user42/Lem-in/src/solve/" (24398 9878 486009 715000) "bfs.c" "solve.c" "bfs_treatment.c" ".#valid_input.c" "../" "flow.c" "flow_treatment.c" "path_computation.c" "./" "valid_input.c")
+
+ ("/home/user42/Lem-in/libft/" (24397 38317 21296 430000) "ft_strnequ.c" "ft_memmove.c" "ft_strlcat.c" "ft_vstrdup.c" "ft_lstdelone.c" "ft_strsub.c" "ft_strmap.c" "ft_putchar_fd.c" "ft_strlen.c" "ft_strndup.c" "ft_putstr.c" "ft_strcpy.c" "ft_atoi_protected.c" "ft_memcmp.c" "ft_fillstr.c" "ft_memalloc.c" "exceeds_int.c" "ft_strrev.c" "get_next_line2.c" "ft_memset.c" "LICENSE" "ft_isdigit.c" "ft_isprint.c" "ft_sort_list.c" "ft_repet_fd.c" "ft_repet.c" "ft_itoa.c" "ft_pgcd.c" "ft_putnbr_fd.c" "ft_countchr.c" "ft_isalnum.c" "ft_do_op.c" "free_split.c" "ft_isint.c" "auteur" "ft_strrchr.c" "ft_strmapi.c" "ft_strchr.c" "depo/" "ft_printf/" "ft_putstr_fd.c" "ft_lstnew2.c" "ft_sqrt.c" "ft_putnbr.c" "ft_bzero.c" "ft_striteri.c" "ft_lstmap.c" "ft_strequ.c" "ft_freesv.c" "ft_strjoin.c" "include/" "ft_fstrjoin.c" "libft.a" "ft_isalpha.c" "ft_abs.c" "../" "ft_putnbr_max.c" "ft_lstadd.c" "ft_strdup.c" "ft_putendl_fd.c" "ft_strnew.c" "ft_toupper.c" "ft_chgchr.c" "ft_strstr.c" "ft_strncat.c" "ft_striter.c" "ft_putendl.c" "ft_putchar.c" "ft_memccpy.c" "ft_strsplit.c" "ft_strclr.c" "ft_tolower.c" "ft_strnstr.c" "ft_lstdel.c" "ft_scmp.c" "ft_strcmp.c" ".git" "ft_fprime.c" "ft_strncpy.c" "build-libft.mri" "ft_isascii.c" "ft_lstnew.c" "Makefile" "ft_puterr.c" "ft_atoi.c" "ft_memchr.c" "ft_memdel.c" "ft_memcpy.c" "ft_mod.c" "./" "ft_strcat.c" "ft_lstiter.c" "ft_itoa_base.c" "ft_cpyxchr.c" "ft_ulstr.c" "get_next_line.c" "ft_strncmp.c" "ft_strtrim.c" "ft_strdel.c" "ft_swap_bits.c")
+
+ ("/home/user42/ft_printf/" (24397 35517 429201 881000) "LICENSE" "src/" "auteur" "depo/" "include/" "../" "Makefile~" ".git/" "Makefile" "./")
+
+ ("/home/user42/ft_printf/include/" (24397 35585 689204 186000) "ft_printf.h~" ".#libft.h" "#libft.h#" "../" "libft.h" "ft_printf.h" "./")
+
+ ("/home/user42/Inner42/corewar/libft/ft_printf/" (24395 33133 894056 294000) "src/" "auteur" "depo/" "include/" "../" "libftprintf.a" "Makefile" "./")
+
+ ("/home/user42/Inner42/corewar/vm/src/" (24394 41074 547174 294000) "parsing/" "computer-system/" "vm_main.c" "loading/" "op/" "interface/" "../" "validation/" "./")
+
+ ("/home/user42/Inner42/corewar/vm/" (24397 23824 725600 493000) "skynet.cor" "jumper.s" "skynet.s" "machine.cor" "zork.s" ".cor" "42.cor" "superkitty.cor" "car.cor" "cool" "src/" "depo/" "superkitty.s" "car.s" "include/" "machine.s" "../" "todo.txt" "zork.cor~" "puppy.cor" "corewarexample" "corewar" "zorkorig.cor" "zork.cor" "a.cor" "jumper.cor" "kitty.cor" "Makefile" "kitty.s" "./" "misaka.cor" "nigini.cor" "asm" "misaka.s")
+
+ ("/home/user42/Inner42/corewar/libft/" (24395 53512 532084 767000) "ft_strnequ.c" "ft_memmove.c" "ft_strlcat.c" "ft_vstrdup.c" "ft_isint.c~" "ft_lstdelone.c" "ft_strsub.c" "ft_strmap.c" "ft_putchar_fd.c" "ft_strlen.c" "ft_strndup.c" "ft_putstr.c" "ft_strcpy.c" "ft_atoi_protected.c" "ft_memcmp.c" "ft_fillstr.c" "ft_memalloc.c" "exceeds_int.c" "ft_strrev.c" "get_next_line2.c" "ft_memset.c" "ft_isdigit.c" "ft_isprint.c" "ft_sort_list.c" "ft_repet_fd.c" "ft_repet.c" "ft_mod.c~" "ft_itoa.c" "ft_pgcd.c" "ft_putnbr_fd.c" "ft_countchr.c" "ft_isalnum.c" ".a.txt" "ft_do_op.c" "free_split.c" "ft_isint.c" "auteur" "ft_strrchr.c" "ft_strmapi.c" "ft_strchr.c" "depo/" "ft_printf/" "ft_putstr_fd.c" "ft_lstnew2.c" "ft_sqrt.c" "ft_putnbr.c" "ft_bzero.c" "ft_striteri.c" "ft_lstmap.c" "ft_strequ.c" "ft_freesv.c" "ft_strjoin.c" "ft_fstrjoin.c" "libft.a" "ft_isalpha.c" "ft_abs.c" "../" "ft_putnbr_max.c" "ft_lstadd.c" "ft_strdup.c" "ft_putendl_fd.c" "ft_strnew.c" "ft_toupper.c" "ft_chgchr.c" "ft_strstr.c" "ft_strncat.c" "ft_striter.c" "ft_putendl.c" "ft_putchar.c" "ft_memccpy.c" "ft_strsplit.c" "ft_strclr.c" "ft_tolower.c" "ft_strnstr.c" "ft_lstdel.c" "ft_scmp.c" "ft_strcmp.c" "ft_fprime.c" "ft_strncpy.c" "build-libft.mri" "ft_isascii.c" "ft_lstnew.c" "Makefile" "ft_puterr.c" "ft_atoi.c" "ft_memchr.c" "ft_memdel.c" "ft_memcpy.c" "ft_mod.c" "./" "ft_strcat.c" "ft_lstiter.c" "ft_itoa_base.c" "ft_cpyxchr.c" "ft_ulstr.c" "get_next_line.c" "ft_strncmp.c" "ft_strtrim.c" "ft_strdel.c" "ft_swap_bits.c")
+
+ ("/home/user42/Inner42/corewar/vm/src/loading/" (24395 62594 688291 289000) "load.c" "players.c~" "load_ram.c~" "load_input.c" "load_input.c~" "../" "load_ram.c" ".-" "players.c" "./")
+
+ ("/home/user42/Inner42/corewar/" (24397 15158 917307 829000) "resources/" "vm.org~" "op.h" "compiler/" "vm/" "corewar.gif" "include/" "vm.org" "../" "main.c" "libft/" "op.c" "myfile.asm" "./" "myfiles.txt")
+
+ ("/home/user42/Inner42/corewar/vm/src/parsing/" (24397 18898 673434 129000) "logical_management.c" "logical_management.c~" "byte_management.c" "../" ".-" "byte_management.c~" "./")
+
+ ("/home/user42/Inner42/corewar/include/" (24395 32972 678050 849000) "op.h" "../" "corewar.h" "libft.h" "./")
+
+ ("/home/user42/Inner42/corewar/vm/src/op/" (24397 23450 993587 871000) "op11_15.c~" "op6_10.c" "aff.c" "aff.c~" "op6_10.c~" "op11_15.c" "op1_5.c" "../" "op1_5.c~" "op.c" "./")
+
+ ("/home/user42/Inner42/corewar/vm/include/" (24397 9383 57112 765000) "vm.h" "../" "vm.h~" "./")
+
+ ("/home/user42/Inner42/corewar/vm/src/computer-system/" (24397 18490 245420 335000) "run_cpu.c" "debug.c~" "vm_init.c" "vm_init.c~" "debug.c" "../" ".-" "./" "run_cpu.c~")
+
+ ("/home/user42/get_next_line/" (24397 34301 137160 804000) "LICENSE" "depo/" "author" "get_next_line.h" "../" "main.c" "libft/" ".git/" "Makefile" "./" "get_next_line.c" ".gitmodules")
+
+ ("/home/user42/get_next_line/libft/" (24397 34302 341160 845000) "ft_strnequ.c" "ft_memmove.c" "ft_strlcat.c" "ft_vstrdup.c" "ft_lstdelone.c" "ft_strsub.c" "ft_strmap.c" "ft_putchar_fd.c" "ft_strlen.c" "ft_strndup.c" "ft_putstr.c" "ft_strcpy.c" "ft_atoi_protected.c" "ft_memcmp.c" "ft_fillstr.c" "ft_memalloc.c" "exceeds_int.c" "ft_strrev.c" "get_next_line2.c" "ft_memset.c" "LICENSE" "ft_isdigit.c" "ft_isprint.c" "ft_sort_list.c" "ft_repet_fd.c" "ft_repet.c" "ft_itoa.c" "ft_pgcd.c" "ft_putnbr_fd.c" "ft_countchr.c" "ft_isalnum.c" "ft_do_op.c" "free_split.c" "ft_isint.c" "auteur" "ft_strrchr.c" "ft_strmapi.c" "ft_strchr.c" "depo/" "ft_printf/" "ft_putstr_fd.c" "ft_lstnew2.c" "ft_sqrt.c" "ft_putnbr.c" "ft_bzero.c" "ft_striteri.c" "ft_lstmap.c" "ft_strequ.c" "ft_freesv.c" "ft_strjoin.c" "include/" "ft_fstrjoin.c" "ft_isalpha.c" "ft_abs.c" "../" "ft_putnbr_max.c" "ft_lstadd.c" "ft_strdup.c" "ft_putendl_fd.c" "ft_strnew.c" "ft_toupper.c" "ft_chgchr.c" "ft_strstr.c" "ft_strncat.c" "ft_striter.c" "ft_putendl.c" "ft_putchar.c" "ft_memccpy.c" "ft_strsplit.c" "ft_strclr.c" "ft_tolower.c" "ft_strnstr.c" "ft_lstdel.c" "ft_scmp.c" "ft_strcmp.c" ".git" "ft_fprime.c" "ft_strncpy.c" "build-libft.mri" "ft_isascii.c" "ft_lstnew.c" "Makefile" "ft_puterr.c" "ft_atoi.c" "ft_memchr.c" "ft_memdel.c" "ft_memcpy.c" "ft_mod.c" "./" "ft_strcat.c" "ft_lstiter.c" "ft_itoa_base.c" "ft_cpyxchr.c" "ft_ulstr.c" "get_next_line.c" "ft_strncmp.c" "ft_strtrim.c" "ft_strdel.c" "ft_swap_bits.c")
+
+ ("/home/user42/Inner42/Fillit/" (24397 34401 369164 189000) "src/" "auteur" "../" "libft/" "Makefile" "./")
+
+ ("/home/user42/Inner42/V_Fillit/src/" (24384 6931 295221 641000) "solve.c" "treatment2.c" "treatment.c" "fillit.c" "../" "identify.c" "fillit.h" "./")
+
+ ("/home/user42/Inner42/V_Fillit/" (24384 6931 295221 641000) "src/" "auteur" "../" "libft/" "Makefile" "./" "testfiles/" "fillit.gif")
+
+ ("/home/user42/Fillit/" (24397 34599 177170 870000) "LICENSE" "src/" "auteur" "depo/" "../" "libft/" ".git/" "Makefile" "./" "testfiles/" ".gitmodules" "V_Fillit/")
+
+ ("/home/user42/Fillit/V_Fillit/" (24397 34812 305178 68000) "fillit" "src/" "auteur" "depo/" "../" "libft/" "Makefile" "./" "fillit.gif")
+
+ ("/home/user42/Fillit/V_Fillit/src/" (24397 34849 169179 312000) "solve.c" "treatment2.c" "treatment.c" "fillit.c" "treatment.c~" "../" "identify.c" "fillit.h" "./" "treatment2.c~")
+
+ ("/tmp/Corewar/Corewar/srcs/corewar/" (24393 12707 649519 129000) "operation_2b.c" "operation_3.c" "op_shift.c" "operation_4.c" "get_players.c" "vw_draw_tools.c" "get_players_errors.c" "vw_draw_img.c" "vw_maj_process.c" "vw_maj_win.c" "corewar.c" "load_arena.c" "vw_init_win.c" "vw_th_input.c" "../" "operation_2.c" "vw_init.c" "vw_draw_life.c" "vw_th_core.c" "vm_game.c" "vm_debbug.c" "vm_parsing.c" "op.c" "vm_init_free.c" "./" "vw_th_timer.c" "operate.c" "operation_4b.c" "vw_th_anim.c" "operation_1.c" "vw_th_render.c")
+
+ ("/tmp/Corewar/Corewar/srcs/champion/" (24389 19308 655869 457000) "chicken_fork.cor" "test_octal_2.cor" "test_octal_4.s" "chicken.s" "chickabomb.s" "test_octal_3.s" "test_octal_2.s" "test_octal_4.cor" "toto.s" "chicken.cor" "test_octal_1.cor" "chicken_fork.s" "fork_hacking.cor" "chickabomb.cor" "../" "fork_hacking.s" "test_octal_3.cor" "./" "toto.cor" "test_octal_1.s")
+
+ ("/tmp/Corewar/Corewar/srcs/" (24391 39716 954007 557000) "../" "corewar/" "champion/" "./" "asm/")
+
+ ("/tmp/Corewar/Corewar/" (24389 19308 655869 457000) "auteur" "../" "srcs/" "libft/" "Makefile" "./" "includes/")
+
+ ("/tmp/Corewar/" (24389 19308 675869 458000) "resources/" "README.md" "corewar.pdf" "resources_corewar.pdf" "script_v.sh" "images/" "check_asm.sh" "../" "Corewar/" "corewar_en.pdf" "note_corewar.txt" ".git/" "./")
+
+ ("/tmp/" (24393 12438 541510 41000) ".font-unix/" "systemd-private-1d444c3aff134a80aa864cddc49e3514-bolt.service-fiC7DO/" "babel-3449uyB/" ".X11-unix/" ".Test-unix/" "systemd-private-1d444c3aff134a80aa864cddc49e3514-rtkit-daemon.service-148uae/" "systemd-private-1d444c3aff134a80aa864cddc49e3514-systemd-resolved.service-vvXUT7/" "Temp-171b2516-6cce-4fa9-aa67-866d50d33d7a/" "mozilla-temp-882699301" "mozilla_user420/" "systemd-private-1d444c3aff134a80aa864cddc49e3514-colord.service-HpoSB7/" ".X0-lock" "tracker-extract-files.1001/" "systemd-private-1d444c3aff134a80aa864cddc49e3514-redis-server.service-JuKRn7/" "../" "Corewar/" "Temp-c97026a9-28df-40e0-8665-129b75ef4783/" ".XIM-unix/" "mozilla-temp-1549995006" "ssh-104fk8E8hPRQ/" "babel-20450wgX/" "./" "config-err-pL9MhI" "systemd-private-1d444c3aff134a80aa864cddc49e3514-ModemManager.service-nRNhpM/" ".ICE-unix/")
+
+ ("/home/" (24203 24028 377556 741000) "user42/" "../" "./")
+
+ ("/home/user42/Inner42/" (24392 14241 756865 54000) "piscine-C.zip" "README.md" "R.Skyline/" "miscellany" "LICENSE" "Libft/" "Init/" "ft_printf/" "PiscineReload/" "../" "corewar/" "Fillit/" "GNL/" "push_swap/" "camagru/" ".git/" "./" ".gitignore" "V_Fillit/" "norme.fr.pdf" "lem_in/")
+
+ ("/home/user42/Inner42/corewar/vm/src/validation/" (24392 6804 519852 692000) "valid_exec.c" "valid_exec.c~" "valid_param.c~" "valid_param.c" "../" "input_param.c" "input_param.c~" "./")
+
+ ("/home/user42/Inner42/corewar/vm/src/interface/" (24392 3342 685683 169000) "ncurses_init.c" "../" ".-" "./")
+
+ ("/home/user42/Inner42/corewar/libft/ft_printf/src/" (24389 13164 703661 962000) "manipulation.c" "aux/" "id_format.c" "interpreter.c" "ft_printf.c" "ft_vfprintf.c" "caster.c" "../" "printform.c" "./")
+
+ ("/home/user42/Inner42/ft_printf/" (24384 8543 515276 89000) "ft_printf.fr.pdf" "src/" "auteur" "test.c" "../" "main.c" "Makefile" "norme.en.pdf" "./" "includes/")
+
+ ("/home/user42/Inner42/corewar/libft/ft_printf/src/aux/" (24389 12151 639627 749000) "ft_putdbl.c" "ft_strrev.c" "print_address.c" "../" "ft_put.c" "./" "ft_putoxx.c" "ft_itoa_basexx.c")
+
+ ("/home/user42/Inner42/corewar/libft/ft_printf/include/" (24389 12010 787622 992000) "../" "ft_printf.h" "./")
+
+ ("/home/user42/Inner42/GNL/" (24389 1640 975272 780000) ".comp" "a.out" "author" "get_next_line.h" "libft.a" "../" "main.c" "libft/" "./" "get_next_line.c")
+
+ ("/home/user42/Inner42/lem_in/src/graph/" (24384 6931 323221 642000) "graph.h" "treatment.c" "../" "attrib.c" "list.c" "./" "print.c")
+
+ ("/home/user42/Inner42/lem_in/src/solve/" (24384 6931 323221 642000) "bfs.c" "solve.c" "bfs_treatment.c" "../" "flow.c" "flow_treatment.c" "solve.h" "path_computation.c" "./" "valid_input.c")
+
+ ("/home/user42/Inner42/lem_in/" (24384 6931 323221 642000) "correction/" "src/" "auteur" "lem-in.en.pdf" "generator" "interface/" "fr.subject.pdf" "../" "re.md" "libft/" "Makefile" "./" "Result/" "lemin.gif")
+
+ ("/home/user42/.emacs.d/" (24386 16247 361164 331000) "autocomplete/" "root_42/" "elpa/" "history" "auteur" "neotree/" "ido.last" "skeleton/" "../" "myemacs" "lib/" "emacs" "autopair-master/" "auto-save-list/" "./" ".mc-lists.el" "org-colored-text.el" "auto.el" "ido.last~" "ac-comphist.dat")
+
+ ("/home/user42/Inner42/corewar/include/libft/ft_printf/" (24383 59229 538178 970000) "obj/" "src/" "auteur" "include/" "../" "libftprintf.a" "Makefile" "./")
+
+ ("/home/user42/Inner42/corewar/include/libft/" (24383 59264 259532 148000) "ft_strnequ.c" "ft_memmove.c" "ft_strlcat.c" "ft_vstrdup.c" "ft_lstdelone.c" "ft_strsub.c" "obj/" "ft_strmap.c" "ft_putchar_fd.c" "ft_strlen.c" "ft_strndup.c" "ft_putstr.c" "ft_strcpy.c" "ft_atoi_protected.c" "ft_memcmp.c" "ft_fillstr.c" "ft_memalloc.c" "ft_strrev.c" "get_next_line2.c" "size_int.c" "ft_memset.c" "ft_isdigit.c" "ft_isprint.c" "ft_sort_list.c" "ft_repet.c" "ft_itoa.c" "ft_pgcd.c" "ft_putnbr_fd.c" "ft_countchr.c" "ft_isalnum.c" "ft_do_op.c" "free_split.c" "auteur" "ft_strrchr.c" "ft_strmapi.c" "ft_strchr.c" "ft_printf/" "ft_putstr_fd.c" "ft_lstnew2.c" "ft_sqrt.c" "ft_putnbr.c" "ft_bzero.c" "ft_striteri.c" "ft_lstmap.c" "ft_strequ.c" "ft_freesv.c" "ft_strjoin.c" "include/" "ft_fstrjoin.c" "libft.a" "ft_isalpha.c" "ft_abs.c" "../" "ft_putnbr_max.c" "ft_lstadd.c" "ft_strdup.c" "ft_putendl_fd.c" "ft_strnew.c" "ft_toupper.c" "ft_chgchr.c" "ft_strstr.c" "ft_strncat.c" "ft_striter.c" "ft_putendl.c" "ft_putchar.c" "ft_memccpy.c" "ft_strsplit.c" "ft_strclr.c" "ft_tolower.c" "ft_strnstr.c" "ft_lstdel.c" "ft_scmp.c" "ft_strcmp.c" "ft_fprime.c" "ft_strncpy.c" "build-libft.mri" "ft_isascii.c" "ft_lstnew.c" "Makefile" "ft_puterr.c" "ft_atoi.c" "ft_memchr.c" "ft_memdel.c" "ft_memcpy.c" "./" "ft_strcat.c" "ft_lstiter.c" "ft_itoa_base.c" "ft_cpyxchr.c" "ft_ulstr.c" "get_next_line.c" "ft_strncmp.c" "ft_strtrim.c" "ft_strdel.c" "ft_swap_bits.c")
+
+ ("/home/user42/Inner42/corewar/include/libft/include/" (24383 58125 218708 619000) "../" "libft.h~" "libft.h" "./")
+
+ ("/home/user42/Inner42/corewar/include/libft/ft_printf/src/aux/" (24383 57975 514703 563000) "ft_putdbl.c" "ft_strrev.c" "print_address.c" "../" "ft_put.c" "./" "ft_putoxx.c" "ft_itoa_basexx.c")
+
+ ("/home/user42/Inner42/corewar/include/libft/ft_printf/include/" (24383 58044 534705 894000) "../" "ft_printf.h" "./")
+
+ ("/home/user42/Inner42/corewar/include/libft/ft_printf/obj/" (24383 57823 918698 443000) "ft_putoxx.o" "ft_put.o" "interpreter.o" "ft_putdbl.o" "printform.o" "ft_itoa.o" "print_address.o" "ft_strlen.o" "ft_countchr.o" "ft_atoi.o" "ft_strcmp.o" "../" "ft_itoa_basexx.o" "manipulation.o" "ft_strrev.o" "ft_putchar.o" "caster.o" "./" "id_format.o" "ft_putnbr.o" "ft_putstr.o" "ft_strcpy.o" "ft_printf.o" "ft_vfprintf.o")
+
+ ("/home/user42/Inner42/corewar/include/libft/ft_printf/src/" (24383 44582 254251 243000) "manipulation.c" "aux/" "id_format.c" "interpreter.c" "ft_printf.c" "ft_vfprintf.c" "caster.c" "../" "printform.c" "./")
+
+ ("/home/user42/Inner42/corewar/include/libft/obj/" (24382 57071 265480 174000) ".#Makefile" "../" "./")
+
+ ("/home/user42/Inner42/corewar/compiler/" (24382 43727 953029 540000) ".#Makefile" "../" "Makefile" "./")
+
+ ("/home/usuario/42/web_cv/js/" (23905 6378 408048 846000) "lang.js" "onclicks.js" "./" "nav.js" "../")
+
+ ("/home/usuario/42/web_cv/css/" (23905 5127 632303 714000) "certf.css~" "./" "style.css" "nav.css" "nav.css~" "../" "certf.css")
+
+ ("/home/usuario/42/web_cv/" (23902 59227 287700 386000) "js/" "./" ".git/" "docs/" "ranger.png" "toDo.txt" "ranger specif->openav100%.png" "toDo.txt~" "index.html" "css/" "certificates.html" "img/" "CNAME" "../")
+
+ ("/home/usuario/42/web_copy/web_cv/js/" (23901 58765 641123 185000) "lang.js" "onclicks.js" "./" "nav.js" "../")
+
+ ("/home/usuario/42/web_copy/web_cv/" (23901 58776 797143 980000) "a" "js/" "./" "website/" ".git/" "docs/" "toDo.txt" "toDo.txt~" "index.html" "css/" "b" "certificates.html" "img/" "CNAME" "../")
+
+ ("/home/usuario/42/web_copy/js/" (23897 52057 647983 102000) "lang.js" "./" "particles.json" "particles.js" "app.js" "../")
+
+ ("/home/usuario/42/web_copy/" (23901 58763 369119 15000) "js/" "./" "website/" ".git/" "web_cv/" "docs/" "index.html" "css/" "img/" "../")
+
+ ("/home/usuario/.mutt/" (23901 55806 78959 556000) "a" "muttrc" "templates/" "./" "send2mom.sh~" "cache/" "send2mom.sh" "b" "certificates" "../")
+
+ ("/home/usuario/42/" (23897 52056 903983 9000) "web_copy/" "GNL/" "printf.zip" "push_swap/" "GNL.zip" "./" "Fillit/" "web_cv/" "Lettre_de_motivation.pdf" "src.zip" "42Projects/" "Norminette/" "sandbox/" "Python/" "ft_printf/" "../" "fillit.zip")
+
+ ("/home/usuario/42/web_cv/website/MovingHighlight/css/" (19753 55414 0 0) "./" "style.css" "../")
+
+ ("/home/usuario/42/web_cv/website/MovingHighlight/" (23899 63095 139965 72000) "#index.html#" "./" ".#index.html" "index.html" "css/" "index.html~" "../")
+
+ ("/home/usuario/42/web_cv/certificats/" (23896 40370 750022 558000) "./" "fr.html" "../")
+
+ ("/home/usuario/42/push_swap/src/" (23895 26372 876162 242000) "treatment.o" "push_swap.o" "treatment2.c~" "verif2.c~" "verif2.o" "verif.c" "verif2.c" "./" "treatment2.c" "verif.o" "verif.c~" "push_swap.h" "treatment.c" "treatment2.o" "solve.c~" "solve.o" "push_swap.c" "solve.c" "../" "push_swap.h~")
+
+ ("/home/usuario/42/web_cv/php/" (23896 24437 219694 483000) "en.php~" "fr.php" "./" "es.php" "en.php" "app.php~" "es.php~" "fr.php~" "app.php" "../")
+
+ ("/home/usuario/42/push_swap/libft/" (23893 44960 879906 48000) "ft_itoa_base.o" "ft_memalloc.c" "libft.h" "ft_strtrim.o" "ft_strjoin.c" "ft_countchr.o" "libft.a" "ft_vstrdup.o" "ft_memcmp.c" "ft_memmove.c" "ft_pgcd.c" "ft_strcat.o" "ft_memdel.o" "ft_strdup.o" "ft_putnbr.o" "ft_isprint.o" "ft_sort_list.o" "ft_strstr.c" "ft_strdel.c" "ft_putchar_fd.o" "ft_strncat.c" "ft_memccpy.c" "ft_putnbr_fd.o" "ft_isalpha.o" "ft_isalnum.c" "ft_strdup.c" "ft_itoa.o" "ft_memdel.c" "ft_strcmp.c" "ft_strclr.c" "ft_memmove.o" "ft_lstmap.o" "ft_putstr.c" "ft_strndup.c" "ft_lstdel.c" "ft_strsub.c" "ft_tolower.c" "ft_strsplit.o" "ft_strstr.o" "ft_pgcd.o" "./" "ft_striteri.o" "ft_striter.c" "ft_strlcat.c" "ft_putstr.o" "ft_putchar_fd.c" "ft_lstmap.c" "ft_strjoin.o" "ft_putnbr.c" "ft_sqrt.o" "ft_isascii.c" "ft_putnbr_fd.c" "ft_strchr.o" "ft_strlcat.o" "ft_putstr_fd.o" "ft_bzero.c" "ft_strrev.c" "Makefile" "ft_strcpy.c" "ft_strnequ.c" "ft_strmap.c" "ft_atoi_protected.c" "ft_strlen.c" "ft_bzero.o" "ft_strrchr.c" "ft_lstdel.o" "ft_strndup.o" "ft_ulstr.o" "ft_strcat.c" "ft_memchr.c" "ft_sqrt.c" "ft_isascii.o" "ft_fillstr.o" "ft_lstdelone.c" "ft_atoi.c" "ft_putstr_fd.c" "ft_strncmp.o" "ft_putendl.c" "ft_do_op.o" "ft_memchr.o" "ft_memalloc.o" "ft_atoi_protected.o" "ft_cpyxchr.o" "ft_chgchr.o" "ft_strmapi.o" "ft_strcpy.o" "ft_strnew.o" "ft_itoa_base.c" "ft_toupper.c" "author" "ft_strchr.c" "ft_striteri.c" "ft_memcpy.c" "ft_strrchr.o" "ft_memcmp.o" "ft_strncmp.c" "get_next_line.o" "ft_putchar.o" "ft_strnstr.c" "ft_striter.o" "ft_fillstr.c" "ft_freesv.o" "ft_putchar.c" "ft_memcpy.o" "ft_lstdelone.o" "ft_tolower.o" "ft_lstiter.c" "ft_toupper.o" "ft_do_op.c" "ft_ulstr.c" "ft_isprint.c" "ft_countchr.c" "ft_putendl_fd.c" "ft_strdel.o" "ft_itoa.c" "ft_putendl_fd.o" "ft_strnequ.o" "ft_atoi.o" "ft_cpyxchr.c" "ft_memset.c" "ft_strnew.c" "ft_sort_list.c" "ft_swap_bits.c" "ft_isalnum.o" "ft_strclr.o" "ft_putendl.o" "ft_chgchr.c" "ft_lstiter.o" "ft_strcmp.o" "ft_lstadd.o" "ft_strequ.c" "ft_isdigit.o" "get_next_line.c" "ft_isdigit.c" "ft_strrev.o" "ft_memccpy.o" "ft_lstadd.c" "ft_memset.o" "ft_strtrim.c" "ft_strequ.o" "ft_vstrdup.c" "ft_swap_bits.o" "ft_strnstr.o" "ft_fstrjoin.o" "ft_freesv.c" "libft.h~" "ft_strsub.o" "ft_strmap.o" "ft_lstnew.c" "ft_strncat.o" "ft_strncpy.c" "ft_fprime.o" "ft_strmapi.c" "ft_strlen.o" "ft_lstnew.o" "ft_isalpha.c" "ft_strsplit.c" "ft_strncpy.o" "ft_fprime.c" "../" "ft_fstrjoin.c")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
