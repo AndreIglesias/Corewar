@@ -5,4 +5,4 @@ This inspired A. K. Dewdney to coin the idea for Core War.
 
 The idea was simple. You compete by designing viruses to overtake a computer. You win by protecting your own program and overwriting your opponent's programs. This is all happening on a virtual computer. Think, a simple computer within your computer.
 
-![](corewar2.gif?raw=true "corewar")
+![<img width="50%">](corewar2.gif?raw=true "corewar")
