@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 18:53:16 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/08/27 22:41:56 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 19:00:08 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	valid_format(int ac, char **av, int *np)
 			i = eparam;
 		}
 	}
-	return (EXIT_SUCCESS);
+	return ((nplayers) ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
 int			valid_input(int ac, char **av)

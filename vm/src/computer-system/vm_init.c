@@ -6,12 +6,11 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 22:44:00 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/01 21:58:33 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 20:00:07 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-**
 ** +------+-----+------------+-----+-----------------+
 ** |           CPU           |     |      RAM        |
 ** +------+------------+-----|     |-----------------+
@@ -24,7 +23,6 @@
 ** |  R4  |            |     |     |  2   |    4     |
 ** |  ... |            |     |     |  ... |    ...   |
 ** +------+------------+-----+-----+------+----------+
-**
 */
 
 #include "vm.h"
@@ -46,8 +44,8 @@ int		vm_init(t_vm *vm)
 	vm->last_alive = 0;
 	vm->process_alive = 0;
 	vm->player = NULL;
-	vm->mainWin = NULL;
-	vm->sideWin = NULL;
+	vm->m_win = NULL;
+	vm->s_win = NULL;
 	vm->processes = NULL;
 	ft_memset(vm->ram.arena, 0, sizeof(unsigned char) * MEM_SIZE);
 	ft_memset(vm->ram.owner, 0, sizeof(unsigned char) * MEM_SIZE);

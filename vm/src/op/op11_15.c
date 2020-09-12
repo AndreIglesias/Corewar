@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 17:02:18 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/05 14:13:38 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 19:41:01 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 
 void							op_sti(t_vm *vm, t_list *process)
 {
-	t_uchar acb;
-	int args;
-	t_uchar type;
-	t_uchar mv;
-	int	nb[3];
+	t_uchar	acb;
+	int		args;
+	t_uchar	type;
+	t_uchar	mv;
+	int		nb[3];
 
 	args = 3;
 	mv = 0;
@@ -38,7 +38,7 @@ void							op_sti(t_vm *vm, t_list *process)
 				get_arg(vm, process, &mv, type + 4);
 			if (!args)
 				store_at(vm, process, TPROCES->reg[nb[2]], TPROCES->pc +
-						 ((nb[0] + nb[1]) % IDX_MOD) + 3);
+						((nb[0] + nb[1]) % IDX_MOD) + 3);
 		}
 	}
 	TPROCES->pc = mem_mod(TPROCES->pc + octal_shift(acb, 2, 3));
@@ -63,9 +63,9 @@ void							op_fork(t_vm *vm, t_list *process)
 
 void							op_lld(t_vm *vm, t_list *process)
 {
-	int move;
-	t_uchar acb;
-	int reg;
+	int		move;
+	t_uchar	acb;
+	int		reg;
 
 	acb = in_mem(vm, TPROCES->pc + 1);
 	if (is_argsize(12, acb, 2))
@@ -93,32 +93,8 @@ void							op_lld(t_vm *vm, t_list *process)
 
 void							op_lldi(t_vm *vm, t_list *process)
 {
-	t_uchar acb;
-	int args;
-	t_uchar type;
-	t_uchar mv;
-	int	nb[3];
-
-	args = 3;
-	mv = 0;
-	acb = in_mem(vm, TPROCES->pc + 1);
-	if (is_argsize(13, acb, args))
-	{
-		while (args)
-		{
-			type = (acb >> ((args--) * 2)) & 0b11;
-			if (type == REG && !is_reg(vm, TPROCES->pc + 2 + mv))
-				break ;
-			if (args)
-				nb[args] = get_arg(vm, process, &mv, type + 4);
-			if (args)
-				continue ;
-			nb[args] = in_mem(vm, TPROCES->pc + 2 + mv) - 1;
-			TPROCES->reg[nb[0]] = reverse_bytes(vm, TPROCES->pc + nb[1] + nb[2], 4);
-			TPROCES->carry = (TPROCES->reg[nb[0]]) ? 0 : 1;
-		}
-	}
-	TPROCES->pc = mem_mod(TPROCES->pc + octal_shift(acb, 2, 3));
+	TPROCES->optab = 13;
+	disect_args(vm, process, 2, &lldi_op);
 }
 
 /*

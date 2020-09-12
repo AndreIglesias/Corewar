@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 00:13:47 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/09 01:36:44 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 13:21:39 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ** valid == -2	: separator error
 ** valid > 0	: position
 */
-
+/*
 int		valid_reg(char **cmd, int pos, int sep_pos)
 {
 	int	i;
@@ -49,13 +49,13 @@ int		valid_reg(char **cmd, int pos, int sep_pos)
 		return (0);
 	return (i + 4);
 }
-
+*/
 /*
 ** return -1	: not this type
 ** return 0		: successful valid type
 ** return > 0	: position
 */
-
+/*
 int		label_param(char **cmd, int pos, unsigned int i)
 {
 	if (cmd[pos][i] && cmd[pos][i] == LABEL_CHAR)
@@ -80,3 +80,4 @@ int		valid_ind(char **cmd, int pos, int i, int sep_pos)
 	if ((cmd[pos][i] && cmd[pos][i] == ',') && sep_pos == 1)
 		return (-2);
 }
+*/

@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:17:31 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/06 21:49:39 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 14:51:17 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	kill_zombies(t_vm *vm, t_list *process)
 					prev->next = process->next;
 				free(process->obj);
 				free(process);
-				process = (prev == NULL) ? vm->processes: prev->next;
+				process = (prev == NULL) ? vm->processes : prev->next;
 				vm->process_alive--;
 				continue ;
 			}
@@ -49,10 +49,10 @@ void	find_ir(t_vm *vm, t_list *process)
 	{
 		TPROCES->ir = ir - 1;
 		TPROCES->last_ir = ir;
-		TPROCES->duration = op_tab[TPROCES->ir].cycle - 1;
+		TPROCES->duration = g_op_tab[TPROCES->ir].cycle - 1;
 		return ;
 	}
-	TPROCES->ir = - 1;
+	TPROCES->ir = -1;
 	TPROCES->pc++;
 	TPROCES->pc %= MEM_SIZE;
 }
@@ -72,8 +72,7 @@ void	process_operations(t_vm *vm, t_list *process)
 				find_ir(vm, process);
 			if (!TPROCES->duration && (0 <= ir && ir <= 15))
 			{
-				//ft_printf(GREEN"HELLO: %s"E0M, op_tab[TPROCES->ir].name);
-				op_tab[TPROCES->ir].f(vm, process);
+				g_op_tab[TPROCES->ir].f(vm, process);
 				TPROCES->ir = -1;
 			}
 			else
@@ -86,13 +85,12 @@ void	process_operations(t_vm *vm, t_list *process)
 
 void	update_cycles(t_vm *vm)
 {
-	int reduce_cycles;
-	t_player *champion;
+	int			reduce_cycles;
+	t_player	*champion;
 
 	reduce_cycles = 0;
 	if (vm->cycles && vm->cycles % vm->cycle_to_die == 0)
 	{
-		//verify if each process executed at least one "live" and kill them
 		if (vm->nlives >= NBR_LIVE)
 			reduce_cycles = 1;
 		vm->nchecks = (reduce_cycles) ? 0 : vm->nchecks + 1;
@@ -112,18 +110,15 @@ void	update_cycles(t_vm *vm)
 
 int		run_processes(t_vm *vm)
 {
-	int	control;
-	t_player *champion;
+	int			control;
+	t_player	*champion;
 
 	while (vm->processes != NULL && vm->cycle_to_die > 0)
 	{
-		if (vm->ncurses && (control = ncupdate(vm, getch())))
-		{
-			if (control == 1)
-				break ;
-			if (control == 2)
-				continue ;
-		}
+		if (vm->ncurses && (control = ncupdate(vm, getch())) && control == 1)
+			break ;
+		if (vm->ncurses && control == 2)
+			continue ;
 		if (vm->cycles == vm->dump_param)
 			return (EXIT_SUCCESS + print_ram(vm));
 		update_cycles(vm);

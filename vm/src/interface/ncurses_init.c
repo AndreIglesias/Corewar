@@ -6,13 +6,13 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 15:07:58 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/05 17:47:54 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 20:01:39 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-static void	init_colors()
+static void		init_colors(void)
 {
 	start_color();
 	init_color(COLOR_YELLOW, 180, 180, 180);
@@ -29,7 +29,7 @@ static void	init_colors()
 	init_pair(6, COLOR_BLACK, COLOR_YELLOW);
 }
 
-static t_matrix init_m()
+static t_matrix	init_m(void)
 {
 	t_matrix m;
 
@@ -39,7 +39,7 @@ static t_matrix init_m()
 	return (m);
 }
 
-int		ncupdate(t_vm *vm, int input)
+int				ncupdate(t_vm *vm, int input)
 {
 	if (input == 'q')
 		return (1);
@@ -63,36 +63,37 @@ int		ncupdate(t_vm *vm, int input)
 	return (0);
 }
 
-void	resize_window(t_vm *vm)
+void			resize_window(t_vm *vm)
 {
 	refresh();
-	delwin(vm->mainWin);
-	delwin(vm->sideWin);
-	vm->mainWin = newwin(vm->height + 2, vm->width + 2, 0, 0);
-	vm->sideWin = newwin(vm->height - vm->procHeight + 2, vm->sideWidth + 2, 0,
-						 vm->width + 2);
-	vm->processWin = newwin(vm->procHeight, vm->sideWidth + 2, vm->proc_y,
+	delwin(vm->m_win);
+	delwin(vm->s_win);
+	delwin(vm->p_win);
+	vm->m_win = newwin(vm->height + 2, vm->width + 2, 0, 0);
+	vm->s_win = newwin(vm->height - vm->p_height + 2, vm->s_width + 2, 0,
+						vm->width + 2);
+	vm->p_win = newwin(vm->p_height, vm->s_width + 2, vm->proc_y,
 							vm->width + 2);
-	fill_arena(vm->height, vm, init_m(), vm->mainWin);
-	print_panel(vm->sideWin, vm->processes, vm);
-	box(vm->mainWin, 0, 0);
-	box(vm->sideWin, 0, 0);
-	box(vm->processWin, 0, 0);
-	wrefresh(vm->mainWin);
-	wrefresh(vm->sideWin);
-	wrefresh(vm->processWin);
+	fill_arena(vm->height, vm, init_m(), vm->m_win);
+	print_panel(vm->s_win, vm->processes, vm);
+	box(vm->m_win, 0, 0);
+	box(vm->s_win, 0, 0);
+	box(vm->p_win, 0, 0);
+	wrefresh(vm->m_win);
+	wrefresh(vm->s_win);
+	wrefresh(vm->p_win);
 }
 
-int		print_arena(t_vm *vm)
+int				print_arena(t_vm *vm)
 {
 	initscr();
 	noecho();
 	keypad(stdscr, TRUE);
 	vm->height = ft_sqrt(MEM_SIZE);
 	vm->width = vm->height * 3;
-	vm->sideWidth = 50;
+	vm->s_width = 50;
 	vm->proc_y = (5 * vm->nplayers) + 10;
-	vm->procHeight = vm->height + 2 - vm->proc_y;
+	vm->p_height = vm->height + 2 - vm->proc_y;
 	init_colors();
 	resize_window(vm);
 	return (0);

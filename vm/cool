@@ -1,1 +1,2 @@
 ./corewar -n machine.cor skynet.cor misaka.cor car.cor
+../corewar  -n ../tmp/car.cor ../tmp/a.cor ../tmp/car.cor ../tmp/jumper.cor

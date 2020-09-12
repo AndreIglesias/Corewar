@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 17:21:12 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/05 14:08:00 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 14:51:42 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		is_argsize(t_uchar ir, t_uchar acb, t_uchar narg)
 		n = 0;
 		if ((acb >> m) & 0b11)
 			n = 0b01 << (((acb >> m) & 0b11) - 1);
-		if (!(n & op_tab[ir].args[i]))
+		if (!(n & g_op_tab[ir].args[i]))
 			return (0);
 		i++;
 		narg--;
@@ -51,48 +51,10 @@ int		octal_shift(t_uchar acb, t_uchar label_size, t_uchar narg)
 	return (shift);
 }
 
-unsigned int	ft_ptr_to_uint(t_vm *vm, unsigned int pc, int size)
-{
-	int				i;
-	unsigned int	result;
-
-	i = 0;
-	result = 0;
-	pc = mem_mod(pc);
-	while (i < size)
-	{
-		result = result * 0x100 + vm->ram.arena[pc];
-		i++;
-		pc = mem_mod(pc + 1);
-	}
-	return (result);
-}
-
-int				idx_mod(unsigned int val)
-{
-	int		flag;
-
-	flag = 0;
-	if (val > 2147483647)
-		flag = 1;
-	val = val % 65536;
-	/*
-	if (proc->loaded_op.opcode == 13 || proc->loaded_op.opcode == 14)
-	{
-		if (flag == 0)
-			return (val % MEM_SIZE);
-		return (-(-(val % MEM_SIZE) % IDX_MOD));
-		}*/
-	if (val > (65535 / 2) || flag == 1)
-		return (-(-(val % MEM_SIZE) % IDX_MOD));
-	return ((val % MEM_SIZE) % IDX_MOD);
-}
-
-
 int		reverse_bytes(t_vm *vm, unsigned int pc, int bytes)
 {
-	unsigned char bytes2[2];
-	unsigned char bytes4[4];
+	t_uchar bytes2[2];
+	t_uchar bytes4[4];
 
 	if (bytes == 4)
 	{
@@ -117,8 +79,8 @@ int		reverse_bytes(t_vm *vm, unsigned int pc, int bytes)
 
 void	store_at(t_vm *vm, t_list *process, unsigned int val, int address)
 {
-	char i;
-	int mod;
+	char	i;
+	int		mod;
 
 	i = 4;
 	while (i--)
@@ -136,7 +98,7 @@ void	store_at(t_vm *vm, t_list *process, unsigned int val, int address)
 int		get_arg(t_vm *vm, t_list *process, t_uchar *move, t_uchar type)
 {
 	int		ret;
-	int 	value;
+	int		value;
 	t_uchar	label;
 
 	label = (type >> 0b10) ? 0b10 : 0b100;

@@ -6,17 +6,17 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 19:39:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/05 18:07:12 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 14:35:28 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "vm.h"
+#include "vm.h"
 
 int		load_player(t_vm *vm, char *file, int nplayer)
 {
-	int fd;
-	int size;
-	t_player *new;
+	int			fd;
+	int			size;
+	t_player	*new;
 
 	if ((fd = open(file, O_RDONLY)) < 0)
 	{
@@ -50,7 +50,7 @@ int		load_input(t_vm *vm, int ac, char **av)
 	i += vm->ncurses;
 	if (ft_strcmp(av[i], "-dump") == 0)
 	{
-		ft_printf(RED"dump: %d\n"E0M, ft_atoi(av[i+1]));
+		ft_printf(RED"dump: %d\n"E0M, ft_atoi(av[i + 1]));
 		vm->dump_param = ft_atoi(av[i + 1]);
 		i += 2;
 	}

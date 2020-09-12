@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:30:54 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/08/30 14:05:50 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 19:38:05 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,10 @@ int		load_champions(t_vm *vm)
 	return (EXIT_SUCCESS);
 }
 
-int		load_processes(t_vm *vm)
+int		load_processes(t_vm *vm, t_player *champion, int i)
 {
-	t_process p;
-	t_player *champion;
-	int i;
+	t_process	p;
 
-	champion = vm->player;
-	i = 0;
 	while (i < vm->nplayers)
 	{
 		vm->nprocess++;
@@ -71,7 +67,6 @@ int		load_processes(t_vm *vm)
 	return (EXIT_SUCCESS);
 }
 
-
 int		add_process(t_vm *vm, t_list *process, unsigned int pc)
 {
 	t_process p;
@@ -87,6 +82,7 @@ int		add_process(t_vm *vm, t_list *process, unsigned int pc)
 	PROCESS->live_count = TPROCES->live_count;
 	PROCESS->live_since = TPROCES->live_since + 1;
 	PROCESS->last_ir = -1;
+	PROCESS->optab = 0;
 	PROCESS->owner = TPROCES->owner;
 	ft_memcpy(&PROCESS->reg, &TPROCES->reg, REG_NUMBER * REG_SIZE);
 	return (EXIT_SUCCESS);

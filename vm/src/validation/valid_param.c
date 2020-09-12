@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 18:31:41 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/06 22:14:28 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 18:59:54 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		is_dump(int i, int ac, char **av)
 {
-	if (ft_strcmp(av[i], "-dump") == 0)
+	if (i < ac && ft_strcmp(av[i], "-dump") == 0)
 	{
 		if (((i + 1 >= ac) || !ft_isint(av[i + 1])) || ft_atoi(av[i + 1]) <= 0)
 			return (-1 + ft_puterr(ERROR": Improper -dump input", 0));

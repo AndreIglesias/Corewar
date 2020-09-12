@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 22:36:10 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/08/28 18:53:59 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 14:52:23 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,6 @@ void							op_lldi(t_vm *vm, t_list *process);
 void							op_lfork(t_vm *vm, t_list *process);
 void							op_aff(t_vm *vm, t_list *process);
 
-extern t_op						op_tab[17];
+extern t_op						g_op_tab[17];
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 19:42:06 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/08/25 22:33:12 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 19:02:46 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int valid_magic(char *file)
+int		valid_magic(char *file)
 {
 	unsigned char	exec_magic[4];
 	int				fd;
@@ -28,13 +28,14 @@ int valid_magic(char *file)
 	read(fd, &exec_magic[1], 1);
 	read(fd, &exec_magic[0], 1);
 	if (*(unsigned int*)exec_magic != COREWAR_EXEC_MAGIC)
-	{ft_printf_fd(2, ERROR": %s: Improper exec_magic\n", file);
+	{
+		ft_printf_fd(2, ERROR": %s: Improper exec_magic\n", file);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
 
-int valid_header(int fd, char *file)
+int		valid_header(int fd, char *file)
 {
 	if (lseek(fd, 0, SEEK_END) - sizeof(t_header) > CHAMP_MAX_SIZE)
 	{

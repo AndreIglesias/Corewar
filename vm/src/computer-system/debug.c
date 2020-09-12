@@ -6,11 +6,33 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 14:44:58 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/05 17:25:44 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 19:19:15 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "vm.h"
+#include "vm.h"
+
+int		is_ir(t_list *process, int i)
+{
+	while (process)
+	{
+		if (i == TPROCES->pc && (TPROCES->ir > 0 && TPROCES->ir <= 15))
+			return (TPROCES->owner);
+		process = process->next;
+	}
+	return (0);
+}
+
+int		is_pc(t_list *process, int i)
+{
+	while (process)
+	{
+		if (i == TPROCES->pc)
+			return (1);
+		process = process->next;
+	}
+	return (0);
+}
 
 int		print_ram(t_vm *vm)
 {

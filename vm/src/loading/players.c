@@ -6,13 +6,13 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 17:09:58 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/05 18:01:06 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 14:43:15 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-t_player	*new_player()
+t_player	*new_player(void)
 {
 	t_player *new;
 
@@ -32,14 +32,14 @@ t_player	*new_player()
 	return (new);
 }
 
-void	add_player(t_vm *vm, t_player *new)
+void		add_player(t_vm *vm, t_player *new)
 {
 	new->next = vm->player;
 	vm->player = new;
 	vm->nplayers++;
 }
 
-void	kill_players(t_vm *vm)
+void		kill_players(t_vm *vm)
 {
 	t_player *champion;
 	t_player *aux;

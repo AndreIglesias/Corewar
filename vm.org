@@ -29,7 +29,7 @@
 * REFERENCE
 ** COMPUTER SYSTEM
 
-  +------+-----+------------+-----+-----------------+
+  +------+------------+-----+-----+-----------------+
   |           ~CPU~           |     |      ~RAM~        |
   +------+------------+-----|     |-----------------+
   | !REGS! |    .ALU.     |     |     |   `Instructions`  |
@@ -307,7 +307,22 @@ All the addressing is /relatif/ to PC and IDX_MOD (except for lld, lldi and lfor
 |                    |             |
 |--------------------+-------------|
 
-*** INIT
+*** ASSEMBLER
+|--------------------|
+| *STEPS*              |
+|--------------------|
+| READ               |
+| VALIDATION         |
+| - Lexicon          |
+| - Syntax           |
+| LOADING            |
+| - validate sematic |
+| TRANSLATION        |
+| WRITE              |
+|--------------------|
+
+*** VM
+**** INIT
 1. Initialize every registry is at 0 except
    - !r1!
 	 * Player's /Number/, is given to the champions via r1 registry their ~first process~ at startup
@@ -364,10 +379,10 @@ Example of a [[64 byte's RAM]]
 
 [[Zork in ASM]]
 
-*** VALIDATION
+**** VALIDATION
 Display relevant error message on the *standard error* (/fd = 2/)
 
-**** INPUT
+***** INPUT
 1. Verify the format of the argv
    - ./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ...
 	 + /-dump nbr_cycles/
@@ -381,7 +396,7 @@ Display relevant error message on the *standard error* (/fd = 2/)
 3. Invalid *header* values! (/header_t/ type)
 4. Verify if there's *no code* in champion.cor
 
-**** IN RUN-TIME
+***** IN RUN-TIME
 1. Every (/CYCLE_TO_DIE/) number of cycles
    - Verify if *each process* has executed at least one *live*
 	 + if a *process didn't*, it will be killed
@@ -392,16 +407,16 @@ Display relevant error message on the *standard error* (/fd = 2/)
 3. If every process is dead, the *game is over*
 4. *Memory* is _circular_ and of /MEM_SIZE/
 
-*** GAME
-**** MEANWHILE
+**** GAME
+***** MEANWHILE
 1. For each valid execusion of the *live* instruction
    - Display "A process shows that player X (champion_name) is alive"
 
-**** END
+***** END
 1. The last /player/ alive *wins*
    - Display "Player X (champion_name) won" | X = *player's number* && champion_name = *its name*
 
-*** COMPUTER SYSTEM
+**** COMPUTER SYSTEM
 - Each instruction will *completely* execute itself /at the end of its last cycle/
   + and wait for its entire duration
 

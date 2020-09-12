@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 23:55:20 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/09 01:31:24 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 14:54:30 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,10 @@ int		is_label(char **cmd)
 ** valid == -1	: not this type
 ** valid == -2	: separator error
 ** valid > 0	: position
+** -------------
+** valid_params.c: valid_reg, valid_dir, valid_ind
 */
-
+/*
 int		valid_params(char **cmd, int x, int posarg, int nargs)
 {
 	int i;
@@ -75,11 +77,11 @@ int		valid_params(char **cmd, int x, int posarg, int nargs)
 		sep_pos = (i + 1 == nargs) ? 2 : 0;
 		sep_pos = (i == 0) ? 1 : sep_pos;
 		valid = -1;
-		if (op_tab[x].args[i] & T_REG)
+		if (g_op_tab[x].args[i] & T_REG)
 			valid = valid_reg(cmd, posarg, i, sep_pos);
-		if ((valid != 0 && valid != -2) && op_tab[x].args[i] & T_DIR)
+		if ((valid != 0 && valid != -2) && g_op_tab[x].args[i] & T_DIR)
 			valid = valid_dir(cmd, posarg, valid, i, sep_pos);
-		if ((valid != 0 && valid != -2) && op_tab[x].args[i] & T_IND)
+		if ((valid != 0 && valid != -2) && g_op_tab[x].args[i] & T_IND)
 			valid_ind(cmd, posarg, valid, i, sep_pos);
 		if (valid < 0)
 			return (0);
@@ -93,27 +95,27 @@ int		valid_separator(char **cmd, int i, int nargs)
 {
 	return (1);
 }
-
+*/
 int		is_opcode(char **cmd, int i)
 {
 	int		x;
 	char	*op;
-	int		si;
+	//int		si;
 
 	x = 0;
 	if (*ft_itersplit(cmd, i) == '#')
 		return (0);
-	while (op_tab[x].name)
+	while (g_op_tab[x].name)
 	{
 		op = ft_itersplit(cmd, i);
-		if (ft_strcmp(op_tab[x].name, op) == 0)//maybe ld:label or ld%31
+		if (ft_strcmpn(g_op_tab[x].name, op, ":%") == 0)
 		{
-			si = ft_coordsplit(cmd, op).i + 1;
-			if (!valid_separator(cmd, i + 1, op_tab[x].nb_arg))
+			//si = ft_coordsplit(cmd, op).i + 1;
+			/*if (!valid_separator(cmd, i + 1, g_op_tab[x].nb_arg))
 				return (-2);
-			if (!valid_params(cmd, x, si, op_tab[x].nb_arg))
-				return (-2);
-			ft_printf(GREEN"%s-%s\n"E0M, op_tab[x].name, ft_itersplit(cmd, i));
+			if (!valid_params(cmd, x, si, g_op_tab[x].nb_arg))
+			return (-2);*/
+			ft_printf(GREEN"%s-%s\n"E0M, g_op_tab[x].name, ft_itersplit(cmd, i));
 			return (1);
 		}
 		x++;

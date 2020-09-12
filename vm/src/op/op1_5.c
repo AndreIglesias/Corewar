@@ -6,11 +6,11 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 16:59:34 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/08/31 22:18:44 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 17:07:11 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "vm.h"
+#include "vm.h"
 
 /*
 ** ACB Parameters:
@@ -41,7 +41,7 @@ void							op_ld(t_vm *vm, t_list *process)
 {
 	t_uchar	acb;
 	int		move;
-	int 	reg;
+	int		reg;
 
 	acb = in_mem(vm, TPROCES->pc + 1);
 	reg = TPROCES->pc + 6 - ((acb & 0b01100000) >> 5);
@@ -66,9 +66,9 @@ void							op_ld(t_vm *vm, t_list *process)
 
 void							op_st(t_vm *vm, t_list *process)
 {
-	t_uchar acb;
-	unsigned int reg1;
-	int move;
+	t_uchar			acb;
+	unsigned int	reg1;
+	int				move;
 
 	acb = in_mem(vm, TPROCES->pc + 1);
 	if (ACB1 == REG && is_reg(vm, TPROCES->pc + 2))
@@ -91,10 +91,10 @@ void							op_st(t_vm *vm, t_list *process)
 
 void							op_add(t_vm *vm, t_list *process)
 {
-	int nb;
-	t_uchar acb;
-	int reg1;
-	int reg2;
+	int		nb;
+	t_uchar	acb;
+	int		reg1;
+	int		reg2;
 
 	acb = in_mem(vm, TPROCES->pc + 1);
 	if (is_argsize(3, acb, 3) && is_reg(vm, TPROCES->pc + 2) &&
@@ -107,7 +107,6 @@ void							op_add(t_vm *vm, t_list *process)
 		TPROCES->reg[in_mem(vm, TPROCES->pc + 4) - 1] = nb;
 	}
 	TPROCES->pc = mem_mod(TPROCES->pc + octal_shift(acb, 4, 3));
-
 }
 
 /*
@@ -116,10 +115,10 @@ void							op_add(t_vm *vm, t_list *process)
 
 void							op_sub(t_vm *vm, t_list *process)
 {
-	int nb;
-	t_uchar acb;
-	int reg1;
-	int reg2;
+	int		nb;
+	t_uchar	acb;
+	int		reg1;
+	int		reg2;
 
 	acb = in_mem(vm, TPROCES->pc + 1);
 	if (is_argsize(4, acb, 3) && is_reg(vm, TPROCES->pc + 2) &&
