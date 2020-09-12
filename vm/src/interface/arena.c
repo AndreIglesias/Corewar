@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 20:41:28 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 20:02:18 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 21:11:28 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ ____", vm->process_alive);
 	i++;
 	while (process)
 	{
-		wattron(window, COLOR_PAIR(TPROCES->owner + 1));
+		wattron(window, COLOR_PAIR(((TP*)P->obj)->owner + 1));
 		mvwprintw(window, i + 1, 1, "Process %d PC:", n++);
-		wattroff(window, COLOR_PAIR(TPROCES->owner + 1));
-		mvwprintw(window, i + 1, 15, "%d", TPROCES->pc);
-		ir = TPROCES->last_ir;
-		wattron(window, COLOR_PAIR(TPROCES->owner + 1));
+		wattroff(window, COLOR_PAIR(((TP*)P->obj)->owner + 1));
+		mvwprintw(window, i + 1, 15, "%d", ((TP*)P->obj)->pc);
+		ir = ((TP*)P->obj)->last_ir;
+		wattron(window, COLOR_PAIR(((TP*)P->obj)->owner + 1));
 		mvwprintw(window, i + 1, 25, "OP: ");
 		wattron(window, COLOR_PAIR(5) | A_BOLD);
 		mvwprintw(window, i + 1, 30, "%s", (0 < ir && ir <= 15) ?

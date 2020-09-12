@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:30:54 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 19:38:05 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 21:23:40 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,19 @@ int		load_processes(t_vm *vm, t_player *champion, int i)
 		vm->nprocess++;
 		vm->process_alive++;
 		ft_lstadd(&vm->processes, ft_lstnew(&p, sizeof(t_process)));
-		PROCESS->carry = 0;
-		PROCESS->nprocess = vm->nprocess;
-		PROCESS->pc = champion->pc_address;
-		PROCESS->duration = 0;
-		PROCESS->ir = -1;
-		PROCESS->live_count = 0;
-		PROCESS->live_since = 0;
-		PROCESS->last_ir = -1;
-		PROCESS->owner = i + 1;
-		ft_memset(&PROCESS->reg, 0, REG_NUMBER * REG_SIZE);
-		PROCESS->reg[0] = champion->nplayer;
-		ft_printf("PLAYER %d %s, weight %d bytes\n", PROCESS->reg[0],
+		((t_process*)vm->processes->obj)->carry = 0;
+		((t_process*)vm->processes->obj)->nprocess = vm->nprocess;
+		((t_process*)vm->processes->obj)->pc = champion->pc_address;
+		((t_process*)vm->processes->obj)->duration = 0;
+		((t_process*)vm->processes->obj)->ir = -1;
+		((t_process*)vm->processes->obj)->live_count = 0;
+		((t_process*)vm->processes->obj)->live_since = 0;
+		((t_process*)vm->processes->obj)->last_ir = -1;
+		((t_process*)vm->processes->obj)->owner = i + 1;
+		ft_memset(&((t_process*)vm->processes->obj)->reg, 0,
+				REG_NUMBER * REG_SIZE);
+		((t_process*)vm->processes->obj)->reg[0] = champion->nplayer;
+		ft_printf("PLAYER %d %s, weight %d bytes\n", champion->nplayer,
 					champion->name, champion->prog_size);
 		champion = champion->next;
 		i++;
@@ -74,16 +75,18 @@ int		add_process(t_vm *vm, t_list *process, unsigned int pc)
 	vm->nprocess++;
 	vm->process_alive++;
 	ft_lstadd(&vm->processes, ft_lstnew(&p, sizeof(t_process)));
-	PROCESS->carry = TPROCES->carry;
-	PROCESS->nprocess = vm->nprocess;
-	PROCESS->pc = pc;
-	PROCESS->duration = 0;
-	PROCESS->ir = -1;
-	PROCESS->live_count = TPROCES->live_count;
-	PROCESS->live_since = TPROCES->live_since + 1;
-	PROCESS->last_ir = -1;
-	PROCESS->optab = 0;
-	PROCESS->owner = TPROCES->owner;
-	ft_memcpy(&PROCESS->reg, &TPROCES->reg, REG_NUMBER * REG_SIZE);
+	((t_process*)vm->processes->obj)->carry = ((TP*)P->obj)->carry;
+	((t_process*)vm->processes->obj)->nprocess = vm->nprocess;
+	((t_process*)vm->processes->obj)->pc = pc;
+	((t_process*)vm->processes->obj)->duration = 0;
+	((t_process*)vm->processes->obj)->ir = -1;
+	((t_process*)vm->processes->obj)->live_count = ((TP*)P->obj)->live_count;
+	((t_process*)vm->processes->obj)->live_since = ((TP*)P->obj)->live_since
+																			+ 1;
+	((t_process*)vm->processes->obj)->last_ir = -1;
+	((t_process*)vm->processes->obj)->optab = 0;
+	((t_process*)vm->processes->obj)->owner = ((TP*)P->obj)->owner;
+	ft_memcpy(&((t_process*)vm->processes->obj)->reg, &((TP*)P->obj)->reg,
+			REG_NUMBER * REG_SIZE);
 	return (EXIT_SUCCESS);
 }

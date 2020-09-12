@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 17:36:04 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 14:47:50 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 21:32:50 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int				is_reg(t_vm *vm, int nb)
 
 void			save_cmp(t_list *process, int id, int comp)
 {
-	TPROCES->reg[id] = comp;
-	TPROCES->carry = (TPROCES->reg[id]) ? 0 : 1;
+	((TP*)P->obj)->reg[id] = comp;
+	((TP*)P->obj)->carry = (((TP*)P->obj)->reg[id]) ? 0 : 1;
 }
 
 unsigned int	mem_mod(int x)

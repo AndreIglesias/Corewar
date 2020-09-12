@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 17:03:30 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 14:56:05 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 21:21:29 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 
 void							op_aff(t_vm *vm, t_list *process)
 {
-	int acb;
+	t_uchar	acb;
 
-	acb = in_mem(vm, TPROCES->pc + 1);
-	if (ACB1 == REG && is_reg(vm, TPROCES->pc + 2))
+	acb = in_mem(vm, ((TP*)P->obj)->pc + 1);
+	if (p_acb(acb, 1) == REG && is_reg(vm, ((TP*)P->obj)->pc + 2))
 	{
-		ft_printf("AFF: %d\n", TPROCES->reg[in_mem(vm, TPROCES->pc + 2) - 1]);
+		ft_printf("AFF: %d\n",
+			((TP*)P->obj)->reg[in_mem(vm, ((TP*)P->obj)->pc + 2) - 1]);
 	}
-	TPROCES->pc = mem_mod(TPROCES->pc + octal_shift(acb, 4, 1));
+	((TP*)P->obj)->pc = mem_mod(((TP*)P->obj)->pc + octal_shift(acb, 4, 1));
 }

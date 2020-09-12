@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 21:50:15 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 20:04:17 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 21:33:37 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,18 @@
 # define MAX_SPEED	0
 # define MIN_SPEED	30000
 
-# define PROCESS	((t_process*)vm->processes->obj)
-# define TPROCES	((t_process*)process->obj)
+# define TP			t_process
+# define P			process
 
 /*
-**# define ACB1		(acb & 0b11000000) >> 6
-**# define ACB2		(acb & 0b110000) >> 4
-**# define ACB3		(acb & 0b1100) >> 2
+**# define ACB1		(acb & 0b11000000) >> 6	-> p_acb()
+**# define ACB2		(acb & 0b110000) >> 4	-> p_acb()
+**# define ACB3		(acb & 0b1100) >> 2		-> p_acb()
 **# define REG		0b01
 **# define DIR		0b10
 **# define IND		0b11
 */
 
-# define ACB1		(acb & 0b11000000) >> 6
-# define ACB2		(acb & 0b110000) >> 4
-# define ACB3		(acb & 0b1100) >> 2
 # define REG		1
 # define DIR		2
 # define IND		3
@@ -161,6 +158,7 @@ void				lldi_op(t_list *process, int *nb, t_vm *vm);
 ** parsing: direct_args
 */
 
+int					p_acb(t_uchar acb, int p_number);
 void				disect_args(t_vm *vm, t_list *process, int isld,
 						void (*f)(t_list *process, int *nb, t_vm *vm));
 /*

@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 17:21:12 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 14:51:42 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 21:33:02 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void	store_at(t_vm *vm, t_list *process, unsigned int val, int address)
 	while (i--)
 	{
 		mod = mem_mod(address);
-		vm->ram.owner[mod] = TPROCES->owner;
-		vm->ram.scrb[mod] = TPROCES->owner;
+		vm->ram.owner[mod] = ((TP*)P->obj)->owner;
+		vm->ram.scrb[mod] = ((TP*)P->obj)->owner;
 		vm->ram.arena[mod] = val & 0xFF;
 		address--;
 		address = mem_mod(address);
@@ -104,18 +104,18 @@ int		get_arg(t_vm *vm, t_list *process, t_uchar *move, t_uchar type)
 	label = (type >> 0b10) ? 0b10 : 0b100;
 	if ((type & 0b11) == REG)
 	{
-		value = vm->ram.arena[mem_mod(TPROCES->pc + 2 + (*move)++)];
-		ret = TPROCES->reg[value - 1];
+		value = vm->ram.arena[mem_mod(((TP*)P->obj)->pc + 2 + (*move)++)];
+		ret = ((TP*)P->obj)->reg[value - 1];
 	}
 	else if ((type & 0b11) == DIR)
 	{
-		ret = reverse_bytes(vm, TPROCES->pc + 2 + *move, label);
+		ret = reverse_bytes(vm, ((TP*)P->obj)->pc + 2 + *move, label);
 		*move += label;
 	}
 	else
 	{
-		value = reverse_bytes(vm, TPROCES->pc + 2 + *move, 2) % IDX_MOD;
-		ret = reverse_bytes(vm, TPROCES->pc + value, 4);
+		value = reverse_bytes(vm, ((TP*)P->obj)->pc + 2 + *move, 2) % IDX_MOD;
+		ret = reverse_bytes(vm, ((TP*)P->obj)->pc + value, 4);
 		*move += 2;
 	}
 	return (ret);

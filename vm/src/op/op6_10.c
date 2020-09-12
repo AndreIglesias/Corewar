@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 17:01:05 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 19:50:24 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 21:22:27 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 void							op_and(t_vm *vm, t_list *process)
 {
-	TPROCES->optab = 5;
+	((TP*)P->obj)->optab = 5;
 	disect_args(vm, process, 0, &and_op);
 }
 
@@ -36,7 +36,7 @@ void							op_and(t_vm *vm, t_list *process)
 
 void							op_or(t_vm *vm, t_list *process)
 {
-	TPROCES->optab = 6;
+	((TP*)P->obj)->optab = 6;
 	disect_args(vm, process, 0, &or_op);
 }
 
@@ -46,7 +46,7 @@ void							op_or(t_vm *vm, t_list *process)
 
 void							op_xor(t_vm *vm, t_list *process)
 {
-	TPROCES->optab = 7;
+	((TP*)P->obj)->optab = 7;
 	disect_args(vm, process, 0, &xor_op);
 }
 
@@ -58,8 +58,9 @@ void							op_zjmp(t_vm *vm, t_list *process)
 {
 	int move;
 
-	move = reverse_bytes(vm, TPROCES->pc + 1, 2) % IDX_MOD;
-	TPROCES->pc = mem_mod(TPROCES->pc + ((TPROCES->carry) ? move : 3));
+	move = reverse_bytes(vm, ((TP*)P->obj)->pc + 1, 2) % IDX_MOD;
+	((TP*)P->obj)->pc = mem_mod(((TP*)P->obj)->pc +
+						((((TP*)P->obj)->carry) ? move : 3));
 }
 
 /*
@@ -68,6 +69,6 @@ void							op_zjmp(t_vm *vm, t_list *process)
 
 void							op_ldi(t_vm *vm, t_list *process)
 {
-	TPROCES->optab = 9;
+	((TP*)P->obj)->optab = 9;
 	disect_args(vm, process, 2, &ldi_op);
 }

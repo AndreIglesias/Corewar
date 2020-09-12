@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:17:31 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 14:51:17 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/12 21:26:53 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	kill_zombies(t_vm *vm, t_list *process)
 		prev = NULL;
 		while (process)
 		{
-			if (!TPROCES->live_count || vm->cycle_to_die < 0)
+			if (!((TP*)P->obj)->live_count || vm->cycle_to_die < 0)
 			{
 				if (process == vm->processes)
 					vm->processes = process->next;
@@ -33,7 +33,7 @@ void	kill_zombies(t_vm *vm, t_list *process)
 				vm->process_alive--;
 				continue ;
 			}
-			TPROCES->live_count = 0;
+			((TP*)P->obj)->live_count = 0;
 			prev = process;
 			process = process->next;
 		}
@@ -44,17 +44,17 @@ void	find_ir(t_vm *vm, t_list *process)
 {
 	int ir;
 
-	ir = vm->ram.arena[TPROCES->pc % MEM_SIZE];
+	ir = vm->ram.arena[((TP*)P->obj)->pc % MEM_SIZE];
 	if (0 < ir && ir <= 15)
 	{
-		TPROCES->ir = ir - 1;
-		TPROCES->last_ir = ir;
-		TPROCES->duration = g_op_tab[TPROCES->ir].cycle - 1;
+		((TP*)P->obj)->ir = ir - 1;
+		((TP*)P->obj)->last_ir = ir;
+		((TP*)P->obj)->duration = g_op_tab[((TP*)P->obj)->ir].cycle - 1;
 		return ;
 	}
-	TPROCES->ir = -1;
-	TPROCES->pc++;
-	TPROCES->pc %= MEM_SIZE;
+	((TP*)P->obj)->ir = -1;
+	((TP*)P->obj)->pc++;
+	((TP*)P->obj)->pc %= MEM_SIZE;
 }
 
 void	process_operations(t_vm *vm, t_list *process)
@@ -67,17 +67,17 @@ void	process_operations(t_vm *vm, t_list *process)
 			ft_memset(vm->ram.scrb, 0, sizeof(unsigned char) * MEM_SIZE);
 		while (process)
 		{
-			ir = TPROCES->ir;
+			ir = ((TP*)P->obj)->ir;
 			if (ir < 0 || 15 < ir)
 				find_ir(vm, process);
-			if (!TPROCES->duration && (0 <= ir && ir <= 15))
+			if (!((TP*)P->obj)->duration && (0 <= ir && ir <= 15))
 			{
-				g_op_tab[TPROCES->ir].f(vm, process);
-				TPROCES->ir = -1;
+				g_op_tab[((TP*)P->obj)->ir].f(vm, process);
+				((TP*)P->obj)->ir = -1;
 			}
 			else
-				TPROCES->duration--;
-			TPROCES->live_since++;
+				((TP*)P->obj)->duration--;
+			((TP*)P->obj)->live_since++;
 			process = process->next;
 		}
 	}
