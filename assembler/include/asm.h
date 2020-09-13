@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/13 16:15:00 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/13 20:56:56 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ int					valid_input(char *filename, t_file *file);
 int					valid_reg(char **cmd, int i);
 int					valid_dir(char **cmd, int i);
 int					valid_ind(char **cmd, int i);
+int					lexicon_error(char **cmd, int i, char *err, int ret);
 
-int					correct_syntax(t_file *file, char *line, int l, int s);
+int					verify_code(t_file *file, char *line, int l, int s);
 int					is_head(char **cmd, char *str);
 int					is_label(char **cmd);
-int					is_opcode(char **cmd, int i);
+int					is_opcode(char **cmd, int i, int line);
 
 #endif

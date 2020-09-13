@@ -6,7 +6,7 @@
 #    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/20 19:19:55 by ciglesia          #+#    #+#              #
-#    Updated: 2020/09/12 12:29:46 by ciglesia         ###   ########.fr        #
+#    Updated: 2020/09/13 20:46:02 by ciglesia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -31,7 +31,7 @@ LOADING		=	file_init.c
 ANALYSIS	=	lexer.c parsing.c
 SYNTHESIS	=
 OP			=	op.c
-VALIDATION	=	valid_file.c valid_params.c
+VALIDATION	=	valid_file.c valid_params.c print_err.c
 
 SOURCE		=	$(SRC) $(LOADING) $(ANALYSIS) $(SYNTHESIS) $(OP) $(VALIDATION)
 
