@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 12:32:22 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/13 16:15:00 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct		s_file
 	char			*comment;
 	char			*playername;
 	unsigned char	code[CHAMP_MAX_SIZE];
+	char			*labels[CHAMP_MAX_SIZE];
 }					t_file;
 
 typedef struct		s_code
@@ -38,12 +39,12 @@ typedef struct		s_code
 void				file_init(t_file *file);
 
 int					valid_input(char *filename, t_file *file);
-int					valid_reg(char **cmd, int pos, int sep_pos);
-int					valid_dir(char **cmd, int pos, int i, int sep_pos);
-int					valid_ind(char **cmd, int pos, int i, int sep_pos);
+int					valid_reg(char **cmd, int i);
+int					valid_dir(char **cmd, int i);
+int					valid_ind(char **cmd, int i);
 
 int					correct_syntax(t_file *file, char *line, int l, int s);
-int					is_head(char ** cmd, char *str);
+int					is_head(char **cmd, char *str);
 int					is_label(char **cmd);
 int					is_opcode(char **cmd, int i);
 

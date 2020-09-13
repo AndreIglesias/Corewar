@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:11:34 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 13:21:13 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/13 17:38:05 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		invalid_lexicon(char **cmd)
 		ft_printf_fd(2, ERROR""RED": lexicon: invalid number of quotes"E0M);
 	else if (err == -2)
 		ft_printf_fd(2, ERROR""RED": lexicon: invalid format"E0M);
-	return ((err < 0) ? 1 : 0);
+	return ((err < 0) ? 1 : 0); // if error return itersplit  // itersplit -> coords i j "^"
 }
 
 int		invalid_syntax(char **cmd, int i, int j)

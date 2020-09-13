@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 00:13:47 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 13:21:39 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/13 17:36:59 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,70 +14,71 @@
 
 
 /*
-** sep_pos == 1	: first argument
-** sep_pos == 2	: last argument
-** valid == 0	: successful valid type
 ** valid == -1	: not this type
-** valid == -2	: separator error
 ** valid > 0	: position
 */
-/*
-int		valid_reg(char **cmd, int pos, int sep_pos)
-{
-	int	i;
 
-	i = 0;
-	if ((cmd[pos][i] && cmd[pos][i] == ',') && sep_pos == 1)
-		return (-2);
-	if (cmd[pos][i] && cmd[pos][i] == ',')
-		i++;
-	if (!cmd[pos][i] || !cmd[pos][i] != 'r')
+int		valid_reg(char **cmd, int i)
+{
+	//ft_printf(RED"%s"E0M, ft_itersplit(cmd, i));//
+	if (!ft_itersplit(cmd, i) || *ft_itersplit(cmd, i) != 'r')
 		return (-1);
-	if (!cmd[pos][i + 1] || !('1' <= cmd[pos][i + 1] && cmd[pos][i + 1] <= '9'))
+	if (!ft_itersplit(cmd, i + 1) || !('1' <= *ft_itersplit(cmd, i + 1) &&
+										*ft_itersplit(cmd, i + 1) <= '9'))
 		return (-1);
-	if (!cmd[pos][i + 2])
+	if (!ft_itersplit(cmd, i + 2) || (*ft_itersplit(cmd, i + 2) == ','
+									|| *ft_itersplit(cmd, i + 2) == '#'))
 		return (i + 2);
-	if (cmd[pos][i + 2] == ',')
-		return (i + 2);
-	else if (!('0' <= cmd[pos][i + 2] && cmd[pos][i + 2] <= '6'))
+	if (!('0' <= *ft_itersplit(cmd, i + 2) && *ft_itersplit(cmd, i + 2) <= '6'))
 		return (-1);
-	if (!cmd[pos][i + 3])
-		return (0);
-	if (cmd[pos][i + 3] == ',')
-		return ((sep_pos == 2) ? -2 : i + 3);
-	if (!cmd[pos][i + 4])
-		return (0);
-	return (i + 4);
+	if ('1' != *ft_itersplit(cmd, i + 1))
+		return (-1);
+	return (i + 3);
 }
-*/
+
 /*
 ** return -1	: not this type
-** return 0		: successful valid type
 ** return > 0	: position
 */
-/*
-int		label_param(char **cmd, int pos, unsigned int i)
+
+int		label_param(char **cmd, unsigned int i)
 {
-	if (cmd[pos][i] && cmd[pos][i] == LABEL_CHAR)
+	//ft_printf(RED"%s"E0M, ft_itersplit(cmd, i));//
+	if (ft_itersplit(cmd, i) && *ft_itersplit(cmd, i) == LABEL_CHAR)
 		i++;
 	else
-		return (-1);
-	while (cmd[pos][i] && ft_countchr(LABEL_CHARS, cmd[pos][i]))
+		return (0);
+	while (ft_itersplit(cmd, i) && ft_countchr(LABEL_CHARS, *ft_itersplit(cmd, i)))
 		i++;
-	if (cmd[pos][i])
-		return (i + 1);
-	return (0);
+	return (i + 1);
 }
 
-int		valid_dir(char **cmd, int pos, int i, int sep_pos)
+int		valid_dir(char **cmd, int i)
 {
-	if ((cmd[pos][i] && cmd[pos][i] == ',') && sep_pos == 1)
+	int ret;
+
+	//ft_printf(RED"%s"E0M, ft_itersplit(cmd, i));//
+	if (!ft_itersplit(cmd, i) || *ft_itersplit(cmd, i) != '%')
+		return (-1);
+	if ((ret = valid_ind(cmd, i + 1)) < 0)
 		return (-2);
+	return (ret);
 }
 
-int		valid_ind(char **cmd, int pos, int i, int sep_pos)
+int		valid_ind(char **cmd, int i)
 {
-	if ((cmd[pos][i] && cmd[pos][i] == ',') && sep_pos == 1)
-		return (-2);
+	int	ret;
+
+	//ft_printf(RED"%s"E0M, ft_itersplit(cmd, i));//
+	if ((ret = label_param(cmd, i)))
+		return (ret);
+	if (ft_itersplit(cmd, i) && *ft_itersplit(cmd, i) == '-')
+		i++;
+	ret = i;
+	while (ft_itersplit(cmd, i) && ('0' <= *ft_itersplit(cmd, i) &&
+									*ft_itersplit(cmd, i) <= '9'))
+		i++;
+	if (ret == i)
+		return (-1);
+	return (i);
 }
-*/

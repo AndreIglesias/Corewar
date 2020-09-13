@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 23:55:20 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 14:54:30 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/13 17:34:41 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,53 +54,77 @@ int		is_label(char **cmd)
 }
 
 /*
-** sep_pos == 1	: first argument
-** sep_pos == 2	: last argument
-** valid == 0	: successful valid type
 ** valid == -1	: not this type
-** valid == -2	: separator error
-** valid > 0	: position
+** valid > 0	: successful valid type, position
 ** -------------
 ** valid_params.c: valid_reg, valid_dir, valid_ind
 */
-/*
-int		valid_params(char **cmd, int x, int posarg, int nargs)
-{
-	int i;
-	int	separator;
-	int	valid;
-	int	sep_pos;
 
-	i = 0;
-	while (cmd[posarg] && i < nargs)
+//si = ft_coordsplit(cmd, op).i + 1;
+
+int		valid_params(char **cmd, int x, int i, int nargs)
+{
+	int	valid;
+	int type;
+
+	type = 0;
+	while (nargs)
 	{
-		sep_pos = (i + 1 == nargs) ? 2 : 0;
-		sep_pos = (i == 0) ? 1 : sep_pos;
 		valid = -1;
-		if (g_op_tab[x].args[i] & T_REG)
-			valid = valid_reg(cmd, posarg, i, sep_pos);
-		if ((valid != 0 && valid != -2) && g_op_tab[x].args[i] & T_DIR)
-			valid = valid_dir(cmd, posarg, valid, i, sep_pos);
-		if ((valid != 0 && valid != -2) && g_op_tab[x].args[i] & T_IND)
-			valid_ind(cmd, posarg, valid, i, sep_pos);
+		ft_printf(CYAN"%s"E0M, ft_itersplit(cmd, i));
+		if (ft_itersplit(cmd, i) && *ft_itersplit(cmd, i) == ',')
+			i++;
+		//ft_printf(RED"%s"E0M, ft_itersplit(cmd, i));//
+		if ((g_op_tab[x].args[type] & T_REG) == T_REG)
+			valid = valid_reg(cmd, i);
+		if (valid == -1 && (g_op_tab[x].args[type] & T_DIR) == T_DIR)
+			valid = valid_dir(cmd, i);
+		if (valid == -1 && (g_op_tab[x].args[type] & T_IND) == T_IND)
+			valid = valid_ind(cmd, i);
 		if (valid < 0)
 			return (0);
-		posarg++;
-		i++;
+		nargs--;
+		i = valid;
+		type++;
 	}
 	return (1);
 }
-
 int		valid_separator(char **cmd, int i, int nargs)
 {
+	int x;
+	int si;
+
+	while (nargs)
+	{
+		x = i;
+		//ft_printf(CYAN"%s"E0M, ft_itersplit(cmd, i));//
+		si = ft_coordsplit(cmd, ft_itersplit(cmd, i)).i;
+		while (ft_itersplit(cmd, i) && ft_coordsplit(cmd,
+				ft_itersplit(cmd, i)).i == si && ft_countchr(":-%"LABEL_CHARS,
+														*ft_itersplit(cmd, i)))
+			i++;
+		//ft_printf(RED"%s"E0M, ft_itersplit(cmd, i));//
+		if (nargs > 1 && ft_itersplit(cmd, i) && *ft_itersplit(cmd, i) == '#')
+			break ;
+		if (i == x)
+			return (0);
+		else if (nargs != 1 && ft_itersplit(cmd, i) && *ft_itersplit(cmd, i) != ',')
+			return (0);
+		else if (nargs == 1 && ft_itersplit(cmd, i) && *ft_itersplit(cmd, i) != '#')
+			return (0);
+		nargs--;
+		i++;
+	}
+	if (nargs >= 1)
+		return (0);
+	//ft_printf(BLUE"%s"E0M, ft_itersplit(cmd, i));//
 	return (1);
 }
-*/
+
 int		is_opcode(char **cmd, int i)
 {
 	int		x;
 	char	*op;
-	//int		si;
 
 	x = 0;
 	if (*ft_itersplit(cmd, i) == '#')
@@ -110,12 +134,13 @@ int		is_opcode(char **cmd, int i)
 		op = ft_itersplit(cmd, i);
 		if (ft_strcmpn(g_op_tab[x].name, op, ":%") == 0)
 		{
-			//si = ft_coordsplit(cmd, op).i + 1;
-			/*if (!valid_separator(cmd, i + 1, g_op_tab[x].nb_arg))
+			if (!valid_separator(cmd, i + ft_strlen(g_op_tab[x].name),
+								g_op_tab[x].nb_arg))
 				return (-2);
-			if (!valid_params(cmd, x, si, g_op_tab[x].nb_arg))
-			return (-2);*/
-			ft_printf(GREEN"%s-%s\n"E0M, g_op_tab[x].name, ft_itersplit(cmd, i));
+			if (!valid_params(cmd, x, i + ft_strlen(g_op_tab[x].name),
+								g_op_tab[x].nb_arg))
+				return (-2);
+			ft_printf(GREEN"%s-%s\n"E0M, g_op_tab[x].name,ft_itersplit(cmd, i));
 			return (1);
 		}
 		x++;
