@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 23:55:20 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/13 22:06:03 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/13 23:57:24 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ int		is_opcode(char **cmd, int i, int line)
 		op = ft_itersplit(cmd, i);
 		if (ft_strcmpn(g_op_tab[x].name, op, ":%") == 0)
 		{
+			ft_printf(GREEN"%s\n"E0M, g_op_tab[x].name);
 			if (!valid_separator(cmd, i + ft_strlen(g_op_tab[x].name),
 								g_op_tab[x].nb_arg, line))
 				return (-1);
