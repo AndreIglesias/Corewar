@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 00:13:47 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/13 17:36:59 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/14 12:55:36 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		label_param(char **cmd, unsigned int i)
 		return (0);
 	while (ft_itersplit(cmd, i) && ft_countchr(LABEL_CHARS, *ft_itersplit(cmd, i)))
 		i++;
-	return (i + 1);
+	return (i);
 }
 
 int		valid_dir(char **cmd, int i)

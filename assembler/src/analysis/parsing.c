@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:11:34 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/13 22:05:26 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/14 12:50:27 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		invalid_syntax(char **cmd, int i, int j, int line)
 {
 	(void)j;
 	(void)line;
+	//ft_printf(GREEN"%s\n"E0M, cmd[i]);
 	while (cmd[i])
 	{
 		if (cmd[i][0] == '#')
