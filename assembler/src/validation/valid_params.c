@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 00:13:47 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/14 12:55:36 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/15 21:08:09 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 
 int		valid_reg(char **cmd, int i)
 {
-	//ft_printf(RED"%s"E0M, ft_itersplit(cmd, i));//
 	if (!ft_itersplit(cmd, i) || *ft_itersplit(cmd, i) != 'r')
 		return (-1);
 	if (!ft_itersplit(cmd, i + 1) || !('1' <= *ft_itersplit(cmd, i + 1) &&
@@ -43,7 +42,6 @@ int		valid_reg(char **cmd, int i)
 
 int		label_param(char **cmd, unsigned int i)
 {
-	//ft_printf(RED"%s"E0M, ft_itersplit(cmd, i));//
 	if (ft_itersplit(cmd, i) && *ft_itersplit(cmd, i) == LABEL_CHAR)
 		i++;
 	else
@@ -57,7 +55,6 @@ int		valid_dir(char **cmd, int i)
 {
 	int ret;
 
-	//ft_printf(RED"%s"E0M, ft_itersplit(cmd, i));//
 	if (!ft_itersplit(cmd, i) || *ft_itersplit(cmd, i) != '%')
 		return (-1);
 	if ((ret = valid_ind(cmd, i + 1)) < 0)
@@ -69,7 +66,6 @@ int		valid_ind(char **cmd, int i)
 {
 	int	ret;
 
-	//ft_printf(RED"%s"E0M, ft_itersplit(cmd, i));//
 	if ((ret = label_param(cmd, i)))
 		return (ret);
 	if (ft_itersplit(cmd, i) && *ft_itersplit(cmd, i) == '-')

@@ -1,5 +1,6 @@
 .name "Explosive Kitty"
-.comment "Jan-ken-pon (じゃんけんぽん)Tapis dans l'ombre je veille. - Minou"
+.comment "Jan-ken
+	asta-pon (じゃんけんぽん)Tapis dans l'ombre je veille. - Minou"
 
 start:
 	ld -42, r2

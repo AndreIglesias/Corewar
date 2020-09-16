@@ -1,0 +1,9 @@
+#+AUTHOR: ciglesia & fgarault
+
+|------------+-------------+-------------------|
+| ~ANALYSIS~ | ~SYNTHESIS~ | ~STRUCTURES~      |
+|------------+-------------+-------------------|
+| Lexicon    | Translation | Label table       |
+| Syntax     |             | instruction table |
+| Semantics  |             |                   |
+|------------+-------------+-------------------|

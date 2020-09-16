@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_main.c                                         :+:      :+:    :+:   */
+/*   load_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/05 22:21:40 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 19:45:14 by ciglesia         ###   ########.fr       */
+/*   Created: 2020/09/15 17:45:51 by ciglesia          #+#    #+#             */
+/*   Updated: 2020/09/15 18:05:02 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		main(int ac, char **av)
+void	fill_header(char *dest, char *inst, int size, int headline)
 {
-	t_file	file;
+	int i;
+	int j;
 
-	if (ac != 2)
-		return (ft_puterr(ERROR""RED": assembler needs exactly one file!"E0M,
-						EXIT_FAILURE));
-	else
+	i = 0;
+	while (dest[i])
+		i++;
+	if (headline)
 	{
-		file_init(&file);
-		if (valid_input(av[1], &file) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
-		if (verify_code(&file, NULL, 0, 0) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
-		translate(&file);
-		//free table, lists, char*
+		while (inst[j] && inst[j] != '"')
+			j++;
+		j++;
 	}
-	return (EXIT_SUCCESS);
+	else
+		dest[i++] = '\n';
+	while (inst[j] && inst[j] != '"' && i < size)
+		dest[i++] = inst[j++];
 }

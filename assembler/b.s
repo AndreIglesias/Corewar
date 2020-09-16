@@ -1,9 +1,8 @@
 
     ##deassembler par msa 1.8, made by joe "sasta"
 #srata
-	.name"Tching tching(Intercepteur),
 
-	rsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaBouh!Bouh!(bruits d'anti-jeu)"  ##3pttsr
+
 	#.asrta
 
 	.comment "arstatarsasrtastaa #sasa
