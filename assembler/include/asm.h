@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 21:14:35 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/16 12:27:10 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@
 typedef struct		s_instr
 {
 	t_uchar			opcode;
-	int				nargs;//
-	t_arg_type		args[3];//
-	int				acb;
+	t_uchar			nargs;
+	t_uchar			acb;
 	int				reg;
 	char			*dir;
 	char			*ind;
@@ -47,7 +46,7 @@ typedef struct		s_file
 	t_code			*code_tab;
 }					t_file;
 
-int					translate(t_file *file);
+int					translate(t_file *file, int verbosity);
 
 void				file_init(t_file *file);
 t_code				*new_label(void);
