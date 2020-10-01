@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 20:41:28 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/01 19:40:06 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/01 20:04:25 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void		print_processes(WINDOW *window, t_list *process, t_vm *vm, int i)
 
 	n = vm->process_alive;
 	wattron(window, A_BOLD);
-	mvwprintw(window, ++i, 0, " _____________PROCESSES_(%03d / %03d)__________\
+	mvwprintw(window, ++i, 0, " _____________PROCESSES_(%04d / %04d)________\
 _______", vm->process_alive, vm->nprocess);
 	wattroff(window, A_BOLD);
 	i++;
