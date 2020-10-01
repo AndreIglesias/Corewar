@@ -6,7 +6,7 @@
 /*   By: fgarault <fgarault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 12:48:19 by fgarault          #+#    #+#             */
-/*   Updated: 2020/09/30 11:55:48 by fgarault         ###   ########.fr       */
+/*   Updated: 2020/10/01 14:57:00 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int		compiled_name(t_file *file)
 
 	i = 0;
 	fd = 0;
-	if (!(name = ft_strnew(ft_strlen(file->name))))
+	if (!(name = ft_strnew(ft_strlen(file->name) + 2)))
 		return (-1);
 	while (file->name[i] != '.')
 	{
