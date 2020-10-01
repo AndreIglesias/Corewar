@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 17:09:58 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/30 20:05:48 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:01:11 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,19 @@ t_player	*new_player(void)
 
 void		add_player(t_vm *vm, t_player *new)
 {
-	new->next = vm->player;
-	vm->player = new;
+	t_player	*aux;
+
+	if (vm->player)
+	{
+		aux = vm->player;
+		while (aux->next)
+			aux = aux->next;
+		aux->next = new;
+	}
+	else
+	{
+		vm->player = new;
+	}
 	vm->nplayers++;
 }
 
