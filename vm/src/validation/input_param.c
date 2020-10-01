@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 18:53:16 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 19:00:08 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/01 11:44:18 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ static int	print_usage(void)
 
 	str = ft_itoa(CHAMP_MAX_SIZE);
 	ft_putstr_fd(E0M, 2);
-	ft_puterr(BOLD"USAGE"E0M": ./corewar [-n] [-dump nbr_cycles] \
+	ft_puterr(BOLD"USAGE"E0M": ./corewar [-n | -dump nbr_cycles] [-v] \
 [[-n number] champion.cor] ...\n", 0);
 	ft_puterr(BOLD"-n"E0M" :\t\t\t Ncurses display\n", 0);
 	ft_puterr(BOLD"-dump"E0M" nbr_cycles:\t After nbr_cycles \
 dump the memory and quit the game", 0);
 	ft_puterr("\t\t\t must be dumped in hexadecimal format with 32 octets \
 per line.\n", 0);
+	ft_puterr(BOLD"-v"E0M" :\t\t\t Verbosity\n", 0);
 	ft_puterr(BOLD"-n"E0M" number:\t\t The number of the player \
 "ITALIC"(positive int)"E0M, 0);
 	ft_puterr("\t\t\t if non-existent, the player's number will be generated \
@@ -44,26 +45,24 @@ static int	valid_format(int ac, char **av, int *np)
 	int		nplayers;
 
 	i = 1;
-	i += (ft_strcmp(av[i], "-n") == 0);
+	i += is_ncurses(i, ac, av);
 	if ((eparam = is_dump(i, ac, av)) < 0)
 		return (EXIT_FAILURE);
 	i += eparam;
+	i += ((i < ac) && ft_strcmp(av[i], "-v") == 0);
 	nplayers = 0;
 	while (i < ac)
 	{
-		if (av[i][0] == '-' && ft_strcmp(av[i], "-n") != 0)
-			return (EXIT_FAILURE);
-		if ((eparam = is_champion(i, ac, av, np)) < 0)
+		if ((av[i][0] == '-' && ft_strcmp(av[i], "-n") != 0) ||
+			((eparam = is_champion(i, ac, av, np)) < 0))
 			return (EXIT_FAILURE);
 		if (nplayers >= MAX_PLAYERS)
 			return (ft_puterr(ERROR": Too many champions", EXIT_FAILURE));
-		if (eparam > i)
-		{
-			nplayers++;
-			i = eparam;
-		}
+		nplayers += (eparam > i) ? 1 : 0;
+		i = (eparam > i) ? eparam : i;
 	}
-	return ((nplayers) ? EXIT_SUCCESS : EXIT_FAILURE);
+	return ((nplayers) ? EXIT_SUCCESS : ft_puterr(ERROR": Need at least 1 \
+player", EXIT_FAILURE));
 }
 
 int			valid_input(int ac, char **av)

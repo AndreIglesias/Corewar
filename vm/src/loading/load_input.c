@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 19:39:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 14:35:28 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/01 11:45:59 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		load_player(t_vm *vm, char *file, int nplayer)
 
 	if ((fd = open(file, O_RDONLY)) < 0)
 	{
-		ft_printf_fd(2, ERROR": %s: Couldn't open file."E0M);
+		ft_printf_fd(2, ERROR": %s: Couldn't open file."E0M, file);
 		return (EXIT_FAILURE);
 	}
 	new = new_player();
@@ -36,7 +36,6 @@ int		load_player(t_vm *vm, char *file, int nplayer)
 	new->last_live_cycle = 0;
 	close(fd);
 	add_player(vm, new);
-	ft_printf(CYAN"name: %s, players: %d\n"E0M, vm->player->name, vm->nplayers);
 	return (EXIT_SUCCESS);
 }
 
@@ -46,14 +45,15 @@ int		load_input(t_vm *vm, int ac, char **av)
 	int nb;
 
 	i = 1;
-	vm->ncurses = (ft_strcmp(av[i], "-n") == 0);
+	vm->ncurses = is_ncurses(i, ac, av);
 	i += vm->ncurses;
-	if (ft_strcmp(av[i], "-dump") == 0)
+	if ((i < ac) && ft_strcmp(av[i], "-dump") == 0)
 	{
-		ft_printf(RED"dump: %d\n"E0M, ft_atoi(av[i + 1]));
 		vm->dump_param = ft_atoi(av[i + 1]);
 		i += 2;
 	}
+	vm->verbosity = ((i < ac) && ft_strcmp(av[i], "-v") == 0);
+	i += vm->verbosity;
 	while (i < ac)
 	{
 		nb = -1;

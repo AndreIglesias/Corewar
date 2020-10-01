@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 16:59:34 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 21:15:53 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 15:38:44 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,19 @@ void							op_ld(t_vm *vm, t_list *process)
 void							op_st(t_vm *vm, t_list *process)
 {
 	t_uchar			acb;
-	unsigned int	reg1;
+	unsigned int	reg;
 	int				move;
 
 	acb = in_mem(vm, ((TP*)P->obj)->pc + 1);
 	if (p_acb(acb, 1) == REG && is_reg(vm, ((TP*)P->obj)->pc + 2))
 	{
-		reg1 = ((TP*)P->obj)->reg[in_mem(vm, ((TP*)P->obj)->pc + 2) - 1];
+		reg = ((TP*)P->obj)->reg[in_mem(vm, ((TP*)P->obj)->pc + 2) - 1];
 		if (p_acb(acb, 2) == REG && is_reg(vm, ((TP*)P->obj)->pc + 3))
-			((TP*)P->obj)->reg[in_mem(vm, ((TP*)P->obj)->pc + 3) - 1] = reg1;
+			((TP*)P->obj)->reg[in_mem(vm, ((TP*)P->obj)->pc + 3) - 1] = reg;
 		else if (p_acb(acb, 2) == IND)
 		{
 			move = reverse_bytes(vm, ((TP*)P->obj)->pc + 3, 2);
-			store_at(vm, process, reg1, ((TP*)P->obj)->pc
+			store_at(vm, process, reg, ((TP*)P->obj)->pc
 										+ (move % IDX_MOD) + 3);
 		}
 	}

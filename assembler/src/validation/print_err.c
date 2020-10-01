@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 20:30:46 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 20:31:36 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/24 12:10:16 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,10 @@ int		load_error(char **cmd, int i, char *err, int line)
 	ft_printf_fd(2, "^");
 	ft_printf_fd(2, "\n"E0M);
 	return (0);
+}
+
+void	print_usage(char *str, char *end, char *flag, char *messflag)
+{
+	ft_printf_fd(2, E0M""BOLD"USAGE"E0M": %s [%s] file%s\n", str, flag, end);
+	ft_printf_fd(2, "%s\t%s\n", flag, messflag);
 }

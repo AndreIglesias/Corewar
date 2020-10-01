@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:17:31 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 21:26:53 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/30 19:26:38 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,8 @@ void	update_cycles(t_vm *vm)
 	vm->cycles++;
 }
 
-int		run_processes(t_vm *vm)
+int		run_processes(t_vm *vm, int control)
 {
-	int			control;
-	t_player	*champion;
-
 	while (vm->processes != NULL && vm->cycle_to_die > 0)
 	{
 		if (vm->ncurses && (control = ncupdate(vm, getch())) && control == 1)
@@ -125,13 +122,12 @@ int		run_processes(t_vm *vm)
 		process_operations(vm, vm->processes);
 		kill_zombies(vm, vm->processes);
 	}
-	(!vm->ncurses) ? print_ram(vm) : 0;
-	champion = vm->player;
-	while (champion)
-	{
-		if (vm->last_alive == champion->nplayer)
-			ft_printf("Player %d (%s) won\n", vm->last_alive, champion->name);
-		champion = champion->next;
-	}
+	(vm->ncurses) ? nodelay(stdscr, 0) : 0;
+	(vm->ncurses) ? resize_window(vm) : 0;
+	(vm->ncurses && control != 1) ? player_won(vm, vm->player, 1) : 0;
+	(vm->ncurses && control == 1) ? endwin() : 0;
+	((vm->dump_param > 0 && vm->dump_param > vm->cycles) ||
+	(!vm->ncurses && vm->verbosity) || vm->verbosity) ? print_ram(vm) : 0;
+	(control != 1) ? player_won(vm, vm->player, 0) : 0;
 	return (EXIT_SUCCESS);
 }

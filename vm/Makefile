@@ -6,7 +6,7 @@
 #    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/20 19:19:55 by ciglesia          #+#    #+#              #
-#    Updated: 2020/09/12 18:08:51 by ciglesia         ###   ########.fr        #
+#    Updated: 2020/09/30 19:35:31 by ciglesia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -28,7 +28,7 @@ DIRVALID	=	./src/validation/
 
 SRC			=	vm_main.c
 COMPUTER_S	=	vm_init.c debug.c run_cpu.c
-INTERFACE	=	ncurses_init.c arena.c
+INTERFACE	=	ncurses_init.c arena.c winner.c
 LOADING		=	load.c load_input.c players.c load_ram.c
 PARSING		=	byte_management.c logical_management.c disect_args.c
 OP			=	op.c op1_5.c op6_10.c op11_15.c aff.c op_cmpi.c

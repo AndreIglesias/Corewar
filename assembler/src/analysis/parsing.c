@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:53:57 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 20:15:47 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 11:05:55 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ int		valid_params(char **cmd, int x, int i, int line)
 		i = valid;
 		type++;
 	}
-	if (ft_itersplit(cmd, i) && *ft_itersplit(cmd, i) != '#')
-		return (syntax_error(cmd, i, "invalid parameter", line));
-	return (1);
+	return ((ft_itersplit(cmd, i) && *ft_itersplit(cmd, i) != '#') ?
+			syntax_error(cmd, i, "invalid parameter", line) : 1);
 }
 
 int		valid_separator(char **cmd, int i, int nargs, int line)
@@ -76,4 +75,60 @@ int		valid_separator(char **cmd, int i, int nargs, int line)
 	if (nargs >= 1)
 		return (syntax_error(cmd, i, "invalid format", line));
 	return (1);
+}
+
+int		exist_label(t_code *code, char *label, int line)
+{
+	int spaces;
+
+	while (code)
+	{
+		if (ft_strcmp(label, code->label) == 0)
+			return (1);
+		code = code->next;
+	}
+	spaces = a_error("syntax", "Invalid or Unknown label");
+	ft_printf_fd(2, ": in line %d: "BOLD"%s\n", line, label);
+	spaces += ft_strlen(": in line :");
+	spaces += ft_sizei(line) + ft_strlen(label);
+	ft_repet_fd(' ', spaces, 2);
+	ft_printf_fd(2, "^");
+	ft_printf_fd(2, "\n"E0M);
+	return (0);
+}
+
+int		labelparam_unknown(t_code *table, t_instruction *instr)
+{
+	t_args	*args;
+
+	while (instr)
+	{
+		args = instr->args;
+		while (args)
+		{
+			if (args->dir && args->dir[1] && args->dir[1] == ':')
+				if (!exist_label(table, &args->dir[2], instr->line))
+					return (1);
+			if (args->ind && args->ind[0] && args->ind[0] == ':')
+				if (!exist_label(table, &args->ind[1], instr->line))
+					return (1);
+			args = args->next;
+		}
+		instr = instr->next;
+	}
+	return (0);
+}
+
+int		unknown_labels(t_code *code)
+{
+	t_code	*table;
+
+	table = code;
+	while (code)
+	{
+		if (labelparam_unknown(table, code->instr))
+			return (1);
+		code = code->next;
+	}
+	return (0);
 }

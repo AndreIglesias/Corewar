@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 21:50:15 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 21:33:37 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/01 11:45:08 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct		s_vm
 	t_list			*processes;
 	t_player		*player;
 	int				dump_param;
+	int				verbosity;
 	int				nplayers;
 	int				last_alive;
 	int				nprocess;
@@ -124,6 +125,7 @@ void				add_player(t_vm *vm, t_player *new);
 t_player			*new_player();
 int					add_process(t_vm *vm, t_list *process, unsigned int pc);
 void				kill_players(t_vm *vm);
+void				player_won(t_vm *vm, t_player *champion, int ncurses);
 
 /*
 ** validation
@@ -131,6 +133,7 @@ void				kill_players(t_vm *vm);
 
 int					valid_input(int ac, char **av);
 int					is_dump(int i, int ac, char **av);
+int					is_ncurses(int i, int ac, char **av);
 int					is_champion(int i, int ac, char **av, int *np);
 int					valid_header(int fd, char *file);
 
@@ -139,7 +142,7 @@ int					valid_header(int fd, char *file);
 */
 
 int					vm_init(t_vm *vm);
-int					run_processes(t_vm *vm);
+int					run_processes(t_vm *vm, int control);
 int					print_ram(t_vm *vm);
 int					is_ir(t_list *process, int i);
 int					is_pc(t_list *process, int i);
@@ -184,6 +187,8 @@ int					print_arena(t_vm *vm);
 int					ncupdate(t_vm *vm, int input);
 void				print_panel(WINDOW *win, t_list *process, t_vm *vm);
 void				resize_window(t_vm *vm);
+void				champion_won(WINDOW *win, t_vm *vm, t_player *champion,
+									int color);
 void				fill_arena(int height, t_vm *vm, t_matrix m,
 								WINDOW *win);
 

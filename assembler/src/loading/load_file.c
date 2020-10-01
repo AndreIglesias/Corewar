@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:45:51 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 18:05:02 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/20 20:33:54 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	fill_header(char *dest, char *inst, int size, int headline)
 	i = 0;
 	while (dest[i])
 		i++;
+	j = 0;
 	if (headline)
 	{
 		while (inst[j] && inst[j] != '"')

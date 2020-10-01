@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 22:36:10 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 14:52:23 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/15 21:14:28 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,13 @@ typedef	struct s_vm				t_vm;
 typedef struct					s_op
 {
 	char						*name;
-	unsigned char				nb_arg;
+	t_uchar						nb_arg;
 	t_arg_type					args[3];
-	unsigned char				opcode;
+	t_uchar						opcode;
 	unsigned int				cycle;
 	char						*description;
-	unsigned char				octal;
-	unsigned char				label;
+	t_uchar						octal;
+	t_uchar						label;
 	void						(*f)(t_vm *vm, t_list *process);
 }								t_op;
 

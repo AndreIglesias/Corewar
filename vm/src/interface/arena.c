@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 20:41:28 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 21:11:28 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/01 12:44:48 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,34 @@ void		fill_arena(int height, t_vm *vm, t_matrix m, WINDOW *win)
 	}
 }
 
+void		print_registers(WINDOW *window, int i, int *reg)
+{
+	int x;
+
+	x = 0;
+	while (x < REG_NUMBER)
+	{
+		if (reg[x])
+		{
+			wattron(window, COLOR_PAIR(5) | A_BOLD);
+			mvwprintw(window, i + 1, 34 + x, "x", reg[x]);
+			wattroff(window, COLOR_PAIR(5) | A_BOLD);
+		}
+		else
+		{
+			wattron(window, COLOR_PAIR(4) | A_BOLD);
+			mvwprintw(window, i + 1, 34 + x, ".");
+			wattroff(window, COLOR_PAIR(4) | A_BOLD);
+		}
+		x++;
+	}
+}
+
 void		print_processes(WINDOW *window, t_list *process, t_vm *vm, int i)
 {
 	int n;
-	int ir;
 
-	n = 1;
+	n = vm->nprocess;
 	wattron(window, A_BOLD);
 	mvwprintw(window, ++i, 0, " __________________PROCESSES_(%d)_______________\
 ____", vm->process_alive);
@@ -55,17 +77,18 @@ ____", vm->process_alive);
 	while (process)
 	{
 		wattron(window, COLOR_PAIR(((TP*)P->obj)->owner + 1));
-		mvwprintw(window, i + 1, 1, "Process %d PC:", n++);
+		mvwprintw(window, i + 1, 1, "Process %02d  PC:", n--);
 		wattroff(window, COLOR_PAIR(((TP*)P->obj)->owner + 1));
-		mvwprintw(window, i + 1, 15, "%d", ((TP*)P->obj)->pc);
-		ir = ((TP*)P->obj)->last_ir;
+		mvwprintw(window, i + 1, 17, "%d", ((TP*)P->obj)->pc);
 		wattron(window, COLOR_PAIR(((TP*)P->obj)->owner + 1));
-		mvwprintw(window, i + 1, 25, "OP: ");
+		mvwprintw(window, i + 1, 23, "OP: ");
 		wattron(window, COLOR_PAIR(5) | A_BOLD);
-		mvwprintw(window, i + 1, 30, "%s", (0 < ir && ir <= 15) ?
-					g_op_tab[ir - 1].name : "(null)");
-		i++;
+		mvwprintw(window, i + 1, 27, "%s",
+				(0 < ((TP*)P->obj)->last_ir && ((TP*)P->obj)->last_ir <= 15) ?
+				g_op_tab[((TP*)P->obj)->last_ir - 1].name : "(null)");
 		wattroff(window, COLOR_PAIR(5) | A_BOLD);
+		print_registers(window, i, ((TP*)P->obj)->reg);
+		i++;
 		process = process->next;
 	}
 }

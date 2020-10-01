@@ -6,12 +6,11 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 00:13:47 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 21:08:09 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/21 11:49:19 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
 
 /*
 ** valid == -1	: not this type
@@ -46,7 +45,8 @@ int		label_param(char **cmd, unsigned int i)
 		i++;
 	else
 		return (0);
-	while (ft_itersplit(cmd, i) && ft_countchr(LABEL_CHARS, *ft_itersplit(cmd, i)))
+	while (ft_itersplit(cmd, i) && ft_countchr(LABEL_CHARS,
+											*ft_itersplit(cmd, i)))
 		i++;
 	return (i);
 }

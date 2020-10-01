@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:30:54 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 21:23:40 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/29 19:30:20 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int		load_processes(t_vm *vm, t_player *champion, int i)
 		ft_memset(&((t_process*)vm->processes->obj)->reg, 0,
 				REG_NUMBER * REG_SIZE);
 		((t_process*)vm->processes->obj)->reg[0] = champion->nplayer;
-		ft_printf("PLAYER %d %s, weight %d bytes\n", champion->nplayer,
-					champion->name, champion->prog_size);
+		(vm->verbosity) ? ft_printf(CYAN"PLAYER %d %s, weight %d bytes\n"E0M,
+			champion->nplayer, champion->name, champion->prog_size) : 0;
 		champion = champion->next;
 		i++;
 	}

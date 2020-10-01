@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 18:31:41 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 18:59:54 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/01 11:43:50 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,20 @@ int		is_dump(int i, int ac, char **av)
 	}
 	else
 		return (0);
+	if (i != 1)
+		return (-1 + ft_puterr(ERROR": -n and -dump are exclusive options", 0));
 	return (2);
+}
+
+int		is_ncurses(int i, int ac, char **av)
+{
+	if (ft_strcmp(av[i], "-n") == 0)
+	{
+		if ((i + 1 >= ac) || ft_isint(av[i + 1]))
+			return (0);
+		return (1);
+	}
+	return (0);
 }
 
 int		is_champion(int i, int ac, char **av, int *np)
