@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 17:09:58 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/01 19:01:11 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/01 19:45:24 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ void		player_won(t_vm *vm, t_player *champion, int ncurses)
 
 void		kill_players(t_vm *vm)
 {
-	t_player *champion;
-	t_player *aux;
+	t_player	*champion;
+	t_player	*aux;
+	t_list		*proc;
 
 	champion = vm->player;
 	while (champion)
@@ -93,4 +94,12 @@ void		kill_players(t_vm *vm)
 		free(aux);
 	}
 	vm->player = NULL;
+	while (vm->processes)
+	{
+		proc = vm->processes->next;
+		free(vm->processes->obj);
+		free(vm->processes);
+		vm->processes = proc;
+	}
+	vm->processes = NULL;
 }
