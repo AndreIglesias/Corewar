@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:12:29 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/30 17:50:12 by fgarault         ###   ########.fr       */
+/*   Updated: 2020/10/02 12:41:19 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,16 @@ int		translate(t_file *file, int verbosity)
 
 	table = file->code_tab;
 	collecting_codebytes(file);
-	while (table)
+	if (verbosity)
 	{
-		if (verbosity)
+		ft_printf(CYAN".name \"%s\"\n"E0M, file->playername);
+		ft_printf(CYAN".comment \"%s\"\n"E0M, file->comment);
+		while (table)
 		{
 			ft_printf(BLUE"%s:\n", table->label);
 			print_instr(table->instr);
+			table = table->next;
 		}
-		table = table->next;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 23:55:20 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/21 10:57:13 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/02 13:24:33 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ int		is_head(char **cmd, char *str, int line, unsigned int i)
 	}
 	if (i != ft_strlen(str))
 		return (0);
-	if (*ft_itersplit(cmd, i++) != '"')
-		return (-1 + lexicon_error(cmd, i, "invalid number of quotes", line));
+	if (!ft_itersplit(cmd, i) || *ft_itersplit(cmd, i) != '"')
+		return (-1 + lexicon_error(cmd, 0, "invalid number of quotes", line));
+	i++;
 	quotes = 1;
 	while (ft_itersplit(cmd, i))
 	{
@@ -56,6 +57,14 @@ int		is_head(char **cmd, char *str, int line, unsigned int i)
 	}
 	return ((quotes > 2 || !quotes) ? -1 +
 			lexicon_error(cmd, i, "invalid number of quotes", line) : quotes);
+}
+
+int		repeated_head(char **cmd, int line, int *boolean, char *str)
+{
+	(*boolean)++;
+	if (*boolean != 1)
+		lexicon_error(cmd, 0, str, line);
+	return (*boolean != 1);
 }
 
 int		is_label(char **cmd)

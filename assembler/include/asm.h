@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/30 17:51:53 by fgarault         ###   ########.fr       */
+/*   Updated: 2020/10/02 13:27:26 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct		s_file
 	int				quotes;
 	int				prog_size;
 	int				exec_magic;
+	int				bname;
+	int				bcomment;
 	t_uchar			type;
 	char			*name;
 	char			comment[COMMENT_LENGTH];
@@ -96,6 +98,8 @@ void				print_usage(char *str, char *end, char *flag,
 
 int					verify_code(t_file *file, char *line, int l, int s);
 int					is_head(char **cmd, char *str, int line, unsigned int i);
+int					repeated_head(char **cmd, int line, int *boolean,
+																char *str);
 int					is_label(char **cmd);
 int					is_opcode(char **cmd, int i, int line);
 

@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:11:34 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/25 17:57:14 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/02 13:26:52 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,18 @@ int		invalid_line(char **cmd, int line, t_file *file)
 	pos = 0;
 	if (file->quotes && (err = end_quote(cmd, file, 0)) == 1)
 		return (0);
-	if (err == 0 && ((err = is_head(cmd, ".name", line, 0)) == 1 || err == 2))
-		return (0);
-	if (err == 0 && ((err = is_head(cmd, ".comment", line, 0)) < 3 && err))
-		return (0);
+	if (err == 0 && (err = is_head(cmd, ".name", line, 0)))
+	{
+		if (err == 1 || err == 2)
+			return (repeated_head(cmd, line, &file->bname,
+									"invalid number of names"));
+	}
+	if (err == 0 && (err = is_head(cmd, ".comment", line, 0)))
+	{
+		if (err == 1 || err == 2)
+			return (repeated_head(cmd, line, &file->bcomment,
+								"invalid number of comments"));
+	}
 	if (err == 0)
 		pos = is_label(cmd);
 	if (err == 0 && (err = is_opcode(cmd, pos, line)) == 1)
