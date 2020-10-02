@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 17:18:06 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/27 17:49:08 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/02 14:14:28 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	write_header(t_file *file)
 {
 	ft_printf_fd(file->fd, ".name \"%s\"\n", file->playername);
-	ft_printf_fd(file->fd, ".comment \"%s\"\n", file->playername);
+	ft_printf_fd(file->fd, ".comment \"%s\"\n", file->comment);
 }
 
 int		init_writing(t_file *file)
