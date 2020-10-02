@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 20:41:28 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/01 20:04:25 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/02 17:05:19 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,15 @@ _______", vm->process_alive, vm->nprocess);
 	while (process)
 	{
 		wattron(window, COLOR_PAIR(((TP*)P->obj)->owner + 1));
-		mvwprintw(window, i + 1, 1, "Process %02d  PC:", n--);
+		mvwprintw(window, i + 1, 1, "Process %04d  PC:", n--);
 		wattroff(window, COLOR_PAIR(((TP*)P->obj)->owner + 1));
-		mvwprintw(window, i + 1, 17, "%d", ((TP*)P->obj)->pc);
+		mvwprintw(window, i + 1, 19, "%04d", ((TP*)P->obj)->pc);
 		wattron(window, COLOR_PAIR(((TP*)P->obj)->owner + 1));
-		mvwprintw(window, i + 1, 23, "OP: ");
+		mvwprintw(window, i + 1, 24, "OP: ");
 		wattron(window, COLOR_PAIR(5) | A_BOLD);
-		mvwprintw(window, i + 1, 27, "%s",
+		mvwprintw(window, i + 1, 28, "%s",
 				(0 < ((TP*)P->obj)->last_ir && ((TP*)P->obj)->last_ir <= 15) ?
-				g_op_tab[((TP*)P->obj)->last_ir - 1].name : "(null)");
+				g_op_tab[((TP*)P->obj)->last_ir - 1].name : "____");
 		wattroff(window, COLOR_PAIR(5) | A_BOLD);
 		print_registers(window, i, ((TP*)P->obj)->reg);
 		i++;
