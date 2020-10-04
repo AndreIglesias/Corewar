@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 18:53:16 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/01 11:44:18 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/04 17:36:08 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	print_usage(void)
 	str = ft_itoa(CHAMP_MAX_SIZE);
 	ft_putstr_fd(E0M, 2);
 	ft_puterr(BOLD"USAGE"E0M": ./corewar [-n | -dump nbr_cycles] [-v] \
-[[-n number] champion.cor] ...\n", 0);
+<[-n number] champion.cor> ...\n", 0);
 	ft_puterr(BOLD"-n"E0M" :\t\t\t Ncurses display\n", 0);
 	ft_puterr(BOLD"-dump"E0M" nbr_cycles:\t After nbr_cycles \
 dump the memory and quit the game", 0);
