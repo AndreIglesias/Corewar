@@ -6,7 +6,7 @@
 /*   By: fgarault <fgarault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 16:45:01 by fgarault          #+#    #+#             */
-/*   Updated: 2020/09/29 17:17:49 by fgarault         ###   ########.fr       */
+/*   Updated: 2020/10/04 23:06:56 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void			collecting_codebytes(t_file *file)
 		while (ins)
 		{
 			ins->mem_pos = file->prog_size;
-			if (ins->nargs > 1)
+			if (ins->nargs > 1 || ins->opcode == 16)
 				ins->acb = get_acb(ins);
 			if (ins->acb)
 				file->prog_size += get_sizeof(ins) + 2;

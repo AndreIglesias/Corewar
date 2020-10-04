@@ -6,7 +6,7 @@
 /*   By: fgarault <fgarault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 12:48:19 by fgarault          #+#    #+#             */
-/*   Updated: 2020/10/01 14:57:00 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/04 23:07:09 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void		write_prog(t_file *file, int fd)
 		{
 			arg = ins->args;
 			write(fd, &ins->opcode, 1);
-			ins->nargs > 1 ? write(fd, &ins->acb, 1) : 0;
+			(ins->acb) ? write(fd, &ins->acb, 1) : 0;
 			while (arg)
 			{
 				write(fd, arg->hex, arg->size);
