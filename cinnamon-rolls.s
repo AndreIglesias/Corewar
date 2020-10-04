@@ -16,12 +16,14 @@ main:
 	sti r1, %:live, %1
 live:
 	live %0
-	ld %:main, r3
-	ld %64, r4
-	sub r3, r4, r5
-	sti r5, %:fork, %1
+	and r1, %0, r2
 fork:
-	lfork %:main
-	#and r1, %0, r2
-	#zjmp %:main
-	#aff r1
+	fork %-494
+	ld %121345, r3
+	sti r3, %:live, %1
+	fork %494
+	zjmp %:main
+
+
+
+live:
