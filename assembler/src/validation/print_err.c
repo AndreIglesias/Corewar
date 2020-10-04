@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 20:30:46 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/24 12:10:16 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/04 23:28:57 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,23 @@ int		a_error(char *type, char *err)
 int		lexicon_error(char **cmd, int i, char *err, int line)
 {
 	int	spaces;
+	int posi;
+	int posj;
 
 	spaces = a_error("lexicon", err);
-	ft_printf_fd(2, ": in line %d: "BOLD"%s\n", line,
-							cmd[ft_coordsplit(cmd, ft_itersplit(cmd, i)).i]);
+	if (!ft_itersplit(cmd, i))
+	{
+		posi = 0;
+		posj = ft_strlen(cmd[0]);
+	}
+	else
+	{
+		posi = ft_coordsplit(cmd, ft_itersplit(cmd, i)).i;
+		posj = ft_coordsplit(cmd, ft_itersplit(cmd, i)).j;
+	}
+	ft_printf_fd(2, ": in line %d: "BOLD"%s\n", line, cmd[posi]);
 	spaces += ft_strlen(": in line : ");
-	spaces += ft_sizei(line) + ft_coordsplit(cmd, ft_itersplit(cmd, i)).j;
+	spaces += ft_sizei(line) + posj;
 	ft_repet_fd(' ', spaces, 2);
 	ft_printf_fd(2, "^");
 	ft_printf_fd(2, "\n"E0M);
@@ -36,12 +47,23 @@ int		lexicon_error(char **cmd, int i, char *err, int line)
 int		syntax_error(char **cmd, int i, char *err, int line)
 {
 	int	spaces;
+	int posi;
+	int posj;
 
 	spaces = a_error("syntax", err);
-	ft_printf_fd(2, ": in line %d: "BOLD"%s\n", line,
-							cmd[ft_coordsplit(cmd, ft_itersplit(cmd, i)).i]);
+	if (!ft_itersplit(cmd, i))
+	{
+		posi = 0;
+		posj = ft_strlen(cmd[0]);
+	}
+	else
+	{
+		posi = ft_coordsplit(cmd, ft_itersplit(cmd, i)).i;
+		posj = ft_coordsplit(cmd, ft_itersplit(cmd, i)).j;
+	}
+	ft_printf_fd(2, ": in line %d: "BOLD"%s\n", line, cmd[posi]);
 	spaces += ft_strlen(": in line : ");
-	spaces += ft_sizei(line) + ft_coordsplit(cmd, ft_itersplit(cmd, i)).j;
+	spaces += ft_sizei(line) + posj;
 	ft_repet_fd(' ', spaces, 2);
 	ft_printf_fd(2, "^");
 	ft_printf_fd(2, "\n"E0M);
@@ -51,12 +73,23 @@ int		syntax_error(char **cmd, int i, char *err, int line)
 int		load_error(char **cmd, int i, char *err, int line)
 {
 	int	spaces;
+	int posi;
+	int posj;
 
 	spaces = a_error("load", err);
-	ft_printf_fd(2, ": in line %d: "BOLD"%s\n", line,
-							cmd[ft_coordsplit(cmd, ft_itersplit(cmd, i)).i]);
+	if (!ft_itersplit(cmd, i))
+	{
+		posi = 0;
+		posj = ft_strlen(cmd[0]);
+	}
+	else
+	{
+		posi = ft_coordsplit(cmd, ft_itersplit(cmd, i)).i;
+		posj = ft_coordsplit(cmd, ft_itersplit(cmd, i)).j;
+	}
+	ft_printf_fd(2, ": in line %d: "BOLD"%s\n", line, cmd[posi]);
 	spaces += ft_strlen(": in line : ");
-	spaces += ft_sizei(line) + ft_coordsplit(cmd, ft_itersplit(cmd, i)).j;
+	spaces += ft_sizei(line) + posj;
 	ft_repet_fd(' ', spaces, 2);
 	ft_printf_fd(2, "^");
 	ft_printf_fd(2, "\n"E0M);
