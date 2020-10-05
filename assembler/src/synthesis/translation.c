@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:12:29 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/04 15:09:03 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/05 13:14:44 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		translate(t_file *file, int verbosity)
 		ft_printf(CYAN".comment \"%s\"\n"E0M, file->comment);
 		while (table)
 		{
-			ft_printf(BLUE"%s:\n", table->label);
+			ft_printf(BLUE"%s:\n"E0M, table->label);
 			print_instr(table->instr);
 			table = table->next;
 		}
