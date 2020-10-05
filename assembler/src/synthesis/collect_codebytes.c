@@ -6,7 +6,7 @@
 /*   By: fgarault <fgarault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 16:45:01 by fgarault          #+#    #+#             */
-/*   Updated: 2020/10/04 23:06:56 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/05 12:00:40 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static int		is_bigger_arg(t_instruction *instr)
 
 	op = g_op_tab[instr->opcode - 1].name;
 	if (!ft_strcmp("and", op) || !ft_strcmp("or", op) || !ft_strcmp("xor", op)
-		|| !ft_strcmp("live", op) || !ft_strcmp("ld", op))
+		|| !ft_strcmp("live", op) || !ft_strcmp("ld", op)
+													|| !ft_strcmp("lld", op))
 		return (1);
 	return (0);
 }
