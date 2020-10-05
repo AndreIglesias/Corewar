@@ -6,7 +6,7 @@
 /*   By: fgarault <fgarault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 12:48:19 by fgarault          #+#    #+#             */
-/*   Updated: 2020/10/04 23:07:09 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/05 12:41:21 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static int		compiled_name(t_file *file)
 		i++;
 	}
 	ft_strcat(name, ".cor");
-	if ((fd = open(name, O_RDWR | O_CREAT, 00666)) == -1)
+	if ((fd = open(name, O_WRONLY | O_CREAT | O_TRUNC,
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 	{
 		free(name);
 		return (-1);

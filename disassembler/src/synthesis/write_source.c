@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 17:18:06 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/02 14:14:28 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/05 12:42:22 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int		init_writing(t_file *file)
 	ft_strcat(name, "-dis.s");
 	free(file->name);
 	file->name = name;
-	if ((file->fd = open(file->name, O_RDWR | O_CREAT, 00666)) == -1)
+	if ((file->fd = open(name, O_WRONLY | O_CREAT | O_TRUNC,
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 		return (ft_puterr(ERROR": Couldn't write file"E0M, EXIT_FAILURE));
 	write_header(file);
 	return (EXIT_SUCCESS);
