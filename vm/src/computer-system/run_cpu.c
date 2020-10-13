@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:17:31 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/30 19:26:38 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/13 13:08:06 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,10 @@ void	update_cycles(t_vm *vm)
 			reduce_cycles = 1;
 		vm->nchecks = (reduce_cycles) ? 0 : vm->nchecks + 1;
 		if (vm->nchecks >= MAX_CHECKS)
+		{
+			vm->nchecks = 0;
 			reduce_cycles = 1;
+		}
 		vm->nlives = 0;
 		champion = vm->player;
 		while (champion)
