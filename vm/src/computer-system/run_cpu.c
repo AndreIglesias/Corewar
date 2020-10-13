@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:17:31 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/13 13:08:06 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/13 14:32:32 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	update_cycles(t_vm *vm)
 	t_player	*champion;
 
 	reduce_cycles = 0;
-	if (vm->cycles && vm->cycles % vm->cycle_to_die == 0)
+	if (vm->cycles && (vm->cycles - vm->diff_to_die) % vm->cycle_to_die == 0)
 	{
 		if (vm->nlives >= NBR_LIVE)
 			reduce_cycles = 1;
@@ -107,6 +107,7 @@ void	update_cycles(t_vm *vm)
 			champion = champion->next;
 		}
 	}
+	vm->diff_to_die = (reduce_cycles) ? vm->cycles : vm->diff_to_die;
 	vm->cycle_to_die -= (reduce_cycles) ? CYCLE_DELTA : 0;
 	vm->cycles++;
 }

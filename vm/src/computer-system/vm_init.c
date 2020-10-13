@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 22:44:00 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/29 19:19:42 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/13 14:28:03 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 int		vm_init(t_vm *vm)
 {
 	vm->cycle_to_die = CYCLE_TO_DIE;
+	vm->diff_to_die = 0;
 	vm->dump_param = -1;
 	vm->verbosity = 0;
 	vm->nplayers = 0;

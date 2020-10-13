@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 21:50:15 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/01 11:45:08 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/13 14:27:08 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct		s_vm
 	int				nprocess;
 	int				process_alive;
 	int				cycle_to_die;
+	int				diff_to_die;
 	int				cycles;
 	int				nchecks;
 	int				nlives;
