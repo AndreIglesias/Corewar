@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:17:31 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/13 14:32:32 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/15 01:06:20 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	find_ir(t_vm *vm, t_list *process)
 	int ir;
 
 	ir = vm->ram.arena[((TP*)P->obj)->pc % MEM_SIZE];
-	if (0 < ir && ir <= 15)
+	if (0 < ir && ir <= 16)
 	{
 		((TP*)P->obj)->ir = ir - 1;
 		((TP*)P->obj)->last_ir = ir;
