@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 20:41:28 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/02 17:05:19 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/15 19:04:22 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@ void		print_processes(WINDOW *window, t_list *process, t_vm *vm, int i)
 
 	n = vm->process_alive;
 	wattron(window, A_BOLD);
-	mvwprintw(window, ++i, 0, " _____________PROCESSES_(%04d / %04d)________\
+	mvwprintw(window, 1, 0, " _____________PROCESSES_(%04d / %04d)________\
 _______", vm->process_alive, vm->nprocess);
 	wattroff(window, A_BOLD);
-	i++;
 	while (process)
 	{
 		wattron(window, COLOR_PAIR(((TP*)P->obj)->owner + 1));
-		mvwprintw(window, i + 1, 1, "Process %04d  PC:", n--);
+		mvwprintw(window, i + 1, 1, ((((TP*)P->obj)->carry) ?
+				"*Process %04d PC:" : "Process %04d  PC:"), n--);
 		wattroff(window, COLOR_PAIR(((TP*)P->obj)->owner + 1));
 		mvwprintw(window, i + 1, 19, "%04d", ((TP*)P->obj)->pc);
 		wattron(window, COLOR_PAIR(((TP*)P->obj)->owner + 1));
@@ -130,5 +130,5 @@ void		print_panel(WINDOW *win, t_list *process, t_vm *vm)
 		champion = champion->next;
 		i += 5;
 	}
-	print_processes(vm->p_win, process, vm, 0);
+	print_processes(vm->p_win, process, vm, 2);
 }
