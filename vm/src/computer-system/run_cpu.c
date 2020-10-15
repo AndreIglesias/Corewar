@@ -6,17 +6,17 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:17:31 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/15 01:06:20 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/15 11:24:41 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	kill_zombies(t_vm *vm, t_list *process)
+void	kill_zombies(t_vm *vm, t_list *process, int check)
 {
 	t_list *prev;
 
-	if ((vm->processes && vm->cycles) && !(vm->cycles % vm->cycle_to_die))
+	if ((vm->processes && vm->cycles) && check)
 	{
 		prev = NULL;
 		while (process)
@@ -114,6 +114,8 @@ void	update_cycles(t_vm *vm)
 
 int		run_processes(t_vm *vm, int control)
 {
+	int check;
+
 	while (vm->processes != NULL && vm->cycle_to_die > 0)
 	{
 		if (vm->ncurses && (control = ncupdate(vm, getch())) && control == 1)
@@ -122,9 +124,11 @@ int		run_processes(t_vm *vm, int control)
 			continue ;
 		if (vm->cycles == vm->dump_param)
 			return (EXIT_SUCCESS + print_ram(vm));
+		check = (vm->cycles && (vm->cycles - vm->diff_to_die) %
+										vm->cycle_to_die == 0);
 		update_cycles(vm);
 		process_operations(vm, vm->processes);
-		kill_zombies(vm, vm->processes);
+		kill_zombies(vm, vm->processes, check);
 	}
 	(vm->ncurses) ? nodelay(stdscr, 0) : 0;
 	(vm->ncurses) ? resize_window(vm) : 0;

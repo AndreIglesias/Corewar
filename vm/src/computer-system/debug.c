@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 14:44:58 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/13 19:30:23 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/15 11:25:34 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int		print_ram(t_vm *vm)
 		{
 			line += 32;
 			ft_printf("\n");
-			(vm->verbosity && i + 1 < MEM_SIZE) ? ft_printf("%0#.4x | ", line) : 0;
+			if (vm->verbosity && i + 1 < MEM_SIZE)
+				ft_printf("%0#.4x | ", line);
 		}
 		i++;
 	}
