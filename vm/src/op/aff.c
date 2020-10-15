@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 17:03:30 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/15 18:49:37 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/15 19:21:47 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,20 @@
 /*
 ** opcode: 0x10
 */
+
+void							aff_verb(t_uchar value, t_list *process)
+{
+	if (((TP*)P->obj)->owner == 0)
+		ft_printf(GRAY"0x%.2x : %.3d :\t%c\n"E0M,value, value, value);
+	else if (((TP*)P->obj)->owner == 1)
+		ft_printf(GREEN"0x%.2x : %.3d :\t%c\n"E0M,value, value, value);
+	else if (((TP*)P->obj)->owner == 2)
+		ft_printf(CYAN"0x%.2x : %.3d :\t%c\n"E0M,value, value, value);
+	else if (((TP*)P->obj)->owner == 3)
+		ft_printf(BLUE"0x%.2x : %.3d :\t%c\n"E0M,value, value, value);
+	else
+		ft_printf(YELLOW"0x%.2x : %.3d :\t%c\n"E0M,value, value, value);
+}
 
 void							op_aff(t_vm *vm, t_list *process)
 {
@@ -26,7 +40,12 @@ void							op_aff(t_vm *vm, t_list *process)
 	{
 		value = ((TP*)P->obj)->reg[in_mem(vm, ((TP*)P->obj)->pc + 2) - 1];
 		if (!vm->ncurses)
-			ft_printf("0x%.2x : %.3d :\t%c\n",value, value, value);
+		{
+			if (vm->verbosity)
+				aff_verb(value, process);
+			else
+				ft_printf("%c\n", value);
+		}
 	}
 	((TP*)P->obj)->pc = mem_mod(((TP*)P->obj)->pc + octal_shift(acb, 4, 1));
 }
