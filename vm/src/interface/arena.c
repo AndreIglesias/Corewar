@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 20:41:28 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/15 19:04:22 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/15 19:33:29 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ _______", vm->process_alive, vm->nprocess);
 		mvwprintw(window, i + 1, 24, "OP: ");
 		wattron(window, COLOR_PAIR(5) | A_BOLD);
 		mvwprintw(window, i + 1, 28, "%s",
-				(0 < ((TP*)P->obj)->last_ir && ((TP*)P->obj)->last_ir <= 15) ?
+				(0 < ((TP*)P->obj)->last_ir && ((TP*)P->obj)->last_ir <= 16) ?
 				g_op_tab[((TP*)P->obj)->last_ir - 1].name : "____");
 		wattroff(window, COLOR_PAIR(5) | A_BOLD);
 		print_registers(window, i, ((TP*)P->obj)->reg);
