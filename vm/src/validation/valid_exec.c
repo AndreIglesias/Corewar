@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 19:42:06 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/13 21:00:41 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/16 22:55:53 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		valid_header(int fd, char *file)
 	if (size > CHAMP_MAX_SIZE)
 	{
 		close(fd);
-		ft_printf_fd(2, ERROR": %s: Improper champion's size\n", file);
+		ft_printf_fd(2, ERROR": %s: Improper champion size(%d)\n", file, size);
 		return (EXIT_FAILURE);
 	}
 	close(fd);
