@@ -8,8 +8,14 @@
 	# r16 number to enable condition to exit
 
 main:
-	sti r1, %:loop, %1
-	sti r1, %:wall, %1
+
+loader1:	sti r1, %:loop, %1
+loader2:	sti r1, %:back_wall, %1
+loader3:	sti r1, %:wall, %1
+	sti r2, %:loader1, %0
+	sti r2, %:loader2, %0
+	sti r2, %:loader3, %0
+
 	ld %0, r1			# i
 	ld %1, r2			# 1 unit steps
 	ld %255, r3			# for 255 iterations
@@ -19,10 +25,12 @@ loop:
 	live %0
 	add r1, r2, r1		# r1++
 	aff r1
+	fork %:wall
+	fork %:back_wall
 	sub r16, r3, r4		# diff
 	add r4, r1, r4		# diff += i
 	and r4, r16, r5		# diff & 0b100000000 -> 0 except 0b100000000
-	zjmp %:back_wall
+	zjmp %:loop
 wall:
 	live	%0
 	st	r2, -37
@@ -73,14 +81,15 @@ wall:
 	st	r2, -442
 	st	r2, -451
 	st	r2, -460
+	st	r2, -465
+	st	r2, -472
 	st	r2, -478
-	st	r2, -487
-	st	r2, -496
-	st	r2, -505
-	st	r2, -511
-	fork	%:main
+	st	r2, -482
+	st	r2, -492
+	and r1, %0, r6
 	zjmp	%:wall
 back_wall:
+	aff r1
 	live	%0
 	st	r8,400
 	st	r8,404
@@ -109,28 +118,31 @@ back_wall:
 	st	r8,496
 	st	r8,500
 	st	r8,504
-	st	r8,508
-	st	r8,512
-	st	r8,516
-	st	r8,520
-	st	r8,524
-	st	r8,528
-	st	r8,532
-	st	r8,536
-	st	r8,540
-	st	r8,544
-	st	r8,518
-	st	r8,522
-	st	r8,526
-	st	r8,530
-	st	r8,534
-	st	r8,538
-	st	r8,542
-	st	r8,546
-	st	r8,550
-	st	r8,554
-	st	r8,558
-	st	r8,562
+	st	r8,402
+	st	r8,406
+	st	r8,410
+	st	r8,414
+	st	r8,420
+	st	r8,422
+	st	r8,426
+	st	r8,430
+	st	r8,434
+	st	r8,438
+	st	r8,442
+	st	r8,446
+	st	r8,450
+	st	r8,454
+	st	r8,458
+	st	r8,462
+	st	r8,466
+	st	r8,470
+	st	r8,474
+	st	r8,478
+	st	r8,482
+	st	r8,486
+	st	r8,490
+	st	r8,494
+	st	r8,498
 	ld	%0,r15
-	fork	%:wall
-	zjmp	%:back_wall
+	and r1, %0, r6
+	zjmp %:back_wall
