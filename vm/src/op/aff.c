@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 17:03:30 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/16 15:00:22 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/17 19:10:08 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@
 ** opcode: 0x10
 */
 
-void				aff_verb(t_uchar value, int val, t_list *process)
+void				aff_verb(t_uchar valu, int val, t_list *process)
 {
 	if (((TP*)P->obj)->owner == 0)
-		ft_printf(GRAY"0x%.2x : %.3d(%.3d) :\t%c\n", value, value, val, value);
+		ft_printf(GRAY"0x%.2x : %.3d(%.3d) :\t%c\n", valu, valu, val, valu);
 	else if (((TP*)P->obj)->owner == 1)
-		ft_printf(GREEN"0x%.2x : %.3d(%.3d) :\t%c\n", value, value, val, value);
+		ft_printf(GREEN"0x%.2x : %.3d(%.3d) :\t%c\n", valu, valu, val, valu);
 	else if (((TP*)P->obj)->owner == 2)
-		ft_printf(CYAN"0x%.2x : %.3d(%.3d) :\t%c\n", value, value, val, value);
+		ft_printf(CYAN"0x%.2x : %.3d(%.3d) :\t%c\n", valu, valu, val, valu);
 	else if (((TP*)P->obj)->owner == 3)
-		ft_printf(BLUE"0x%.2x : %.3d(%.3d) :\t%c\n", value, value, val, value);
+		ft_printf(BLUE"0x%.2x : %.3d(%.3d) :\t%c\n", valu, valu, val, valu);
 	else
-		ft_printf(YELLOW"0x%.2x : %.3d(%.3d) :\t%c\n", value, value, val, value);
+		ft_printf(YELLOW"0x%.2x : %.3d(%.3d) :\t%c\n", valu, valu, val, valu);
 	ft_printf(E0M);
 }
 
