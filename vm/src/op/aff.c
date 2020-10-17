@@ -19,15 +19,15 @@
 void				aff_verb(t_uchar value, int val, t_list *process)
 {
 	if (((TP*)P->obj)->owner == 0)
-		ft_printf(GRAY"0x%.2x : %.3d(%.3d) :\t%c\n",value, value, val, value);
+		ft_printf(GRAY"0x%.2x : %.3d(%.3d) :\t%c\n", value, value, val, value);
 	else if (((TP*)P->obj)->owner == 1)
-		ft_printf(GREEN"0x%.2x : %.3d(%.3d) :\t%c\n",value, value, val, value);
+		ft_printf(GREEN"0x%.2x : %.3d(%.3d) :\t%c\n", value, value, val, value);
 	else if (((TP*)P->obj)->owner == 2)
-		ft_printf(CYAN"0x%.2x : %.3d(%.3d) :\t%c\n",value, value, val, value);
+		ft_printf(CYAN"0x%.2x : %.3d(%.3d) :\t%c\n", value, value, val, value);
 	else if (((TP*)P->obj)->owner == 3)
-		ft_printf(BLUE"0x%.2x : %.3d(%.3d) :\t%c\n",value, value, val, value);
+		ft_printf(BLUE"0x%.2x : %.3d(%.3d) :\t%c\n", value, value, val, value);
 	else
-		ft_printf(YELLOW"0x%.2x : %.3d(%.3d) :\t%c\n",value, value, val, value);
+		ft_printf(YELLOW"0x%.2x : %.3d(%.3d) :\t%c\n", value, value, val, value);
 	ft_printf(E0M);
 }
 
