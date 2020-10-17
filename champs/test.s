@@ -20,15 +20,15 @@ label:
 	zjmp %23
 	ldi r2, %:label, r4
 	ldi :label, %3, r4
-	ldi 324, %:label, r4
+	ldi %324, r5, r4
 	sti r3, r4, %33
 	sti r3, 24, %:label
-	sti r3, %:label, %:label
+	sti r3, %:label, r4
 	fork %:label
 	lld 16532, r4
 	lld %:label, r4
 	lldi r2, %14, r5
-	lldi 324, %234, r5
+	lldi 324, r4, r5
 	lldi %:label, %:label, r5
 	lfork %231
 	aff r2
