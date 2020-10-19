@@ -142,7 +142,7 @@ VM is *BIG ENDIAN*
 |-------------+----------+-------------------------------------------------------------------------+-------+-------------------+-------------+----------|
 | [[ld]]      | <<0x02>> | Random argument + registry. Load *value of first arg* in the registry   | *YES* | *YES*             | *YES*       |        5 |
 |-------------+----------+-------------------------------------------------------------------------+-------+-------------------+-------------+----------|
-| [[st]]      | <<0x03>> | Take a registry and a [registry/indirect], *store* value of registry    | *YES* | *YES*             | *YES*       |        5 |
+| [[st]]      | <<0x03>> | Take a registry and a [registry/indirect], *store* value of registry    | *YES* | *YES*             | *NO*        |        5 |
 |             |          | toward the second argument. (st r1, 42) store value at PC+(42%IDX_MOD)  |       |                   |             |          |
 |-------------+----------+-------------------------------------------------------------------------+-------+-------------------+-------------+----------|
 | [[add]]     | <<0x04>> | Take 3 registries, add first 2, *result in the 3rd*.                    | *YES* | *NO*              | *YES*       |       10 |
@@ -157,10 +157,10 @@ VM is *BIG ENDIAN*
 |-------------+----------+-------------------------------------------------------------------------+-------+-------------------+-------------+----------|
 | [[zjmp]]    | <<0x09>> | Take index and *jump to this address* if the carry is 1                 | *NO*  | *YES*             | *NO*        |       20 |
 |-------------+----------+-------------------------------------------------------------------------+-------+-------------------+-------------+----------|
-| [[ldi]]     | <<0x0A>> | Take a registry and *2 indexes*, *add indexes* and treat the result as  | *YES* | *YES*             | *YES*       |       25 |
+| [[ldi]]     | <<0x0A>> | Take a registry and *2 indexes*, *add indexes* and treat the result as  | *YES* | *YES*             | *NO*        |       25 |
 |             |          | an address, *read a value of a REG_SIZE* and put it on the registry     |       |                   |             |          |
 |-------------+----------+-------------------------------------------------------------------------+-------+-------------------+-------------+----------|
-| [[sti]]     | <<0x0B>> | Take a registry and *2 indexes* (potentially registries), *add indexes* | *YES* | *YES*             | *YES*       |       25 |
+| [[sti]]     | <<0x0B>> | Take a registry and *2 indexes* (potentially registries), *add indexes* | *YES* | *YES*             | *NO*        |       25 |
 |             |          | result = *address* where the value of the *first param will be copied*  |       |                   |             |          |
 |-------------+----------+-------------------------------------------------------------------------+-------+-------------------+-------------+----------|
 | [[fork]]    | <<0x0C>> | Take an index, create *new process* that *inherits* different states of | *NO*  | *YES*             | *NO*        |      800 |
@@ -172,7 +172,7 @@ VM is *BIG ENDIAN*
 |-------------+----------+-------------------------------------------------------------------------+-------+-------------------+-------------+----------|
 | [[lfork]]   | <<0x0F>> | Long-fork, fork *without modulo* in the address                         | *NO*  | *NO*              | *NO*        |     1000 |
 |-------------+----------+-------------------------------------------------------------------------+-------+-------------------+-------------+----------|
-| [[aff]]     | <<0x10>> | Take a registry, *displays value* on std output (ASCII). Modulo 256     | *YES* | *NO*              | *YES*       |        2 |
+| [[aff]]     | <<0x10>> | Take a registry, *displays value* on std output (ASCII). Modulo 256     | *YES* | *NO*              | *NO*        |        2 |
 |-------------+----------+-------------------------------------------------------------------------+-------+-------------------+-------------+----------|
 
 *** SYNTAX
