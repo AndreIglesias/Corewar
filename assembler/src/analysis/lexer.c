@@ -101,5 +101,5 @@ int		is_opcode(char **cmd, int i, int line)
 		}
 		x++;
 	}
-	return (-1 + lexicon_error(cmd, i, "invalid format", line));
+	return (-1 + lexicon_error(cmd, i, "invalid instruction", line));
 }
