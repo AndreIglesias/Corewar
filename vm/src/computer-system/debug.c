@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 14:44:58 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/15 11:25:34 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/19 13:20:10 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ int		is_ir(t_list *process, int i)
 {
 	while (process)
 	{
-		if (i == ((TP*)P->obj)->pc && (((TP*)P->obj)->ir > 0 &&
-										((TP*)P->obj)->ir <= 15))
+		if (i == ((TP*)P->obj)->pc && (((TP*)P->obj)->ir <= 15))
 			return (((TP*)P->obj)->owner);
 		process = process->next;
 	}
