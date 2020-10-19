@@ -3,9 +3,10 @@
 #                                                         :::      ::::::::    #
 #    cinnamon-blackhole.s                               :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
+#                                                   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/10/04 16:46:05 by ciglesia          #+#    #+#+#+#+#+#      #
+#                                                      #+#     #+#             #
+#    Created: 2020/10/04 16:46:05                     ###    ########.fr       #
 #                                                                              #
 #******************************************************************************#
 
@@ -38,19 +39,14 @@ main:
 	sti r1, %:live_attack, %1		# 21 bytes
 	sti r1, %:middle_live, %1		# 28 bytes
 	sti r1, %:jumps, %1				# 35 bytes
+	sti r1, %:loop_live, %1			# 42 bytes
 
 	sti r15, %:main, %0				# erase
 	sti r15, %:main, %7				# erase
 	sti r15, %:main, %14			# erase
 	sti r15, %:main, %21			# erase
 	sti r15, %:main, %28			# erase
-
-								# starting point lower wall
-	ld %:live_attack, r2
-	ld %:main, r7
-	sub r7, r2, r7				# position to start painting (end - live_attack)
-	ld %2, r2
-	sub r7, r2, r7				# sub 2 bytes
+	sti r15, %:main, %35
 
 								# starting point upper wall
 	ld %:upper_wall, r2
@@ -89,16 +85,14 @@ live_attack:						# r7 = (end - live_attack)
 	st r15, -256
 	st r15, -256
 	st r15, -256
-	st r15, -256
 
 jumps:
 	live %0
 	ld %655010, r11
-	st r11, -345
-	st r10, -344
+	st r11, -511
 	lfork %-850
 	and r1, %0, r6
-	lfork %-400
+	fork %-400
 	zjmp %:jumps
 
 loop:
@@ -107,14 +101,20 @@ loop:
 		fork %:attack
 		fork %:live_attack
 		fork %:upper_wall
-		fork %:middle_live
+		fork %:loop_live
 		#sub r16, r4, r5				# diff = 512(0b1000000000) - 25
 		#add r5, r2, r5				# diff += i
 		#and r5, r16, r6				# when (diff & 0b100000000) -> carry = 0
 		and r1, %0, r6
-		zjmp %:loop
+	zjmp %:loop
 	#and r1, %0, r6
 	#zjmp %:live_attack
+
+loop_live:
+	live %0
+	fork %:middle_live
+	and r1, %0, r6
+	zjmp %:loop_live
 
 upper_wall:						# r9 = (main - upper_wall)
 	live %0
@@ -123,15 +123,15 @@ upper_wall:						# r9 = (main - upper_wall)
 		sub r16, r13, r5			# diff = 512(0b1000000000) - 330
 		sub r5, r10, r5				# diff += i
 		and r5, r16, r6				# when (diff & 0b100000000) -> carry = 0
-		fork %:middle_live
 	zjmp %:upper_wall
 	ld %-2, r10					# positions(painting) upper_wall
 	and r1, %0, r6
-	fork %:middle_live
+	fork %:loop_live
 	zjmp %:upper_wall
 
 middle_live:
 	live %0
+	and r2, %0, r6
 	zjmp %:middle_live
 
 attack:
