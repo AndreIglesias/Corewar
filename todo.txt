@@ -1,6 +1,6 @@
 
 * TODO
-- [ ] t_header (asm)
+- [X] t_header (asm)
 - [X] commentaire (vm)
 - [X] corewar.org (carry)
 - [ ] push modif vlogsphere (champ, org, asm vm)

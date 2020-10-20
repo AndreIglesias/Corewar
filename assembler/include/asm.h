@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/02 13:27:26 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:50:01 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ typedef struct		s_file
 	int				fd;
 	int				line;
 	int				quotes;
-	int				prog_size;
-	int				exec_magic;
+	unsigned int	prog_size;
+	unsigned int	exec_magic;
 	int				bname;
 	int				bcomment;
 	t_uchar			type;
 	char			*name;
-	char			comment[COMMENT_LENGTH];
-	char			playername[PROG_NAME_LENGTH];
+	char			comment[COMMENT_LENGTH + 1];
+	char			playername[PROG_NAME_LENGTH + 1];
 	t_uchar			code[CHAMP_MAX_SIZE];
 	t_code			*code_tab;
 }					t_file;

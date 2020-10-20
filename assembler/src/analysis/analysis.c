@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:11:34 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/04 15:36:34 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:52:12 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ int		capture_syntax(char **cmd, t_file *file, char *inst, int pos)
 	if (quotes == 1 || (!err && ((err = is_head(cmd, ".name", file->line,
 								0)) == 1 || err == 2) && !file->playername[0]))
 	{
-		fill_header(file->playername, inst, PROG_NAME_LENGTH, err);
+		fill_header(file->playername, inst, PROG_NAME_LENGTH + 1, err);
 		file->quotes = (err == 1) ? 1 : file->quotes;
 		return (0);
 	}
 	if (quotes == 2 || (!err && ((err = is_head(cmd, ".comment",
 							file->line, 0)) < 3 && err) && !file->comment[0]))
 	{
-		fill_header(file->comment, inst, COMMENT_LENGTH, err);
+		fill_header(file->comment, inst, COMMENT_LENGTH + 1, err);
 		file->quotes = (err == 1) ? 2 : file->quotes;
 		return (0);
 	}
