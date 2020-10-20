@@ -1,7 +1,7 @@
 
 * TODO
 - [ ] t_header (asm)
-- [ ] commentaire (vm)
+- [X] commentaire (vm)
 - [X] corewar.org (carry)
 - [ ] push modif vlogsphere (champ, org, asm vm)
 - [X] close() if EXIT_FAILURE (vm validation)
