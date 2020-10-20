@@ -4,4 +4,4 @@
 - [ ] commentaire (vm)
 - [X] corewar.org (carry)
 - [ ] push modif vlogsphere (champ, org, asm vm)
-- [ ] close() if EXIT_FAILURE (vm validation)
+- [X] close() if EXIT_FAILURE (vm validation)
