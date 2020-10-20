@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 17:18:06 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/10/05 12:42:22 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/20 15:40:02 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		init_writing(t_file *file)
 	if (!(name = ft_strnew(ft_strlen(file->name) + 3)))
 		return (EXIT_FAILURE);
 	i = 0;
-	while (file->name[i] != '.')
+	while (file->name[i] && ft_strcmp(&file->name[i], ".cor") != 0)
 	{
 		name[i] = file->name[i];
 		i++;

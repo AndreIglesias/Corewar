@@ -6,7 +6,7 @@
 /*   By: fgarault <fgarault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 12:48:19 by fgarault          #+#    #+#             */
-/*   Updated: 2020/10/05 12:41:21 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/20 15:40:29 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int		compiled_name(t_file *file)
 	fd = 0;
 	if (!(name = ft_strnew(ft_strlen(file->name) + 2)))
 		return (-1);
-	while (file->name[i] != '.')
+	while (file->name[i] && ft_strcmp(&file->name[i], ".s") != 0)
 	{
 		name[i] = file->name[i];
 		i++;
