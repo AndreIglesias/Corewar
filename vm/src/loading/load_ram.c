@@ -6,11 +6,21 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 18:30:54 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/29 19:30:20 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/20 12:43:38 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
+
+void	player_verbosity(t_player *champion)
+{
+	ft_printf(BLUE""BOLD"PLAYER %d (%s), weight %d bytes, commentaire:",
+	champion->nplayer, champion->name, champion->prog_size);
+	if (champion->comment && champion->comment[0])
+		ft_printf(E0M""CYAN"\n%s\n"E0M, champion->comment);
+	else
+		ft_printf(" (empty)\n"E0M);
+}
 
 int		load_champions(t_vm *vm)
 {
@@ -60,8 +70,7 @@ int		load_processes(t_vm *vm, t_player *champion, int i)
 		ft_memset(&((t_process*)vm->processes->obj)->reg, 0,
 				REG_NUMBER * REG_SIZE);
 		((t_process*)vm->processes->obj)->reg[0] = champion->nplayer;
-		(vm->verbosity) ? ft_printf(CYAN"PLAYER %d %s, weight %d bytes\n"E0M,
-			champion->nplayer, champion->name, champion->prog_size) : 0;
+		(vm->verbosity) ? player_verbosity(champion) : 0;
 		champion = champion->next;
 		i++;
 	}
