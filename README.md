@@ -115,5 +115,5 @@ $ make
 
 ## License
 
-> [GPL v3.0](https://github.com/AndreIglesias/Corewar/blob/main/LICENSE) &nbsp;&middot;&nbsp;
+> [GPL v3.0](https://github.com/AndreIglesias/Corewar/blob/master/LICENSE) &nbsp;&middot;&nbsp;
 > [@AndreIglesias](https://github.com/AndreIglesias)
