@@ -70,7 +70,7 @@ The **assembler** (*asm*) translates the champion's code to bytecode.
 
 <img src="https://github.com/AndreIglesias/Corewar/blob/master/docs/img/zork_s.png" alt="zork_code" width="500"/>
 
-### champion's header with the Magic Number:
+### champion's header and the Magic Number:
 
 ![header with magic number](https://github.com/AndreIglesias/Corewar/blob/master/docs/img/MAGIC_EXEC.png)
 
