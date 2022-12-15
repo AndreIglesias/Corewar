@@ -1,6 +1,7 @@
 corewar
 asm
 disasm
+*.cor
 ### C ###
 # Prerequisites
 *.d
