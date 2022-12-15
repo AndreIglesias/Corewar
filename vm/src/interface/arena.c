@@ -51,7 +51,7 @@ void		print_registers(WINDOW *window, int i, int *reg)
 		if (reg[x])
 		{
 			wattron(window, COLOR_PAIR(5) | A_BOLD);
-			mvwprintw(window, i + 1, 34 + x, "x", reg[x]);
+			mvwprintw(window, i + 1, 34 + x, "x");
 			wattroff(window, COLOR_PAIR(5) | A_BOLD);
 		}
 		else
